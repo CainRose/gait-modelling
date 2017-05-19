@@ -341,22 +341,22 @@ end
             TRJ_LG4_J3  = [time_traj; ansp_HR(3,:)];
             
             
-%             TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             
-%             TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             
-%             TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             
-%             TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-%             
+            TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG1_J1(2,:).', (TRJ_LG1_J1(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG1_J2(2,:).', (TRJ_LG1_J2(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG1_J3(2,:).', (TRJ_LG1_J3(1,:)), 'name', 'TRJ_LG4_J1');
+            
+            TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG2_J1(2,:).', (TRJ_LG2_J1(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG2_J2(2,:).', (TRJ_LG2_J2(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG2_J3(2,:).', (TRJ_LG2_J3(1,:)), 'name', 'TRJ_LG4_J1');
+            
+            TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG3_J1(2,:).', (TRJ_LG3_J1(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG3_J2(2,:).', (TRJ_LG3_J2(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG3_J3(2,:).', (TRJ_LG3_J3(1,:)), 'name', 'TRJ_LG4_J1');
+            
+            TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)), 'name', 'TRJ_LG4_J1');
+            TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)), 'name', 'TRJ_LG4_J1');
+            
 %             
 %             save('TRJ_LG1_J1_TIMESERIES')
 %             save('TRJ_LG1_J2_TIMESERIES')
@@ -445,12 +445,12 @@ end
             % compile... treat is as a constraint violation...
 %%%%%%%%%%%keyboard();
 %%%keyboard();
-            try
+%             try
                 sim('final_model_trial2.mdl', 'SimulationMode', 'normal', 'StartTime', '0', 'StopTime', num2str(obj_ite_simulation_time));%, 'RapidAcceleratorUpToDateCheck','off');
-            catch
-                OF = 100000;
-                cons(2) = 1;   
-            end
+%             catch
+%                 OF = 100000;
+%                 cons(2) = 1;   
+%             end
             %%%%%%%%%%keyboard();
 
             results_file_loader  % Reads data from files created by the executable above and stores them in function workspace

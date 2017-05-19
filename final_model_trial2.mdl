@@ -54,7 +54,7 @@ Model {
     }
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.208"
+    ComputedModelVersion    "1.215"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -90,7 +90,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, 0.0, 1616.0, 876.0]
+      Location		      [-8.0, -8.0, 1696.0, 1026.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -114,9 +114,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1566.0, 701.0]
-	ZoomFactor		[0.8]
-	Offset			[-240.64523809523894, 1894.0]
+	Extents			[1646.0, 851.0]
+	ZoomFactor		[1.25]
+	Offset			[48.040476786522106, 1836.3047619047695]
       }
     }
   }
@@ -129,9 +129,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Administrator"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu May 18 15:10:26 2017"
-  RTWModifiedTimeStamp	  417020826
-  ModelVersionFormat	  "1.%<AutoIncrement:208>"
+  LastModifiedDate	  "Fri May 19 14:10:07 2017"
+  RTWModifiedTimeStamp	  417103803
+  ModelVersionFormat	  "1.%<AutoIncrement:215>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -256,7 +256,7 @@ Model {
   ShowModelReferenceBlockIO off
   Array {
     Type		    "Handle"
-    Dimension		    6
+    Dimension		    7
     Simulink.ConfigSet {
       $ObjectID		      8
       Version		      "1.13.0"
@@ -3389,8 +3389,8 @@ Model {
 	Simulink.SolverCC {
 	  $ObjectID		  94
 	  Version		  "1.13.0"
-	  StartTime		  "0.0"
-	  StopTime		  "4"
+	  StartTime		  "0"
+	  StopTime		  "0.6"
 	  AbsTol		  "auto"
 	  FixedStep		  "0.001"
 	  InitialStep		  "auto"
@@ -3425,14 +3425,12 @@ Model {
 	  $ObjectID		  95
 	  Version		  "1.13.0"
 	  Decimation		  "1"
-	  ExternalInput		  "TRJ_LG1_J1_TIMESERIES, TRJ_LG1_J2_TIMESERIES, TRJ_LG1_J3_TIMESERIES,  TRJ_LG2_J1_TIMESERIES, TRJ_"
-	  "LG2_J2_TIMESERIES, TRJ_LG2_J3_TIMESERIES,  TRJ_LG3_J1_TIMESERIES, TRJ_LG3_J2_TIMESERIES, TRJ_LG3_J3_TIMESERIES,  TR"
-	  "J_LG4_J1_TIMESERIES, TRJ_LG4_J2_TIMESERIES, TRJ_LG4_J3_TIMESERIES"
+	  ExternalInput		  "[t, u]"
 	  FinalStateName	  "xFinal"
 	  InitialState		  "xInitial"
 	  LimitDataPoints	  on
 	  MaxDataPoints		  "1000"
-	  LoadExternalInput	  on
+	  LoadExternalInput	  off
 	  LoadInitialState	  off
 	  SaveFinalState	  on
 	  SaveCompleteFinalSimState off
@@ -4004,18 +4002,640 @@ Model {
       }
       Name		      "Configuration5"
       ExtraOptions	      "-aGenerateTraceInfo=0 -aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Optimization/Signals and Parameters"
+      ConfigPrmDlgPosition     [ 252, 45, 1353, 911 ] 
+    }
+    Simulink.ConfigSet {
+      $ObjectID		      110
+      Version		      "1.13.0"
+      Array {
+	Type			"Handle"
+	Dimension		10
+	Simulink.SolverCC {
+	  $ObjectID		  111
+	  Version		  "1.13.0"
+	  StartTime		  "0.0"
+	  StopTime		  "4"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.001"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "1e-1"
+	  MinStep		  "1e-8"
+	  MaxConsecutiveMinStep	  "1000"
+	  RelTol		  "1e-4"
+	  SolverMode		  "Auto"
+	  EnableConcurrentExecution off
+	  ConcurrentTasks	  off
+	  Solver		  "ode45"
+	  SolverName		  "ode45"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  112
+	  Version		  "1.13.0"
+	  Decimation		  "1"
+	  ExternalInput		  "TRJ_LG1_J1_TIMESERIES,TRJ_LG1_J2_TIMESERIES,TRJ_LG1_J3_TIMESERIES,TRJ_LG2_J1_TIMESERIES,TRJ_LG2_J"
+	  "2_TIMESERIES,TRJ_LG2_J3_TIMESERIES,TRJ_LG3_J1_TIMESERIES,TRJ_LG3_J2_TIMESERIES,TRJ_LG3_J3_TIMESERIES,TRJ_LG4_J1_TIM"
+	  "ESERIES,TRJ_LG4_J2_TIMESERIES,TRJ_LG4_J3_TIMESERIES"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  on
+	  LoadInitialState	  off
+	  SaveFinalState	  on
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "ModelDataLogs"
+	  SaveOutput		  off
+	  SaveState		  on
+	  SignalLogging		  on
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  SaveTime		  on
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "tmp_raccel_xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  113
+	  Version		  "1.13.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    8
+	    Cell		    "BooleansAsBitfields"
+	    Cell		    "PassReuseOutputArgsAs"
+	    Cell		    "PassReuseOutputArgsThreshold"
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "OptimizeModelRefInitCode"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    Cell		    "UseSpecifiedMinMax"
+	    PropName		    "DisabledProps"
+	  }
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  InlineParams		  on
+	  UseIntDivNetSlope	  off
+	  UseFloatMulNetSlope	  off
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  on
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  on
+	  StrengthReduction	  off
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  ExpressionDepthLimit	  2147483647
+	  FoldNonRolledExpr	  on
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  UseTempVars		  off
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero off
+	  OptimizeModelRefInitCode off
+	  LifeSpan		  "inf"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "Off"
+	  AccelVerboseBuild	  off
+	  ParallelExecutionInRapidAccelerator on
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  114
+	  Version		  "1.13.0"
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "error"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "EnableAllAsWarning"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "warning"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  LoggingUnavailableSignals "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnconditionalTransitionShadowingDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  115
+	  Version		  "1.13.0"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  64
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  64
+	  ProdLargestAtomicInteger "Char"
+	  ProdLargestAtomicFloat  "None"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  64
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "Intel->x86-64"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Zero"
+	  TargetEndianess	  "LittleEndian"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "MATLAB Host"
+	  TargetUnknown		  off
+	  ProdEqTarget		  off
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  116
+	  Version		  "1.13.0"
+	  UpdateModelReferenceTargets "IfOutOfDate"
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  117
+	  Version		  "1.13.0"
+	  SFSimEnableDebug	  on
+	  SFSimOverflowDetection  on
+	  SFSimEcho		  off
+	  SimBlas		  on
+	  SimCtrlC		  on
+	  SimExtrinsic		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  118
+	  Version		  "1.13.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    15
+	    Cell		    "IncludeHyperlinkInReport"
+	    Cell		    "GenerateTraceInfo"
+	    Cell		    "GenerateTraceReport"
+	    Cell		    "GenerateTraceReportSl"
+	    Cell		    "GenerateTraceReportSf"
+	    Cell		    "GenerateTraceReportEml"
+	    Cell		    "PortableWordSizes"
+	    Cell		    "GenerateWebview"
+	    Cell		    "GenerateCodeMetricsReport"
+	    Cell		    "GenerateCodeReplacementReport"
+	    Cell		    "GenerateErtSFunction"
+	    Cell		    "CreateSILPILBlock"
+	    Cell		    "CodeExecutionProfiling"
+	    Cell		    "CodeProfilingSaveOptions"
+	    Cell		    "CodeProfilingInstrumentation"
+	    PropName		    "DisabledProps"
+	  }
+	  SystemTargetFile	  "grt.tlc"
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  TemplateMakefile	  "grt_default_tmf"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ConfigAtBuild		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  GenerateErtSFunction	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  IncludeERTFirstTime	  off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateCodeInfo	  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  RTWCompilerOptimization "Off"
+	  CheckMdlBeforeBuild	  "Off"
+	  CustomRebuildMode	  "OnUpdate"
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      119
+	      Version		      "1.13.0"
+	      Array {
+		Type			"Cell"
+		Dimension		22
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"IgnoreTestpoints"
+		Cell			"InsertBlockDesc"
+		Cell			"InsertPolySpaceComments"
+		Cell			"SFDataObjDesc"
+		Cell			"MATLABFcnDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InternalIdentifier"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		Cell			"CustomSymbolStrGlobalVar"
+		Cell			"CustomSymbolStrType"
+		Cell			"CustomSymbolStrField"
+		Cell			"CustomSymbolStrFcn"
+		Cell			"CustomSymbolStrFcnArg"
+		Cell			"CustomSymbolStrBlkIO"
+		Cell			"CustomSymbolStrTmpVar"
+		Cell			"CustomSymbolStrMacro"
+		Cell			"ReqsInCode"
+		PropName		"DisabledProps"
+	      }
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      IgnoreCustomStorageClasses on
+	      IgnoreTestpoints	      off
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      128
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      OperatorAnnotations     off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      IncDataTypeInIds	      off
+	      MangleLength	      1
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	    }
+	    Simulink.GRTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      120
+	      Version		      "1.13.0"
+	      Array {
+		Type			"Cell"
+		Dimension		15
+		Cell			"GeneratePreprocessorConditionals"
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"CombineOutputUpdateFcns"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"GenerateTestInterfaces"
+		Cell			"ModelStepFunctionPrototypeControlCompliant"
+		Cell			"CPPClassGenCompliant"
+		Cell			"GenerateAllocFcn"
+		Cell			"PurelyIntegerCode"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		Cell			"SupportNonInlinedSFcns"
+		PropName		"DisabledProps"
+	      }
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      CodeReplacementLibrary  "ANSI_C"
+	      UtilityFuncGeneration   "Auto"
+	      ERTMultiwordTypeDef     "System defined"
+	      ERTMultiwordLength      256
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      IsPILTarget	      off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant on
+	      CompOptLevelCompliant   on
+	      ConcurrentExecutionCompliant on
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Disable all"
+	      CombineOutputUpdateFcns off
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      ERTFirstTimeCompliant   off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      SupportVariableSizeSignals off
+	      EnableShiftOperators    on
+	      ParenthesesLevel	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      GRTInterface	      on
+	      GenerateAllocFcn	      off
+	      UseMalloc		      off
+	      ExtMode		      off
+	      ExtModeStaticAlloc      off
+	      ExtModeTesting	      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTransport	      0
+	      ExtModeMexFile	      "ext_comm"
+	      ExtModeIntrfLevel	      "Level1"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      RTWCAPIRootIO	      off
+	      GenerateASAP2	      off
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	hdlcoderui.hdlcc {
+	  $ObjectID		  121
+	  Version		  "1.13.0"
+	  Description		  "HDL Coder custom configuration component"
+	  Name			  "HDL Coder"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    1
+	    Cell		    ""
+	    PropName		    "HDLConfigFile"
+	  }
+	  HDLCActiveTab		  "0"
+	}
+	SSC.SimscapeCC {
+	  $ObjectID		  122
+	  Version		  "1.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    1
+	    Cell		    "Name"
+	    PropName		    "DisabledProps"
+	  }
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    MECH.SimMechanicsCC {
+	      $ObjectID		      123
+	      Version		      "1.13.0"
+	      Name		      "SimMechanics"
+	      WarnOnRedundantConstraints on
+	      WarnOnSingularInitialAssembly off
+	      ShowCutJoints	      off
+	      VisOnUpdateDiagram      off
+	      VisDuringSimulation     off
+	      EnableVisSimulationTime on
+	      VisSampleTime	      "0"
+	      DisableBodyVisControl   off
+	      ShowCG		      on
+	      ShowCS		      on
+	      ShowOnlyPortCS	      off
+	      HighlightModel	      on
+	      FramesToBeSkipped	      "0"
+	      AnimationDelay	      "3"
+	      RecordAVI		      off
+	      CompressAVI	      on
+	      AutoFitVis	      "off"
+	      EnableSelection	      on
+	      LastVizWinPosition      "[-1 -1 -1 -1]"
+	      CamPosition	      "[0 0 0]"
+	      CamTarget		      "[0 0 -1]"
+	      CamUpVector	      "[0 1 0]"
+	      CamHeight		      "-1"
+	      CamViewAngle	      "0"
+	      VisBackgroundColor      "[0.9 0.9 0.95]"
+	      DefaultBodyColor	      "[1 0 0]"
+	      MDLBodyVisualizationType "Convex hull from body CS locations"
+	      OVRRIDBodyVisualizationType "NONE"
+	    }
+	    simmechanics.ConfigurationSet {
+	      $ObjectID		      124
+	      Version		      "1.13.0"
+	      Description	      "SimMechanics 2G"
+	      Array {
+		Type			"Handle"
+		Dimension		2
+		simmechanics.DiagnosticsConfigSet {
+		  $ObjectID		  125
+		  Version		  "1.13.0"
+		  Description		  "Diagnostics"
+		  Name			  "DiagnosticsConfigSet"
+		  SimMechanicsInvalidVisualProperty "warning"
+		  SimMechanicsCrossSectionNullEdge "warning"
+		  SimMechanicsUnconnectedFramePorts "warning"
+		  SimMechanicsRedundantBlock "warning"
+		  SimMechanicsConflictingReferenceFrames "warning"
+		  SimMechanicsRigidlyBoundBlock	"error"
+		  SimMechanicsUnsatisfiedHighPriorityTargets "warning"
+		  SimMechanicsJointTargetOverSpecification "error"
+		}
+		simmechanics.ExplorerConfigSet {
+		  $ObjectID		  126
+		  Version		  "1.13.0"
+		  Description		  "Explorer"
+		  Name			  "ExplorerConfigSet"
+		  SimMechanicsOpenEditorOnUpdate on
+		}
+		PropName		"Components"
+	      }
+	      Name		      "SimMechanics2G"
+	    }
+	    PropName		    "Components"
+	  }
+	  Name			  "Simscape"
+	  EditingMode		  "Full"
+	  ExplicitSolverDiagnosticOptions "warning"
+	  GlobalZcOffDiagnosticOptions "warning"
+	  SimscapeLogType	  "none"
+	  SimscapeLogSimulationStatistics off
+	  SimscapeLogName	  "simlog"
+	  SimscapeLogDecimation	  1
+	  SimscapeLogLimitData	  on
+	  SimscapeLogDataHistory  5000
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration6"
+      ExtraOptions	      "-aGenerateTraceInfo=0 -aIgnoreTestpoints=0 "
       CurrentDlgPage	      "Data Import//Export"
-      ConfigPrmDlgPosition     [ 236, -17, 1369, 927 ] 
+      ConfigPrmDlgPosition     [ 328, 124, 1353, 863 ] 
     }
     PropName		    "ConfigurationSets"
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    93
+    $ObjectID		    110
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    110
+    $ObjectID		    127
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -4343,7 +4963,7 @@ Model {
   }
   System {
     Name		    "final_model_trial2"
-    Location		    [-8, 0, 1608, 876]
+    Location		    [-8, -8, 1688, 1018]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    282
@@ -4355,115 +4975,163 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "80"
+    ZoomFactor		    "125"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "9391"
+    SIDHighWatermark	    "9386"
     Block {
       BlockType		      Inport
       Name		      "drive_lg1_j1"
-      SID		      "9374"
+      SID		      "9375"
       Position		      [215, 243, 245, 257]
       ZOrder		      154
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg1_j2"
-      SID		      "9375"
+      SID		      "9376"
       Position		      [215, 278, 245, 292]
       ZOrder		      155
       Port		      "2"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg1_j3"
-      SID		      "9376"
+      SID		      "9377"
       Position		      [215, 313, 245, 327]
       ZOrder		      156
       Port		      "3"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg2_j1"
-      SID		      "9383"
+      SID		      "9378"
       Position		      [215, 978, 245, 992]
-      ZOrder		      166
+      ZOrder		      157
       Port		      "4"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg2_j2"
-      SID		      "9384"
+      SID		      "9379"
       Position		      [215, 1013, 245, 1027]
-      ZOrder		      167
+      ZOrder		      158
       Port		      "5"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg2_j3"
-      SID		      "9385"
+      SID		      "9380"
       Position		      [215, 1048, 245, 1062]
-      ZOrder		      168
+      ZOrder		      159
       Port		      "6"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg3_j1"
-      SID		      "9386"
+      SID		      "9381"
       Position		      [215, 1563, 245, 1577]
-      ZOrder		      169
+      ZOrder		      160
       Port		      "7"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg3_j2"
-      SID		      "9387"
+      SID		      "9382"
       Position		      [215, 1598, 245, 1612]
-      ZOrder		      170
+      ZOrder		      161
       Port		      "8"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg3_j3"
-      SID		      "9388"
+      SID		      "9383"
       Position		      [215, 1633, 245, 1647]
-      ZOrder		      171
+      ZOrder		      162
       Port		      "9"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg4_j1"
-      SID		      "9389"
+      SID		      "9384"
       Position		      [215, 2178, 245, 2192]
-      ZOrder		      172
+      ZOrder		      163
       Port		      "10"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg4_j2"
-      SID		      "9390"
+      SID		      "9385"
       Position		      [215, 2213, 245, 2227]
-      ZOrder		      173
+      ZOrder		      164
       Port		      "11"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      Inport
       Name		      "drive_lg4_j3"
-      SID		      "9391"
+      SID		      "9386"
       Position		      [215, 2248, 245, 2262]
-      ZOrder		      174
+      ZOrder		      165
       Port		      "12"
       IconDisplay	      "Port number"
+      OutDataTypeStr	      "double"
+      PortDimensions	      "1"
+      VarSizeSig	      "No"
+      SignalType	      "real"
     }
     Block {
       BlockType		      SubSystem
@@ -16478,7 +17146,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j1"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -16566,7 +17234,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -16675,7 +17343,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -16838,7 +17506,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j2"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -16926,7 +17594,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -17035,7 +17703,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -17198,7 +17866,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j3"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -17286,7 +17954,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -17395,7 +18063,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -17772,7 +18440,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"controller_leg2"
-	Location		[-8, 32, 1608, 908]
+	Location		[-8, 0, 1608, 876]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -17990,7 +18658,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j1"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -18078,7 +18746,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -18187,7 +18855,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -18351,7 +19019,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j2"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -18439,7 +19107,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -18548,7 +19216,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -18712,7 +19380,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j3"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -18800,7 +19468,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -18909,7 +19577,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -19286,7 +19954,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"controller_leg3"
-	Location		[-8, 32, 1608, 908]
+	Location		[-8, 0, 1608, 876]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -19504,7 +20172,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j1"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -19592,7 +20260,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -19701,7 +20369,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -19866,7 +20534,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j2"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -19954,7 +20622,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -20063,7 +20731,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -20228,7 +20896,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j3"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -20316,7 +20984,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -20425,7 +21093,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -20796,7 +21464,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"controller_leg4"
-	Location		[-8, 32, 1608, 908]
+	Location		[-8, -8, 1688, 1018]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -21014,7 +21682,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j1"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, -8, 1688, 1018]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -21102,7 +21770,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -21211,7 +21879,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -21376,7 +22044,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j2"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -21464,7 +22132,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -21573,7 +22241,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -21737,7 +22405,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "j3"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1608, 876]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -21825,7 +22493,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"
@@ -21934,7 +22602,7 @@ Model {
 	      InitialConditionForIntegrator "0"
 	      InitialConditionForFilter	"0"
 	      ExternalReset	      "none"
-	      IgnoreLimit	      off
+	      IgnoreLimit	      on
 	      ZeroCross		      on
 	      LimitOutput	      off
 	      UpperSaturationLimit    "inf"

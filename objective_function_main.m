@@ -181,7 +181,7 @@ obj_ite_phi_rel_FR = design_var(2);
 obj_ite_phi_rel_HL = design_var(3);
 obj_ite_phi_rel_HR = design_var(4);
 
-num_strides = 3;
+num_strides = 1;
 % %%%%%%%%%%%keyboard();
 obj_ite_stride_time = floor(100*obj_ite_stride_length/obj_ite_velocity)/100;
 obj_ite_simulation_time = floor(100*num_strides*obj_ite_stride_time)/100;

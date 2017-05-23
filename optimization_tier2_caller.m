@@ -78,7 +78,7 @@ link_setup
 %           CONTROLLER PARAMETERS SET UP
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-obj_ite_velocity = 1;
+obj_ite_velocity = 0.1;
 velocity_initial = obj_ite_velocity;
                 
 design_var_lower = [0.1;...

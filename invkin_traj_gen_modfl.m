@@ -83,6 +83,7 @@ handro(1:t_steps_stance,:) = handro_temp(end-t_steps_stance+1:end, :);
 handro(t_steps_stance+1:end,:) = handro_temp(1:end-t_steps_stance,:);
 % keyboard();
 q0 = [AEP_L1_J1; AEP_L1_J2; AEP_L1_J3]; % Initial guess for invkin function
+dh_t = zeros(3, 5);
 dh_t = [DH_mat(1:3,2), DH_mat(1:3,1), DH_mat(1:3,4), DH_mat(1:3,3), [0;0;0]]; % append the joint type coloumn, and reorder DH_mat according to invkin function
 % % keyboard();
 % 3.3: calling invkin and pose initialization for CPG

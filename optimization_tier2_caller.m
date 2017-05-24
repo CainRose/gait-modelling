@@ -18,7 +18,7 @@ global KPHRsw1 KPHRsw2 KPHRsw3 KPHRst1 KPHRst2 KPHRst3 KDHRsw1 KDHRsw2 KDHRsw3 K
 global body_pitch_max body_roll_max body_yaw_max
 global front_x front_y back_x back_y
 
-body_pitch_max = pi/3;
+body_pitch_max = pi/8;
 body_roll_max = pi/6; 
 body_yaw_max = pi/6;
 global ground_x ground_y ground_z
@@ -78,7 +78,7 @@ link_setup
 %           CONTROLLER PARAMETERS SET UP
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-obj_ite_velocity = 0.1;
+obj_ite_velocity = 1;
 velocity_initial = obj_ite_velocity;
                 
 design_var_lower = [0.1;...
@@ -297,7 +297,7 @@ options.lb = design_var_lower';                   % lower bound of x
 options.ub = design_var_upper';                   % upper bound of x
 options.objfun = @objective_function_main;     % objective function handle
 options.plotInterval = 1;               % interval between two calls of "plotnsga". 
-% options.useParallel = 'yes';
+options.useParallel = 'yes';
 % options.poolsize = 2;
 options.crossoverFraction = 0.3;
 options.mutationFraction = 0.1;

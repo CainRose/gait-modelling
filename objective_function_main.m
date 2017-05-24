@@ -132,46 +132,35 @@ tic;
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % Section 1: DEFINING POSES IN TERMS OF INPUT VECTOR COMPONENTS
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-global obj_ite_velocity obj_ite_stride_length obj_ite_stride_time obj_ite_simulation_time obj_ite_OF_scale
-global obj_ite_duty_factor_FL obj_ite_duty_factor_FR obj_ite_duty_factor_HL obj_ite_duty_factor_HR
-global obj_ite_step_length_FL obj_ite_step_length_FR obj_ite_step_length_HL obj_ite_step_length_HR
-global obj_ite_phi_rel_FR obj_ite_phi_rel_HL obj_ite_phi_rel_HR
-global lg1ps lg2ps lg3ps lg4ps simulation_time trans_leg_1_rot bx by bz density body_height gravity k_g_v n b_g_v p q S_p fk body_velocity
-global KPFLsw1 KPFLsw2 KPFLsw3 KPFLst1 KPFLst2 KPFLst3 KDFLsw1 KDFLsw2 KDFLsw3 KDFLst1 KDFLst2 KDFLst3
-global KPFRsw1 KPFRsw2 KPFRsw3 KPFRst1 KPFRst2 KPFRst3 KDFRsw1 KDFRsw2 KDFRsw3 KDFRst1 KDFRst2 KDFRst3
-global KPHLsw1 KPHLsw2 KPHLsw3 KPHLst1 KPHLst2 KPHLst3 KDHLsw1 KDHLsw2 KDHLsw3 KDHLst1 KDHLst2 KDHLst3
-global KPHRsw1 KPHRsw2 KPHRsw3 KPHRst1 KPHRst2 KPHRst3 KDHRsw1 KDHRsw2 KDHRsw3 KDHRst1 KDHRst2 KDHRst3
-global TRJ_LG1_J1 TRJ_LG1_J2 TRJ_LG1_J3  TRJ_LG2_J1 TRJ_LG2_J2 TRJ_LG2_J3  TRJ_LG3_J1 TRJ_LG3_J2 TRJ_LG3_J3  TRJ_LG4_J1 TRJ_LG4_J2 TRJ_LG4_J3
-global TRJ_LG1_J1_TIMESERIES TRJ_LG1_J2_TIMESERIES TRJ_LG1_J3_TIMESERIES TRJ_LG2_J1_TIMESERIES TRJ_LG2_J2_TIMESERIES TRJ_LG2_J3_TIMESERIES TRJ_LG3_J1_TIMESERIES TRJ_LG3_J2_TIMESERIES TRJ_LG3_J3_TIMESERIES TRJ_LG4_J1_TIMESERIES TRJ_LG4_J2_TIMESERIES TRJ_LG4_J3_TIMESERIES
-global AEP_L1_J1 AEP_L1_J2 AEP_L1_J3  AEP_L2_J1 AEP_L2_J2 AEP_L2_J3  AEP_L3_J1 AEP_L3_J2 AEP_L3_J3 AEP_L4_J1 AEP_L4_J2 AEP_L4_J3 
-global body_pitch_max body_roll_max body_yaw_max IGD
-global temporary_time t_sen_lg1_j1 t_sen_lg1_j2 t_sen_lg1_j3 t_sen_lg2_j1 t_sen_lg2_j2 t_sen_lg2_j3 
-global t_sen_lg3_j1 t_sen_lg3_j2 t_sen_lg3_j3 t_sen_lg4_j1 t_sen_lg4_j2 t_sen_lg4_j3
-global theta_dot_sen_lg1_j1 theta_dot_sen_lg1_j2 theta_dot_sen_lg1_j3 theta_dot_sen_lg2_j1 theta_dot_sen_lg2_j2 theta_dot_sen_lg2_j3
-global theta_dot_sen_lg3_j1 theta_dot_sen_lg3_j2 theta_dot_sen_lg3_j3 theta_dot_sen_lg4_j1 theta_dot_sen_lg4_j2 theta_dot_sen_lg4_j3
-global theta_sen_lg1_j1 theta_sen_lg1_j2 theta_sen_lg1_j3 theta_sen_lg2_j1 theta_sen_lg2_j2 theta_sen_lg2_j3
-global theta_sen_lg3_j1 theta_sen_lg3_j2 theta_sen_lg3_j3 theta_sen_lg4_j1 theta_sen_lg4_j2 theta_sen_lg4_j3
-global body_pitch pitch_initial velocity_initial obj_ite_max_torque obj_ite_max_torque_change body_height_calc
-% global alpha_leg1_1 alpha_leg1_2 alpha_leg1_3 alpha_leg1_4 alpha_leg3_1 alpha_leg3_2 alpha_leg3_3 alpha_leg3_4
-global leg1_ee_velocity leg2_ee_velocity leg3_ee_velocity leg4_ee_velocity
-global leg1_ee_position leg2_ee_position leg3_ee_position leg4_ee_position
-global lg1kp lg1kb lg1kd lg1ki lg2kp lg2kb lg2kd lg2ki lg3kp lg3kb lg3kd lg3ki lg4kp lg4kb lg4kd lg4ki
+
+global simulation_time trans_leg_1_rot bx by bz density gravity k_g_v n b_g_v p q S_p fk body_velocity
+global body_pitch_max body_roll_max body_yaw_max
+global obj_ite_max_torque obj_ite_max_torque_change
+
+scale = 1;
+FLL = scale*0.33;
+IGD = scale*0.33;
+
+lg1ps = [FLL*0.43, 0, 0, 0; ...
+         FLL*0.40, 0, 0, 0;...
+         FLL*0.17, 0, 0, 0];
+lg2ps = [FLL*0.43, 0, 0, 0; ...
+         FLL*0.40, 0, 0, 0;...
+         FLL*0.17, 0, 0, 0];
+lg3ps = [FLL*0.39, 0, 0, 0; ...
+         FLL*0.36, 0, 0, 0;...
+         FLL*0.25, 0, 0, 0];
+lg4ps = [FLL*0.39, 0, 0, 0; ...
+         FLL*0.36, 0, 0, 0;...
+         FLL*0.25, 0, 0, 0];     
 
 OF = 100000; % Represents a generic value that the members have... multiplied by 10 to represent the worst member
 cons = [0 0 0 0 0 0 0 0 0]; % The 8 constraint values. Look at description above
 
-body_pitch_max = pi/8;
-comb = [0;body_yaw_max;body_pitch_max;body_roll_max];
-save('body_movement_max.mat', 'comb');
+obj_ite_velocity = 1.0;
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % Design Variable initialization to global variables
-AEP_L1_J1 = design_var(6);  AEP_L1_J2 = design_var(7);  AEP_L1_J3 = design_var(8);  
-AEP_L2_J1 = design_var(29);  AEP_L2_J2 = design_var(30);  AEP_L2_J3 = design_var(31);  
-AEP_L3_J1 = design_var(52);  AEP_L3_J2 = design_var(53);  AEP_L3_J3 = design_var(54); 
-AEP_L4_J1 = design_var(75);  AEP_L4_J2 = design_var(76);  AEP_L4_J3 = design_var(77);
 obj_ite_stride_length = design_var(1); % Stride length 
-% alpha_leg1_1 = design_var(8); alpha_leg1_2 = design_var(9); alpha_leg1_3 = design_var(10); alpha_leg1_4 = design_var(11);
-% alpha_leg3_1 = design_var(12); alpha_leg3_2 = design_var(13); alpha_leg3_3 = design_var(14); alpha_leg3_4 = design_var(15);
 obj_ite_duty_factor_FL = design_var(5);
 obj_ite_duty_factor_FR = design_var(28);
 obj_ite_duty_factor_HL = design_var(51);
@@ -181,7 +170,7 @@ obj_ite_phi_rel_FR = design_var(2);
 obj_ite_phi_rel_HL = design_var(3);
 obj_ite_phi_rel_HR = design_var(4);
 
-num_strides = 1;
+num_strides = 3;
 % %%%%%%%%%%%keyboard();
 obj_ite_stride_time = floor(100*obj_ite_stride_length/obj_ite_velocity)/100;
 obj_ite_simulation_time = floor(100*num_strides*obj_ite_stride_time)/100;
@@ -357,23 +346,6 @@ end
             TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)), 'name', 'TRJ_LG4_J1');
             TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)), 'name', 'TRJ_LG4_J1');
             
-%             
-%             save('TRJ_LG1_J1_TIMESERIES')
-%             save('TRJ_LG1_J2_TIMESERIES')
-%             save('TRJ_LG1_J3_TIMESERIES')
-%             
-%             save('TRJ_LG2_J1_TIMESERIES')
-%             save('TRJ_LG2_J2_TIMESERIES')
-%             save('TRJ_LG2_J3_TIMESERIES')
-%             
-%             save('TRJ_LG3_J1_TIMESERIES')
-%             save('TRJ_LG3_J2_TIMESERIES')
-%             save('TRJ_LG3_J3_TIMESERIES')
-%             
-%             save('TRJ_LG4_J1_TIMESERIES')
-%             save('TRJ_LG4_J2_TIMESERIES')
-%             save('TRJ_LG4_J3_TIMESERIES')
-            
     %%%%%%%%%%%keyboard();
 
             % FINDING INITIAL BODY HEIGHT AND INITIAL PITCH ANGLE 
@@ -407,61 +379,108 @@ end
             save('TRJ_LG3_J1.mat', 'TRJ_LG3_J1'); save('TRJ_LG3_J2.mat', 'TRJ_LG3_J2'); save('TRJ_LG3_J3.mat', 'TRJ_LG3_J3');
             save('TRJ_LG4_J1.mat', 'TRJ_LG4_J1'); save('TRJ_LG4_J2.mat', 'TRJ_LG4_J2'); save('TRJ_LG4_J3.mat', 'TRJ_LG4_J3');
             
-            
-%             lg1kp = [design_var(22);design_var(23);design_var(24)];
-%             lg2kp = [design_var(22);design_var(23);design_var(24)];
-%             lg3kp = [design_var(25);design_var(26);design_var(27)];
-%             lg4kp = [design_var(25);design_var(26);design_var(27)];
-% 
-%             lg1kd = [design_var(28);design_var(29);design_var(30)];
-%             lg2kd = [design_var(28);design_var(29);design_var(30)];
-%             lg3kd = [design_var(31);design_var(32);design_var(33)];
-%             lg4kd = [design_var(31);design_var(32);design_var(33)];
-%             
-%             lg1ki = [0;0;0];
-%             lg2ki = [0;0;0];
-%             lg3ki = [0;0;0];
-%             lg4ki = [0;0;0];
-%             lg1kb = [0;0;0];
-%             lg2kb = [0;0;0];
-%             lg3kb = [0;0;0];
-%             lg4kb = [0;0;0];
-            
-%             lg1ki = [0;0;0];
-%             lg2ki = [0;0;0];
-%             lg3ki = [0;0;0];
-%             lg4ki = [0;0;0];
-% 
-%             lg1kb = [0;0;0];
-%             lg2kb = [0;0;0];
-%             lg3kb = [0;0;0];
-%             lg4kb = [0;0;0];
 %             %%
             % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
             % Section 3: Running model and evaluating objective functions
             % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+            
+            mws = get_param('final_model_trial2', 'modelworkspace');
+            
+            % Timeseries trajectories
+            mws.assignin('TRJ_LG1_J1_TIMESERIES', TRJ_LG1_J1_TIMESERIES); mws.assignin('TRJ_LG1_J2_TIMESERIES', TRJ_LG1_J2_TIMESERIES); mws.assignin('TRJ_LG1_J3_TIMESERIES', TRJ_LG1_J3_TIMESERIES);
+            mws.assignin('TRJ_LG2_J1_TIMESERIES', TRJ_LG2_J1_TIMESERIES); mws.assignin('TRJ_LG2_J2_TIMESERIES', TRJ_LG2_J2_TIMESERIES); mws.assignin('TRJ_LG2_J3_TIMESERIES', TRJ_LG2_J3_TIMESERIES);
+            mws.assignin('TRJ_LG3_J1_TIMESERIES', TRJ_LG3_J1_TIMESERIES); mws.assignin('TRJ_LG3_J2_TIMESERIES', TRJ_LG3_J2_TIMESERIES); mws.assignin('TRJ_LG3_J3_TIMESERIES', TRJ_LG3_J3_TIMESERIES);
+            mws.assignin('TRJ_LG4_J1_TIMESERIES', TRJ_LG4_J1_TIMESERIES); mws.assignin('TRJ_LG4_J2_TIMESERIES', TRJ_LG4_J2_TIMESERIES); mws.assignin('TRJ_LG4_J3_TIMESERIES', TRJ_LG4_J3_TIMESERIES);
+            
+            % Trajectories
+            mws.assignin('TRJ_LG1_J1', TRJ_LG1_J1); mws.assignin('TRJ_LG1_J2', TRJ_LG1_J2); mws.assignin('TRJ_LG1_J3', TRJ_LG1_J3);
+            mws.assignin('TRJ_LG2_J1', TRJ_LG2_J1); mws.assignin('TRJ_LG2_J2', TRJ_LG2_J2); mws.assignin('TRJ_LG2_J3', TRJ_LG2_J3);
+            mws.assignin('TRJ_LG3_J1', TRJ_LG3_J1); mws.assignin('TRJ_LG3_J2', TRJ_LG3_J2); mws.assignin('TRJ_LG3_J3', TRJ_LG3_J3);
+            mws.assignin('TRJ_LG4_J1', TRJ_LG4_J1); mws.assignin('TRJ_LG4_J2', TRJ_LG4_J2); mws.assignin('TRJ_LG4_J3', TRJ_LG4_J3);
+            
+            % Gains
+            mws.assignin('KPFLsw1', KPFLsw1); mws.assignin('KPFLsw2', KPFLsw2); mws.assignin('KPFLsw3', KPFLsw3);
+            mws.assignin('KPFLst1', KPFLst1); mws.assignin('KPFLst2', KPFLst2); mws.assignin('KPFLst3', KPFLst3);
+            mws.assignin('KDFLsw1', KDFLsw1); mws.assignin('KDFLsw2', KDFLsw2); mws.assignin('KDFLsw3', KDFLsw3);
+            mws.assignin('KDFLst1', KDFLst1); mws.assignin('KDFLst2', KDFLst2); mws.assignin('KDFLst3', KDFLst3);
+            
+            mws.assignin('KPFRsw1', KPFRsw1); mws.assignin('KPFRsw2', KPFRsw2); mws.assignin('KPFRsw3', KPFRsw3);
+            mws.assignin('KPFRst1', KPFRst1); mws.assignin('KPFRst2', KPFRst2); mws.assignin('KPFRst3', KPFRst3);
+            mws.assignin('KDFRsw1', KDFRsw1); mws.assignin('KDFRsw2', KDFRsw2); mws.assignin('KDFRsw3', KDFRsw3);
+            mws.assignin('KDFRst1', KDFRst1); mws.assignin('KDFRst2', KDFRst2); mws.assignin('KDFRst3', KDFRst3);
+            
+            mws.assignin('KPHLsw1', KPHLsw1); mws.assignin('KPHLsw2', KPHLsw2); mws.assignin('KPHLsw3', KPHLsw3);
+            mws.assignin('KPHLst1', KPHLst1); mws.assignin('KPHLst2', KPHLst2); mws.assignin('KPHLst3', KPHLst3);
+            mws.assignin('KDHLsw1', KDHLsw1); mws.assignin('KDHLsw2', KDHLsw2); mws.assignin('KDHLsw3', KDHLsw3);
+            mws.assignin('KDHLst1', KDHLst1); mws.assignin('KDHLst2', KDHLst2); mws.assignin('KDHLst3', KDHLst3);
+            
+            mws.assignin('KPHRsw1', KPHRsw1); mws.assignin('KPHRsw2', KPHRsw2); mws.assignin('KPHRsw3', KPHRsw3);
+            mws.assignin('KPHRst1', KPHRst1); mws.assignin('KPHRst2', KPHRst2); mws.assignin('KPHRst3', KPHRst3);
+            mws.assignin('KDHRsw1', KDHRsw1); mws.assignin('KDHRsw2', KDHRsw2); mws.assignin('KDHRsw3', KDHRsw3);
+            mws.assignin('KDHRst1', KDHRst1); mws.assignin('KDHRst2', KDHRst2); mws.assignin('KDHRst3', KDHRst3);
+            
+            % Body Variables
+            mws.assignin('body_height', body_height); mws.assignin('pitch_initial', pitch_initial); mws.assignin('velocity_initial', velocity_initial);
             
             % Try catch system to create exception for when model fails to
             % compile... treat is as a constraint violation...
 %%%%%%%%%%%keyboard();
 %%%keyboard();
 %             try
-                sim('final_model_trial2.mdl', 'SimulationMode', 'normal', 'StartTime', '0', 'StopTime', num2str(obj_ite_simulation_time));%, 'RapidAcceleratorUpToDateCheck','off');
+                load_system('final_model_trial2.mdl');
+                modelsim = sim('final_model_trial2.mdl', 'SimulationMode', 'normal', 'StartTime', '0', 'StopTime', num2str(obj_ite_simulation_time));
 %             catch
 %                 OF = 100000;
 %                 cons(2) = 1;   
 %             end
             %%%%%%%%%%keyboard();
 
+            
+            
             results_file_loader  % Reads data from files created by the executable above and stores them in function workspace
-%             figure
-%             plot(temporary_time, t_sen_lg1_j1, 'b', temporary_time, t_sen_lg1_j2, 'r', temporary_time, t_sen_lg1_j3, 'g');
-%             figure
-%             plot(temporary_time, t_sen_lg3_j1, 'b', temporary_time, t_sen_lg3_j2, 'r', temporary_time, t_sen_lg3_j3, 'g');
-%             
 
-%             plot(temporary_time, t_sen_lg1_j1, 'b', temporary_time, t_sen_lg1_j2, 'r', temporary_time, t_sen_lg1_j3, 'g');
+            temporary_time = modelsim.get('t_sen_lg1').time;
+            
+            t_sen_lg1_j1 = modelsim.get('t_sen_lg1').data(:,1);
+            t_sen_lg1_j2 = modelsim.get('t_sen_lg1').data(:,2);
+            t_sen_lg1_j3 = modelsim.get('t_sen_lg1').data(:,3);
 
+            t_sen_lg2_j1 = modelsim.get('t_sen_lg2').data(:,1);
+            t_sen_lg2_j2 = modelsim.get('t_sen_lg2').data(:,2);
+            t_sen_lg2_j3 = modelsim.get('t_sen_lg2').data(:,3);
+
+            t_sen_lg3_j1 = modelsim.get('t_sen_lg3').data(:,1);
+            t_sen_lg3_j2 = modelsim.get('t_sen_lg3').data(:,2);
+            t_sen_lg3_j3 = modelsim.get('t_sen_lg3').data(:,3);
+
+            t_sen_lg4_j1 = modelsim.get('t_sen_lg4').data(:,1);
+            t_sen_lg4_j2 = modelsim.get('t_sen_lg4').data(:,2);
+            t_sen_lg4_j3 = modelsim.get('t_sen_lg4').data(:,3);
+
+            theta_sen_lg1_j1 = modelsim.get('theta_sen_lg1').data(:,1);
+            theta_sen_lg1_j2 = modelsim.get('theta_sen_lg1').data(:,2);
+            theta_sen_lg1_j3 = modelsim.get('theta_sen_lg1').data(:,3);
+
+            theta_sen_lg2_j1 = modelsim.get('theta_sen_lg2').data(:,1);
+            theta_sen_lg2_j2 = modelsim.get('theta_sen_lg2').data(:,2);
+            theta_sen_lg2_j3 = modelsim.get('theta_sen_lg2').data(:,3);
+
+            theta_sen_lg3_j1 = modelsim.get('theta_sen_lg3').data(:,1);
+            theta_sen_lg3_j2 = modelsim.get('theta_sen_lg3').data(:,2);
+            theta_sen_lg3_j3 = modelsim.get('theta_sen_lg3').data(:,3);
+
+            theta_sen_lg4_j1 = modelsim.get('theta_sen_lg4').data(:,1);
+            theta_sen_lg4_j2 = modelsim.get('theta_sen_lg4').data(:,2);
+            theta_sen_lg4_j3 = modelsim.get('theta_sen_lg4').data(:,3);
+
+            body_pitch = modelsim.get('body_movement').data(:,1);
+            body_height_calc = modelsim.get('body_movement').data(:,2);
+            
+            leg1_ee_position = modelsim.get('leg1_ee').data(:,2);
+            leg2_ee_position = modelsim.get('leg2_ee').data(:,2);
+            leg3_ee_position = modelsim.get('leg3_ee').data(:,2);
+            leg4_ee_position = modelsim.get('leg4_ee').data(:,2);
+            
 % cons = [c1 c2 c3 c4 c5 c6 c7 c8]
 % Default value is 0, constraint violation value is 1 
 %

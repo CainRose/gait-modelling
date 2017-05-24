@@ -133,13 +133,25 @@ tic;
 % Section 1: DEFINING POSES IN TERMS OF INPUT VECTOR COMPONENTS
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-global simulation_time trans_leg_1_rot bx by bz density gravity k_g_v n b_g_v p q S_p fk body_velocity
-global body_pitch_max body_roll_max body_yaw_max
-global obj_ite_max_torque obj_ite_max_torque_change
-
 scale = 1;
+HLL = scale*0.33;
 FLL = scale*0.33;
 IGD = scale*0.33;
+body_pitch_max = pi/8;
+body_roll_max = pi/6; 
+body_yaw_max = pi/6;
+ground_x = 24;
+ground_y = 4;
+ground_z = 0.1;
+front_x = IGD/2;      
+back_x = -IGD/2; 
+trans_leg_1_rot = [1 0 0; 0 1 0; 0 0 1];
+bx =IGD; by =0.5*0.5*IGD; bz =0.25*IGD;
+obj_ite_max_torque = 50;
+obj_ite_max_torque_change = 50;
+density = 1408;
+gravity = -9.81;
+k_g_v = 7.21e7; n = 2.31;   b_g_v = 3.8e4;  p = 1.1;    q = 1;  S_p = 0.001;    fk = 0.6;
 
 lg1ps = [FLL*0.43, 0, 0, 0; ...
          FLL*0.40, 0, 0, 0;...
@@ -154,10 +166,114 @@ lg4ps = [FLL*0.39, 0, 0, 0; ...
          FLL*0.36, 0, 0, 0;...
          FLL*0.25, 0, 0, 0];     
 
+for i = 1:3
+	t_mat_lg1(:,:,i) = transformation_mat(lg1ps(i,:));     
+    t_mat_lg2(:,:,i) = transformation_mat(lg2ps(i,:));     
+    t_mat_lg3(:,:,i) = transformation_mat(lg3ps(i,:));     
+    t_mat_lg4(:,:,i) = transformation_mat(lg4ps(i,:));              
+end
+
+leg_length = lg1ps(1,1)+lg1ps(2,1)+lg1ps(3,1);
+
+M1 = [(0.15*lg1ps(1,1))/leg_length;...
+      (0.15*lg1ps(2,1))/leg_length;...
+      (0.15*lg1ps(3,1))/leg_length];
+M2 = [(0.15*lg2ps(1,1))/leg_length;...
+      (0.15*lg2ps(2,1))/leg_length;...
+      (0.15*lg2ps(3,1))/leg_length];
+M3 = [(0.15*lg3ps(1,1))/leg_length;...
+      (0.15*lg3ps(2,1))/leg_length;...
+      (0.15*lg3ps(3,1))/leg_length];
+M4 = [(0.15*lg4ps(1,1))/leg_length;...
+      (0.15*lg4ps(2,1))/leg_length;...
+      (0.15*lg4ps(3,1))/leg_length];
+
+%-------------------------------------------------------------------------%
+L1 = [0.5*sqrt((lg1ps(1,1)^2)+(lg1ps(1,3)^2));...     % Location of centre of mass in front leg 1
+    0.5*sqrt((lg1ps(2,1)^2)+(lg1ps(2,3)^2));...
+    0.5*sqrt((lg1ps(3,1)^2)+(lg1ps(3,3)^2))...
+    ];
+
+l1 = [L1(1) sqrt((lg1ps(1,1))^2+(lg1ps(1,3))^2)-L1(1);...
+      L1(2) sqrt((lg1ps(2,1))^2+(lg1ps(2,3))^2)-L1(2);...
+      L1(3) sqrt((lg1ps(3,1))^2+(lg1ps(3,3))^2)-L1(3);...
+      ];
+     
+R1 = [sqrt((M1(1))/(pi*density*(l1(1,1)+((l1(1,2))*(((l1(1,1))/(l1(1,2)))^(1.5))))));...
+      sqrt((M1(2))/(pi*density*(l1(2,1)+((l1(2,2))*(((l1(2,1))/(l1(2,2)))^(1.5))))));...
+      sqrt((M1(3))/(pi*density*(l1(3,1)+((l1(3,2))*(((l1(3,1))/(l1(3,2)))^(1.5))))));...
+      ];
+
+r1 = [R1(1) R1(1)*(((l1(1,1))/(l1(1,2)))^1.5);...
+      R1(2) R1(2)*(((l1(2,1))/(l1(2,2)))^1.5);...
+      R1(3) R1(3)*(((l1(3,1))/(l1(3,2)))^1.5);...
+      ];
+%-------------------------------------------------------------------------%
+L2 = [0.5*sqrt((lg2ps(1,1)^2)+(lg2ps(1,3)^2));...     % Location of centre of mass in front leg 2
+    0.5*sqrt((lg2ps(2,1)^2)+(lg2ps(2,3)^2));...
+    0.5*sqrt((lg2ps(3,1)^2)+(lg2ps(3,3)^2));...
+    ];
+
+l2 = [L2(1) sqrt((lg2ps(1,1))^2+(lg2ps(1,3))^2)-L2(1);...
+      L2(2) sqrt((lg2ps(2,1))^2+(lg2ps(2,3))^2)-L2(2);...
+      L2(3) sqrt((lg2ps(3,1))^2+(lg2ps(3,3))^2)-L2(3);...
+      ];
+     
+R2 = [sqrt((M2(1))/(pi*density*(l2(1,1)+((l2(1,2))*(((l2(1,1))/(l2(1,2)))^(1.5))))));...
+      sqrt((M2(2))/(pi*density*(l2(2,1)+((l2(2,2))*(((l2(2,1))/(l2(2,2)))^(1.5))))));...
+      sqrt((M2(3))/(pi*density*(l2(3,1)+((l2(3,2))*(((l2(3,1))/(l2(3,2)))^(1.5))))));...
+      ];
+
+r2 = [R2(1) R2(1)*(((l2(1,1))/(l2(1,2)))^1.5);...
+      R2(2) R2(2)*(((l2(2,1))/(l2(2,2)))^1.5);...
+      R2(3) R2(3)*(((l2(3,1))/(l2(3,2)))^1.5);...
+      ];
+%-------------------------------------------------------------------------%  
+L3 = [0.5*sqrt((lg3ps(1,1)^2)+(lg3ps(1,3)^2));...     % Location of centre of mass in front leg 3
+    0.5*sqrt((lg3ps(2,1)^2)+(lg3ps(2,3)^2));...
+    0.5*sqrt((lg3ps(3,1)^2)+(lg3ps(3,3)^2));...
+    ];
+
+l3 = [L3(1) sqrt((lg3ps(1,1))^2+(lg3ps(1,3))^2)-L3(1);...
+      L3(2) sqrt((lg3ps(2,1))^2+(lg3ps(2,3))^2)-L3(2);...
+      L3(3) sqrt((lg3ps(3,1))^2+(lg3ps(3,3))^2)-L3(3);...
+      ];
+     
+R3 = [sqrt((M3(1))/(pi*density*(l3(1,1)+((l3(1,2))*(((l3(1,1))/(l3(1,2)))^(1.5))))));...
+      sqrt((M3(2))/(pi*density*(l3(2,1)+((l3(2,2))*(((l3(2,1))/(l3(2,2)))^(1.5))))));...
+      sqrt((M3(3))/(pi*density*(l3(3,1)+((l3(3,2))*(((l3(3,1))/(l3(3,2)))^(1.5))))));...
+      ];
+
+r3 = [R3(1) R3(1)*(((l3(1,1))/(l3(1,2)))^1.5);...
+      R3(2) R3(2)*(((l3(2,1))/(l3(2,2)))^1.5);...
+      R3(3) R3(3)*(((l3(3,1))/(l3(3,2)))^1.5);...
+      ];
+%-------------------------------------------------------------------------%  
+L4 = [0.5*sqrt((lg4ps(1,1)^2)+(lg4ps(1,3)^2));...     % Location of centre of mass in front leg 4
+    0.5*sqrt((lg4ps(2,1)^2)+(lg4ps(2,3)^2));...
+    0.5*sqrt((lg4ps(3,1)^2)+(lg4ps(3,3)^2));...
+    ];
+
+l4 = [L4(1) sqrt((lg4ps(1,1))^2+(lg4ps(1,3))^2)-L4(1);...
+      L4(2) sqrt((lg4ps(2,1))^2+(lg4ps(2,3))^2)-L4(2);...
+      L4(3) sqrt((lg4ps(3,1))^2+(lg4ps(3,3))^2)-L4(3);...
+      ];
+     
+R4 = [sqrt((M4(1))/(pi*density*(l4(1,1)+((l4(1,2))*(((l4(1,1))/(l4(1,2)))^(1.5))))));...
+      sqrt((M4(2))/(pi*density*(l4(2,1)+((l4(2,2))*(((l4(2,1))/(l4(2,2)))^(1.5))))));...
+      sqrt((M4(3))/(pi*density*(l4(3,1)+((l4(3,2))*(((l4(3,1))/(l4(3,2)))^(1.5))))));...
+      ];
+
+r4 = [R4(1) R4(1)*(((l4(1,1))/(l4(1,2)))^1.5);...
+      R4(2) R4(2)*(((l4(2,1))/(l4(2,2)))^1.5);...
+      R4(3) R4(3)*(((l4(3,1))/(l4(3,2)))^1.5);...
+      ];    
+
+     
 OF = 100000; % Represents a generic value that the members have... multiplied by 10 to represent the worst member
 cons = [0 0 0 0 0 0 0 0 0]; % The 8 constraint values. Look at description above
 
-obj_ite_velocity = 1.0;
+obj_ite_velocity = 0.5;
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % Design Variable initialization to global variables
 obj_ite_stride_length = design_var(1); % Stride length 
@@ -421,18 +537,33 @@ end
             
             % Body Variables
             mws.assignin('body_height', body_height); mws.assignin('pitch_initial', pitch_initial); mws.assignin('velocity_initial', velocity_initial);
+            mws.assignin('t_mat_lg1', t_mat_lg1); mws.assignin('t_mat_lg2', t_mat_lg2); mws.assignin('t_mat_lg3', t_mat_lg3); mws.assignin('t_mat_lg4', t_mat_lg4);
+            mws.assignin('body_pitch_max', body_pitch_max); mws.assignin('body_roll_max', body_roll_max); mws.assignin('body_yaw_max', body_yaw_max); 
+            
+            mws.assignin('l1', l1); mws.assignin('l2', l2); mws.assignin('l3', l3); mws.assignin('l4', l4); 
+            mws.assignin('r1', r1); mws.assignin('r2', r2); mws.assignin('r3', r3); mws.assignin('r4', r4); 
+            mws.assignin('L1', L1); mws.assignin('L2', L2); mws.assignin('L3', L3); mws.assignin('L4', L4); 
+            mws.assignin('R1', R1); mws.assignin('R2', R2); mws.assignin('R3', R3); mws.assignin('R4', R4); 
+            
+            % others
+            mws.assignin('lg1ps', lg1ps); mws.assignin('lg2ps', lg2ps); mws.assignin('lg3ps', lg3ps); mws.assignin('lg4ps', lg4ps); 
+            mws.assignin('gravity', gravity); mws.assignin('ground_x', ground_x); mws.assignin('ground_y', ground_y); mws.assignin('ground_z', ground_z);
+            mws.assignin('back_x', back_x); mws.assignin('front_x', front_x); mws.assignin('density', density);
+            mws.assignin('HLL', HLL); mws.assignin('FLL', FLL); mws.assignin('IGD', IGD); 
+            mws.assignin('bx', bx); mws.assignin('by', by); mws.assignin('bz', bz);
+            mws.assignin('k_g_v', k_g_v); mws.assignin('n', n); mws.assignin('b_g_v', b_g_v); mws.assignin('p', p); mws.assignin('q', q);
+            mws.assignin('S_p', S_p); mws.assignin('fk', fk);
             
             % Try catch system to create exception for when model fails to
             % compile... treat is as a constraint violation...
 %%%%%%%%%%%keyboard();
 %%%keyboard();
-%             try
-                load_system('final_model_trial2.mdl');
+%              try
                 modelsim = sim('final_model_trial2.mdl', 'SimulationMode', 'normal', 'StartTime', '0', 'StopTime', num2str(obj_ite_simulation_time));
-%             catch
-%                 OF = 100000;
-%                 cons(2) = 1;   
-%             end
+%              catch
+%                  OF = 100000;
+%                  cons(2) = 1;   
+%              end
             %%%%%%%%%%keyboard();
 
             
@@ -475,6 +606,7 @@ end
 
             body_pitch = modelsim.get('body_movement').data(:,1);
             body_height_calc = modelsim.get('body_movement').data(:,2);
+            body_velocity = modelsim.get('body_velocity').data(:,1);
             
             leg1_ee_position = modelsim.get('leg1_ee').data(:,2);
             leg2_ee_position = modelsim.get('leg2_ee').data(:,2);

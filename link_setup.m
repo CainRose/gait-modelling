@@ -1,5 +1,3 @@
-global M1 M2 M3 M4 lg1ps lg2ps lg3ps lg4ps 
-
 leg_length = lg1ps(1,1)+lg1ps(2,1)+lg1ps(3,1);
 
 M1 = [(0.15*lg1ps(1,1))/leg_length;...
@@ -16,7 +14,6 @@ M4 = [(0.15*lg4ps(1,1))/leg_length;...
       (0.15*lg4ps(3,1))/leg_length];
 
 %-------------------------------------------------------------------------%
-global L1 L2 L3 l1 l2 l3 R1 R2 R3 r1 r2 r3
 L1 = [0.5*sqrt((lg1ps(1,1)^2)+(lg1ps(1,3)^2));...     % Location of centre of mass in front leg 1
     0.5*sqrt((lg1ps(2,1)^2)+(lg1ps(2,3)^2));...
     0.5*sqrt((lg1ps(3,1)^2)+(lg1ps(3,3)^2))...

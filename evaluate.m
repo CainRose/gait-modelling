@@ -14,6 +14,9 @@ allTime = zeros(N, 1);  % allTime : use to calculate average evaluation times
 % Evaluate objective function in parallel
 %*************************************************************************
 if( strcmpi(opt.useParallel, 'yes') == 1 )
+    model = 'final_model_trial2.mdl';
+    load_system(model);
+    
     curPoolsize = matlabpool('size');
 
     % There isn't opened worker process
@@ -29,6 +32,16 @@ if( strcmpi(opt.useParallel, 'yes') == 1 )
             matlabpool close
             matlabpool(opt.poolsize)
         end
+    end
+    spmd
+        % Setup tempdir and cd into it
+        currDir = pwd;
+        addpath(currDir);
+        tmpDir = tempname;
+        mkdir(tmpDir);
+        cd(tmpDir);
+        % Load the model on the worker
+        load_system(model);
     end
 
     parfor i = 1:N

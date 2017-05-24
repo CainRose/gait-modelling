@@ -1,27 +1,10 @@
-warning('off','all');
 tic;
 clc
 % keyboard();
-global obj_ite_velocity obj_ite_stride_length obj_ite_duty_factor obj_ite_phi_rel_fb obj_ite_stride_time obj_ite_simulation_time obj_ite_stride_height obj_ite_step_clearance obj_ite_step_length obj_ite_take_off_angle obj_ite_angle_change obj_ite_OF_scale
-
-global lg1ps lg2ps lg3ps lg4ps simulation_time trans_leg_1_rot bx by bz density densityw density_body body_height gravity k_g_v n b_g_v p q S_p fk IGD
-global wr1 wl1 wr2 wl2 wr3 wl3 wr4 wl4 wheel_radius obj_ite_max_torque obj_ite_max_torque_change velocity_initial pitch_initial
-global lg1kp lg2kp lg3kp lg4kp lg1ki lg2ki lg3ki lg4ki lg1kd lg2kd lg3kd lg4kd lg1kb lg2kb lg3kb lg4kb body_height_calc
-global M1 M2 M3 M4 L1 L2 L3 L4 l1 l2 l3 l4 R1 R2 R3 R4 r1 r2 r3 r4
-global TRJ_LG1_J1 TRJ_LG1_J2 TRJ_LG1_J3 TRJ_LG1_J4 TRJ_LG2_J1 TRJ_LG2_J2 TRJ_LG2_J3 TRJ_LG2_J4 TRJ_LG3_J1 TRJ_LG3_J2 TRJ_LG3_J3 TRJ_LG3_J4 TRJ_LG4_J1 TRJ_LG4_J2 TRJ_LG4_J3 TRJ_LG4_J4 TRJ_LG1_w TRJ_LG2_w TRJ_LG3_w TRJ_LG4_w
-global TRJ_LG1_J1_TIMESERIES TRJ_LG1_J2_TIMESERIES TRJ_LG1_J3_TIMESERIES TRJ_LG2_J1_TIMESERIES TRJ_LG2_J2_TIMESERIES TRJ_LG2_J3_TIMESERIES TRJ_LG3_J1_TIMESERIES TRJ_LG3_J2_TIMESERIES TRJ_LG3_J3_TIMESERIES TRJ_LG4_J1_TIMESERIES TRJ_LG4_J2_TIMESERIES TRJ_LG4_J3_TIMESERIES
-global AEP_L1_J1 AEP_L1_J2 AEP_L1_J3 AEP_L1_J4 AEP_L2_J1 AEP_L2_J2 AEP_L2_J3 AEP_L2_J4 AEP_L3_J1 AEP_L3_J2 AEP_L3_J3 AEP_L3_J4 AEP_L4_J1 AEP_L4_J2 AEP_L4_J3 AEP_L4_J4
-global KPFLsw1 KPFLsw2 KPFLsw3 KPFLst1 KPFLst2 KPFLst3 KDFLsw1 KDFLsw2 KDFLsw3 KDFLst1 KDFLst2 KDFLst3
-global KPFRsw1 KPFRsw2 KPFRsw3 KPFRst1 KPFRst2 KPFRst3 KDFRsw1 KDFRsw2 KDFRsw3 KDFRst1 KDFRst2 KDFRst3
-global KPHLsw1 KPHLsw2 KPHLsw3 KPHLst1 KPHLst2 KPHLst3 KDHLsw1 KDHLsw2 KDHLsw3 KDHLst1 KDHLst2 KDHLst3
-global KPHRsw1 KPHRsw2 KPHRsw3 KPHRst1 KPHRst2 KPHRst3 KDHRsw1 KDHRsw2 KDHRsw3 KDHRst1 KDHRst2 KDHRst3
-global body_pitch_max body_roll_max body_yaw_max
-global front_x front_y back_x back_y
 
 body_pitch_max = pi/8;
 body_roll_max = pi/6; 
 body_yaw_max = pi/6;
-global ground_x ground_y ground_z
 ground_x = 24;
 ground_y = 4;
 ground_z = 0.1;
@@ -65,14 +48,14 @@ lg4ps = [FLL*0.39, 0, 0, 0; ...
          FLL*0.36, 0, 0, 0;...
          FLL*0.25, 0, 0, 0];     
      
-for i = 1:3
-	t_mat_lg1(:,:,i) = transformation_mat(lg1ps(i,:));     
-    t_mat_lg2(:,:,i) = transformation_mat(lg2ps(i,:));     
-    t_mat_lg3(:,:,i) = transformation_mat(lg3ps(i,:));     
-    t_mat_lg4(:,:,i) = transformation_mat(lg4ps(i,:));              
-end
-
-link_setup
+% for i = 1:3
+% 	t_mat_lg1(:,:,i) = transformation_mat(lg1ps(i,:));     
+%     t_mat_lg2(:,:,i) = transformation_mat(lg2ps(i,:));     
+%     t_mat_lg3(:,:,i) = transformation_mat(lg3ps(i,:));     
+%     t_mat_lg4(:,:,i) = transformation_mat(lg4ps(i,:));              
+% end
+% 
+% link_setup
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %           CONTROLLER PARAMETERS SET UP
@@ -298,7 +281,7 @@ options.ub = design_var_upper';                   % upper bound of x
 options.objfun = @objective_function_main;     % objective function handle
 options.plotInterval = 1;               % interval between two calls of "plotnsga". 
 options.useParallel = 'yes';
-% options.poolsize = 2;
+options.poolsize = 8;
 options.crossoverFraction = 0.3;
 options.mutationFraction = 0.1;
 options.initfun = {@initpop, 'initial_population1.txt'};

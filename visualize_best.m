@@ -73,6 +73,7 @@ ansp_ans_FL = ansp_ans_FL(:, 1:l);
 ansp_ans_FR = ansp_ans_FR(:, 1:l);
 ansp_ans_HL = ansp_ans_HL(:, 1:l);
 ansp_ans_HR = ansp_ans_HR(:, 1:l);
+time_traj = time_traj(1:l);
 
 if extra_flag
     display('Constraint violation - infeasible joint angles')

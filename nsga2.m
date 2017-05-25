@@ -98,6 +98,7 @@ opt = callOutputfuns(opt, state, pop);
 % NSGA2 iteration
 %*************************************************************************
 while( ngen < opt.maxGen && STOP_NSGA==0)
+    check_convergence(pop)
     % 0. Display some information
 	ngen = ngen+1;
     state.currentGen = ngen;

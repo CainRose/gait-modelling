@@ -8,7 +8,7 @@ energy_mean_10p = mean([pop(1:floor(N/10)).obj]);
 % average of population... 
 energy_avg = mean([pop.obj]);
 
-if (abs(energy_avg - energy_mean_10p) < (0.01*min(energy_avg, energy_mean_10p)))
+if (abs(energy_avg - energy_mean_10p) < abs(0.005*min(energy_avg, energy_mean_10p)))
     flag = 1;
 end
 

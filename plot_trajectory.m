@@ -1,10 +1,10 @@
-function plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, divisions)%, phase, cycle_time)
+function plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, AEP, divisions)
 % Function: trajectory_visualization(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, divisions)
 % Description: show the trajectory of the given leg
 
     % select times to visualize and calculate the instanataneous 
     % position of the hip at those 
-    sample_indices = floor(linspace(1, length(J1_traj), divisions))*2;
+    sample_indices = floor(linspace(AEP, AEP + length(J1_traj)/2, divisions))*2;
     hip_offset = [J1_traj(sample_indices-1)*velocity; zeros(2, divisions)];
     
     % joint angle triplets, where each column is at one moment
@@ -32,6 +32,7 @@ function plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, divisions)
     plot3(X, Y, Z, 'color', 'k')
     daspect([1, 1, 1]);
     ylim([0, 0.26]);
+    view(2);
     xlabel('X');
     ylabel('Y');
 end

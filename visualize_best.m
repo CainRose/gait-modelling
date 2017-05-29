@@ -117,10 +117,13 @@ else % c1 not violated - proceed
     
     % adjust trajectories w.r.t. their relative phases
     ansp_FL = ansp_ans_FL;
-    [ansp_FL, leg_marker_FL] = modforleg(ansp_ans_FL, leg_marker_FL, 1, 1);
-    [ansp_FR, leg_marker_FR] = modforleg(ansp_ans_FR, leg_marker_FR, 1, 1);
-    [ansp_HL, leg_marker_HL] = modforleg(ansp_ans_HL, leg_marker_HL, 1, 1);
-    [ansp_HR, leg_marker_HR] = modforleg(ansp_ans_HR, leg_marker_HR, 1, 1);
+    [ansp_FL, leg_marker_FL] = modforleg(ansp_ans_FL, leg_marker_FL, 1, 2);
+    [ansp_FR, leg_marker_FR] = modforleg(ansp_ans_FR, leg_marker_FR, 1, 2);
+    [ansp_HL, leg_marker_HL] = modforleg(ansp_ans_HL, leg_marker_HL, 1, 2);
+    [ansp_HR, leg_marker_HR] = modforleg(ansp_ans_HR, leg_marker_HR, 1, 2);
+    time_tempo = time_traj;
+    time_tempo = time_tempo + stride_time;
+    time_traj = [time_traj(:,1:end-1), time_tempo];
 
     % need to find initialization point
     index_ini = 0; % non-existant index
@@ -163,16 +166,28 @@ else
     TRJ_LG4_J2  = [time_traj; ansp_HR(2,:)];
     TRJ_LG4_J3  = [time_traj; ansp_HR(3,:)];
     
+    FL_AEP = find(leg_marker_FL == -1, 1);
+    FR_AEP = find(leg_marker_FR == -1, 1);
+    HL_AEP = find(leg_marker_HL == -1, 1);
+    HR_AEP = find(leg_marker_HR == -1, 1);
     
     l1 = figure;
-    plot_trajectory(lg1ps, TRJ_LG1_J1, TRJ_LG1_J2, TRJ_LG1_J3, velocity, 30);
+    plot_trajectory(lg1ps, TRJ_LG1_J1, TRJ_LG1_J2, TRJ_LG1_J3, velocity, FL_AEP, 30);
+    title(['Trajectory of Front Left Leg at ' num2str(velocity) ' m/s']);
     l2 = figure;
-    plot_trajectory(lg2ps, TRJ_LG2_J1, TRJ_LG2_J2, TRJ_LG2_J3, velocity, 30);
+    plot_trajectory(lg2ps, TRJ_LG2_J1, TRJ_LG2_J2, TRJ_LG2_J3, velocity, FR_AEP, 30);
+    title(['Trajectory of Front Right Leg at ' num2str(velocity) ' m/s']);
     l3 = figure;
-    plot_trajectory(lg3ps, TRJ_LG3_J1, TRJ_LG3_J2, TRJ_LG3_J3, velocity, 30);
+    plot_trajectory(lg3ps, TRJ_LG3_J1, TRJ_LG3_J2, TRJ_LG3_J3, velocity, HL_AEP, 30);
+    title(['Trajectory of Hind Left Leg at ' num2str(velocity) ' m/s']);
     l4 = figure;
-    plot_trajectory(lg4ps, TRJ_LG4_J1, TRJ_LG4_J2, TRJ_LG4_J3, velocity, 30);
-
+    plot_trajectory(lg4ps, TRJ_LG4_J1, TRJ_LG4_J2, TRJ_LG4_J3, velocity, HR_AEP, 30);
+    title(['Trajectory of Hind Right Leg at ' num2str(velocity) ' m/s']);
+    
+    saveas(l1, ['Trajectory of Front Left Leg at ' num2str(velocity) '.png']);
+    saveas(l2, ['Trajectory of Front Right Leg at ' num2str(velocity) '.png']);
+    saveas(l3, ['Trajectory of Hind Left Leg at ' num2str(velocity) '.png']);
+    saveas(l4, ['Trajectory of Hind Right Leg at ' num2str(velocity) '.png']);
 end
 end
 

@@ -54,7 +54,7 @@ Model {
     }
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.247"
+    ComputedModelVersion    "1.249"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -90,7 +90,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, -8.0, 1696.0, 1026.0]
+      Location		      [-8.0, 0.0, 1696.0, 1026.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -107,21 +107,42 @@ Model {
 	$ClassName		"Simulink.ExplorerBarInfo"
 	Visible			[1]
       }
-      Object {
-	$PropName		"EditorsInfo"
-	$ObjectID		6
-	$ClassName		"Simulink.EditorInfo"
-	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
-	Extents			[1646.0, 851.0]
-	ZoomFactor		[1.0]
-	Offset			[32.401339278264004, 2113.0660712348631]
+      Array {
+	Type			"Simulink.EditorInfo"
+	Dimension		3
+	Object {
+	  $ObjectID		  6
+	  IsActive		  [0]
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
+	  Extents		  [1646.0, 848.0]
+	  ZoomFactor		  [0.8]
+	  Offset		  [-115.01770834078377, 1708.0208331396243]
+	}
+	Object {
+	  $ObjectID		  7
+	  IsActive		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "6431"
+	  Extents		  [1646.0, 848.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-4.875, 0.0]
+	}
+	Object {
+	  $ObjectID		  8
+	  IsActive		  [1]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "276"
+	  Extents		  [1646.0, 848.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [0.0, 0.0]
+	}
+	PropName		"EditorsInfo"
       }
     }
   }
   PhysicalModelingChecksum "2046926822"
-  PhysicalModelingParameterChecksum "3820091242"
+  PhysicalModelingParameterChecksum "2967404523"
   PhysicalModelingProducts "SimMechanics|Simscape"
   Created		  "Wed Jul 24 16:00:11 2013"
   Creator		  "mali"
@@ -129,9 +150,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Administrator"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Jun 01 11:37:35 2017"
-  RTWModifiedTimeStamp	  418217853
-  ModelVersionFormat	  "1.%<AutoIncrement:247>"
+  LastModifiedDate	  "Thu Jun 01 14:15:22 2017"
+  RTWModifiedTimeStamp	  418227319
+  ModelVersionFormat	  "1.%<AutoIncrement:249>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -166,7 +187,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    7
+    $ObjectID		    9
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "final_model"
     overrideMode_	    [0.0]
@@ -225,13 +246,13 @@ Model {
     Type		    "Handle"
     Dimension		    7
     Simulink.ConfigSet {
-      $ObjectID		      8
+      $ObjectID		      10
       Version		      "1.13.0"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  9
+	  $ObjectID		  11
 	  Version		  "1.13.0"
 	  StartTime		  "0.0"
 	  StopTime		  "10.0"
@@ -266,7 +287,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  10
+	  $ObjectID		  12
 	  Version		  "1.13.0"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -298,7 +319,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  11
+	  $ObjectID		  13
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -354,7 +375,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  12
+	  $ObjectID		  14
 	  Version		  "1.13.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -444,7 +465,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  13
+	  $ObjectID		  15
 	  Version		  "1.13.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -485,7 +506,7 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  14
+	  $ObjectID		  16
 	  Version		  "1.13.0"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -500,7 +521,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  15
+	  $ObjectID		  17
 	  Version		  "1.13.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -515,7 +536,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  16
+	  $ObjectID		  18
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -587,7 +608,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      17
+	      $ObjectID		      19
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -654,7 +675,7 @@ Model {
 	    }
 	    RTW.RSimTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      18
+	      $ObjectID		      20
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -737,7 +758,7 @@ Model {
 	  }
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  19
+	  $ObjectID		  21
 	  Version		  "1.13.0"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -750,7 +771,7 @@ Model {
 	  HDLCActiveTab		  "0"
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  20
+	  $ObjectID		  22
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -762,7 +783,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    MECH.SimMechanicsCC {
-	      $ObjectID		      21
+	      $ObjectID		      23
 	      Version		      "1.13.0"
 	      Name		      "SimMechanics"
 	      WarnOnRedundantConstraints on
@@ -795,14 +816,14 @@ Model {
 	      OVRRIDBodyVisualizationType "NONE"
 	    }
 	    simmechanics.ConfigurationSet {
-	      $ObjectID		      22
+	      $ObjectID		      24
 	      Version		      "1.13.0"
 	      Description	      "SimMechanics 2G"
 	      Array {
 		Type			"Handle"
 		Dimension		2
 		simmechanics.DiagnosticsConfigSet {
-		  $ObjectID		  23
+		  $ObjectID		  25
 		  Version		  "1.13.0"
 		  Description		  "Diagnostics"
 		  Name			  "DiagnosticsConfigSet"
@@ -816,7 +837,7 @@ Model {
 		  SimMechanicsJointTargetOverSpecification "error"
 		}
 		simmechanics.ExplorerConfigSet {
-		  $ObjectID		  24
+		  $ObjectID		  26
 		  Version		  "1.13.0"
 		  Description		  "Explorer"
 		  Name			  "ExplorerConfigSet"
@@ -847,13 +868,13 @@ Model {
       ConfigPrmDlgPosition     [ 458, 75, 1462, 947 ] 
     }
     Simulink.ConfigSet {
-      $ObjectID		      25
+      $ObjectID		      27
       Version		      "1.13.0"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  26
+	  $ObjectID		  28
 	  Version		  "1.13.0"
 	  StartTime		  "0.0"
 	  StopTime		  "10.0"
@@ -888,7 +909,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  27
+	  $ObjectID		  29
 	  Version		  "1.13.0"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -920,7 +941,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  28
+	  $ObjectID		  30
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -976,7 +997,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  29
+	  $ObjectID		  31
 	  Version		  "1.13.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -1066,7 +1087,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  30
+	  $ObjectID		  32
 	  Version		  "1.13.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -1107,7 +1128,7 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  31
+	  $ObjectID		  33
 	  Version		  "1.13.0"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -1122,7 +1143,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  32
+	  $ObjectID		  34
 	  Version		  "1.13.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -1137,7 +1158,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  33
+	  $ObjectID		  35
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -1209,7 +1230,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      34
+	      $ObjectID		      36
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -1276,7 +1297,7 @@ Model {
 	    }
 	    RTW.RSimTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      35
+	      $ObjectID		      37
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -1359,7 +1380,7 @@ Model {
 	  }
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  36
+	  $ObjectID		  38
 	  Version		  "1.13.0"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -1372,7 +1393,7 @@ Model {
 	  HDLCActiveTab		  "0"
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  37
+	  $ObjectID		  39
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -1384,7 +1405,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    MECH.SimMechanicsCC {
-	      $ObjectID		      38
+	      $ObjectID		      40
 	      Version		      "1.13.0"
 	      Name		      "SimMechanics"
 	      WarnOnRedundantConstraints on
@@ -1417,14 +1438,14 @@ Model {
 	      OVRRIDBodyVisualizationType "NONE"
 	    }
 	    simmechanics.ConfigurationSet {
-	      $ObjectID		      39
+	      $ObjectID		      41
 	      Version		      "1.13.0"
 	      Description	      "SimMechanics 2G"
 	      Array {
 		Type			"Handle"
 		Dimension		2
 		simmechanics.DiagnosticsConfigSet {
-		  $ObjectID		  40
+		  $ObjectID		  42
 		  Version		  "1.13.0"
 		  Description		  "Diagnostics"
 		  Name			  "DiagnosticsConfigSet"
@@ -1438,7 +1459,7 @@ Model {
 		  SimMechanicsJointTargetOverSpecification "error"
 		}
 		simmechanics.ExplorerConfigSet {
-		  $ObjectID		  41
+		  $ObjectID		  43
 		  Version		  "1.13.0"
 		  Description		  "Explorer"
 		  Name			  "ExplorerConfigSet"
@@ -1469,13 +1490,13 @@ Model {
       ConfigPrmDlgPosition     [ 458, 75, 1462, 947 ] 
     }
     Simulink.ConfigSet {
-      $ObjectID		      42
+      $ObjectID		      44
       Version		      "1.13.0"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  43
+	  $ObjectID		  45
 	  Version		  "1.13.0"
 	  StartTime		  "0.0"
 	  StopTime		  "5"
@@ -1510,7 +1531,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  44
+	  $ObjectID		  46
 	  Version		  "1.13.0"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -1542,7 +1563,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  45
+	  $ObjectID		  47
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -1598,7 +1619,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  46
+	  $ObjectID		  48
 	  Version		  "1.13.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -1688,7 +1709,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  47
+	  $ObjectID		  49
 	  Version		  "1.13.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -1729,7 +1750,7 @@ Model {
 	  ProdEqTarget		  off
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  48
+	  $ObjectID		  50
 	  Version		  "1.13.0"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -1744,7 +1765,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  49
+	  $ObjectID		  51
 	  Version		  "1.13.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -1759,7 +1780,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  50
+	  $ObjectID		  52
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -1838,7 +1859,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      51
+	      $ObjectID		      53
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -1906,7 +1927,7 @@ Model {
 	    }
 	    RTW.RSimTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      52
+	      $ObjectID		      54
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -1988,7 +2009,7 @@ Model {
 	  }
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  53
+	  $ObjectID		  55
 	  Version		  "1.13.0"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -2001,7 +2022,7 @@ Model {
 	  HDLCActiveTab		  "0"
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  54
+	  $ObjectID		  56
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -2013,7 +2034,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    MECH.SimMechanicsCC {
-	      $ObjectID		      55
+	      $ObjectID		      57
 	      Version		      "1.13.0"
 	      Name		      "SimMechanics"
 	      WarnOnRedundantConstraints on
@@ -2046,14 +2067,14 @@ Model {
 	      OVRRIDBodyVisualizationType "NONE"
 	    }
 	    simmechanics.ConfigurationSet {
-	      $ObjectID		      56
+	      $ObjectID		      58
 	      Version		      "1.13.0"
 	      Description	      "SimMechanics 2G"
 	      Array {
 		Type			"Handle"
 		Dimension		2
 		simmechanics.DiagnosticsConfigSet {
-		  $ObjectID		  57
+		  $ObjectID		  59
 		  Version		  "1.13.0"
 		  Description		  "Diagnostics"
 		  Name			  "DiagnosticsConfigSet"
@@ -2067,7 +2088,7 @@ Model {
 		  SimMechanicsJointTargetOverSpecification "error"
 		}
 		simmechanics.ExplorerConfigSet {
-		  $ObjectID		  58
+		  $ObjectID		  60
 		  Version		  "1.13.0"
 		  Description		  "Explorer"
 		  Name			  "ExplorerConfigSet"
@@ -2098,13 +2119,13 @@ Model {
       ConfigPrmDlgPosition     [ 298, 140, 1303, 778 ] 
     }
     Simulink.ConfigSet {
-      $ObjectID		      59
+      $ObjectID		      61
       Version		      "1.13.0"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  60
+	  $ObjectID		  62
 	  Version		  "1.13.0"
 	  StartTime		  "0.0"
 	  StopTime		  "5"
@@ -2139,7 +2160,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  61
+	  $ObjectID		  63
 	  Version		  "1.13.0"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -2171,7 +2192,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  62
+	  $ObjectID		  64
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -2227,7 +2248,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  63
+	  $ObjectID		  65
 	  Version		  "1.13.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -2317,7 +2338,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  64
+	  $ObjectID		  66
 	  Version		  "1.13.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -2358,7 +2379,7 @@ Model {
 	  ProdEqTarget		  off
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  65
+	  $ObjectID		  67
 	  Version		  "1.13.0"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -2373,7 +2394,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  66
+	  $ObjectID		  68
 	  Version		  "1.13.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -2388,7 +2409,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  67
+	  $ObjectID		  69
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -2459,7 +2480,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      68
+	      $ObjectID		      70
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -2530,7 +2551,7 @@ Model {
 	    }
 	    Simulink.RaccelTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      69
+	      $ObjectID		      71
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -2613,7 +2634,7 @@ Model {
 	  }
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  70
+	  $ObjectID		  72
 	  Version		  "1.13.0"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -2626,7 +2647,7 @@ Model {
 	  HDLCActiveTab		  "0"
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  71
+	  $ObjectID		  73
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -2638,7 +2659,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    MECH.SimMechanicsCC {
-	      $ObjectID		      72
+	      $ObjectID		      74
 	      Version		      "1.13.0"
 	      Name		      "SimMechanics"
 	      WarnOnRedundantConstraints on
@@ -2671,14 +2692,14 @@ Model {
 	      OVRRIDBodyVisualizationType "NONE"
 	    }
 	    simmechanics.ConfigurationSet {
-	      $ObjectID		      73
+	      $ObjectID		      75
 	      Version		      "1.13.0"
 	      Description	      "SimMechanics 2G"
 	      Array {
 		Type			"Handle"
 		Dimension		2
 		simmechanics.DiagnosticsConfigSet {
-		  $ObjectID		  74
+		  $ObjectID		  76
 		  Version		  "1.13.0"
 		  Description		  "Diagnostics"
 		  Name			  "DiagnosticsConfigSet"
@@ -2692,7 +2713,7 @@ Model {
 		  SimMechanicsJointTargetOverSpecification "error"
 		}
 		simmechanics.ExplorerConfigSet {
-		  $ObjectID		  75
+		  $ObjectID		  77
 		  Version		  "1.13.0"
 		  Description		  "Explorer"
 		  Name			  "ExplorerConfigSet"
@@ -2723,13 +2744,13 @@ Model {
       ConfigPrmDlgPosition     [ 298, 140, 1303, 778 ] 
     }
     Simulink.ConfigSet {
-      $ObjectID		      76
+      $ObjectID		      78
       Version		      "1.13.0"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  77
+	  $ObjectID		  79
 	  Version		  "1.13.0"
 	  StartTime		  "0.0"
 	  StopTime		  "5"
@@ -2764,7 +2785,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  78
+	  $ObjectID		  80
 	  Version		  "1.13.0"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -2796,7 +2817,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  79
+	  $ObjectID		  81
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -2852,7 +2873,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  80
+	  $ObjectID		  82
 	  Version		  "1.13.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -2942,7 +2963,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  81
+	  $ObjectID		  83
 	  Version		  "1.13.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -2983,7 +3004,7 @@ Model {
 	  ProdEqTarget		  off
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  82
+	  $ObjectID		  84
 	  Version		  "1.13.0"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -2998,7 +3019,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  83
+	  $ObjectID		  85
 	  Version		  "1.13.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -3013,7 +3034,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  84
+	  $ObjectID		  86
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -3084,7 +3105,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      85
+	      $ObjectID		      87
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -3155,7 +3176,7 @@ Model {
 	    }
 	    Simulink.RaccelTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      86
+	      $ObjectID		      88
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -3238,7 +3259,7 @@ Model {
 	  }
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  87
+	  $ObjectID		  89
 	  Version		  "1.13.0"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -3251,7 +3272,7 @@ Model {
 	  HDLCActiveTab		  "0"
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  88
+	  $ObjectID		  90
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -3263,7 +3284,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    MECH.SimMechanicsCC {
-	      $ObjectID		      89
+	      $ObjectID		      91
 	      Version		      "1.13.0"
 	      Name		      "SimMechanics"
 	      WarnOnRedundantConstraints on
@@ -3296,14 +3317,14 @@ Model {
 	      OVRRIDBodyVisualizationType "NONE"
 	    }
 	    simmechanics.ConfigurationSet {
-	      $ObjectID		      90
+	      $ObjectID		      92
 	      Version		      "1.13.0"
 	      Description	      "SimMechanics 2G"
 	      Array {
 		Type			"Handle"
 		Dimension		2
 		simmechanics.DiagnosticsConfigSet {
-		  $ObjectID		  91
+		  $ObjectID		  93
 		  Version		  "1.13.0"
 		  Description		  "Diagnostics"
 		  Name			  "DiagnosticsConfigSet"
@@ -3317,7 +3338,7 @@ Model {
 		  SimMechanicsJointTargetOverSpecification "error"
 		}
 		simmechanics.ExplorerConfigSet {
-		  $ObjectID		  92
+		  $ObjectID		  94
 		  Version		  "1.13.0"
 		  Description		  "Explorer"
 		  Name			  "ExplorerConfigSet"
@@ -3348,13 +3369,13 @@ Model {
       ConfigPrmDlgPosition     [ 298, 140, 1303, 778 ] 
     }
     Simulink.ConfigSet {
-      $ObjectID		      93
+      $ObjectID		      95
       Version		      "1.13.0"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  94
+	  $ObjectID		  96
 	  Version		  "1.13.0"
 	  StartTime		  "0"
 	  StopTime		  "0.6"
@@ -3389,7 +3410,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  95
+	  $ObjectID		  97
 	  Version		  "1.13.0"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -3421,7 +3442,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  96
+	  $ObjectID		  98
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -3477,7 +3498,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  97
+	  $ObjectID		  99
 	  Version		  "1.13.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -3567,7 +3588,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  98
+	  $ObjectID		  100
 	  Version		  "1.13.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -3608,7 +3629,7 @@ Model {
 	  ProdEqTarget		  off
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  99
+	  $ObjectID		  101
 	  Version		  "1.13.0"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -3623,7 +3644,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  100
+	  $ObjectID		  102
 	  Version		  "1.13.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -3638,7 +3659,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  101
+	  $ObjectID		  103
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -3709,7 +3730,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      102
+	      $ObjectID		      104
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -3780,7 +3801,7 @@ Model {
 	    }
 	    Simulink.RaccelTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      103
+	      $ObjectID		      105
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -3863,7 +3884,7 @@ Model {
 	  }
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  104
+	  $ObjectID		  106
 	  Version		  "1.13.0"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -3876,7 +3897,7 @@ Model {
 	  HDLCActiveTab		  "0"
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  105
+	  $ObjectID		  107
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -3888,7 +3909,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    MECH.SimMechanicsCC {
-	      $ObjectID		      106
+	      $ObjectID		      108
 	      Version		      "1.13.0"
 	      Name		      "SimMechanics"
 	      WarnOnRedundantConstraints on
@@ -3921,14 +3942,14 @@ Model {
 	      OVRRIDBodyVisualizationType "NONE"
 	    }
 	    simmechanics.ConfigurationSet {
-	      $ObjectID		      107
+	      $ObjectID		      109
 	      Version		      "1.13.0"
 	      Description	      "SimMechanics 2G"
 	      Array {
 		Type			"Handle"
 		Dimension		2
 		simmechanics.DiagnosticsConfigSet {
-		  $ObjectID		  108
+		  $ObjectID		  110
 		  Version		  "1.13.0"
 		  Description		  "Diagnostics"
 		  Name			  "DiagnosticsConfigSet"
@@ -3942,7 +3963,7 @@ Model {
 		  SimMechanicsJointTargetOverSpecification "error"
 		}
 		simmechanics.ExplorerConfigSet {
-		  $ObjectID		  109
+		  $ObjectID		  111
 		  Version		  "1.13.0"
 		  Description		  "Explorer"
 		  Name			  "ExplorerConfigSet"
@@ -3973,13 +3994,13 @@ Model {
       ConfigPrmDlgPosition     [ 252, 45, 1353, 911 ] 
     }
     Simulink.ConfigSet {
-      $ObjectID		      110
+      $ObjectID		      112
       Version		      "1.13.0"
       Array {
 	Type			"Handle"
 	Dimension		10
 	Simulink.SolverCC {
-	  $ObjectID		  111
+	  $ObjectID		  113
 	  Version		  "1.13.0"
 	  StartTime		  "0.0"
 	  StopTime		  "4"
@@ -4014,7 +4035,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  112
+	  $ObjectID		  114
 	  Version		  "1.13.0"
 	  Decimation		  "1"
 	  ExternalInput		  "TRJ_LG1_J1_TIMESERIES,TRJ_LG1_J2_TIMESERIES,TRJ_LG1_J3_TIMESERIES,TRJ_LG2_J1_TIMESERIES,TRJ_LG2_J"
@@ -4048,7 +4069,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  113
+	  $ObjectID		  115
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -4070,7 +4091,7 @@ Model {
 	  UseIntDivNetSlope	  off
 	  UseFloatMulNetSlope	  off
 	  UseSpecifiedMinMax	  off
-	  InlineInvariantSignals  on
+	  InlineInvariantSignals  off
 	  OptimizeBlockIOStorage  on
 	  BufferReuse		  on
 	  EnhancedBackFolding	  on
@@ -4104,7 +4125,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  114
+	  $ObjectID		  116
 	  Version		  "1.13.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -4194,7 +4215,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  115
+	  $ObjectID		  117
 	  Version		  "1.13.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -4235,7 +4256,7 @@ Model {
 	  ProdEqTarget		  off
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  116
+	  $ObjectID		  118
 	  Version		  "1.13.0"
 	  UpdateModelReferenceTargets "IfOutOfDate"
 	  CheckModelReferenceTargetMessage "error"
@@ -4250,7 +4271,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  117
+	  $ObjectID		  119
 	  Version		  "1.13.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -4265,7 +4286,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  118
+	  $ObjectID		  120
 	  Version		  "1.13.0"
 	  Array {
 	    Type		    "Cell"
@@ -4335,7 +4356,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      119
+	      $ObjectID		      121
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -4403,7 +4424,7 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      120
+	      $ObjectID		      122
 	      Version		      "1.13.0"
 	      Array {
 		Type			"Cell"
@@ -4485,7 +4506,7 @@ Model {
 	  }
 	}
 	hdlcoderui.hdlcc {
-	  $ObjectID		  121
+	  $ObjectID		  123
 	  Version		  "1.13.0"
 	  Description		  "HDL Coder custom configuration component"
 	  Name			  "HDL Coder"
@@ -4498,7 +4519,7 @@ Model {
 	  HDLCActiveTab		  "0"
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  122
+	  $ObjectID		  124
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -4510,7 +4531,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    MECH.SimMechanicsCC {
-	      $ObjectID		      123
+	      $ObjectID		      125
 	      Version		      "1.13.0"
 	      Name		      "SimMechanics"
 	      WarnOnRedundantConstraints on
@@ -4543,14 +4564,14 @@ Model {
 	      OVRRIDBodyVisualizationType "NONE"
 	    }
 	    simmechanics.ConfigurationSet {
-	      $ObjectID		      124
+	      $ObjectID		      126
 	      Version		      "1.13.0"
 	      Description	      "SimMechanics 2G"
 	      Array {
 		Type			"Handle"
 		Dimension		2
 		simmechanics.DiagnosticsConfigSet {
-		  $ObjectID		  125
+		  $ObjectID		  127
 		  Version		  "1.13.0"
 		  Description		  "Diagnostics"
 		  Name			  "DiagnosticsConfigSet"
@@ -4564,7 +4585,7 @@ Model {
 		  SimMechanicsJointTargetOverSpecification "error"
 		}
 		simmechanics.ExplorerConfigSet {
-		  $ObjectID		  126
+		  $ObjectID		  128
 		  Version		  "1.13.0"
 		  Description		  "Explorer"
 		  Name			  "ExplorerConfigSet"
@@ -4598,11 +4619,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    110
+    $ObjectID		    112
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    127
+    $ObjectID		    129
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -4923,7 +4944,7 @@ Model {
   }
   System {
     Name		    "final_model_trial2"
-    Location		    [-8, -8, 1688, 1018]
+    Location		    [-8, 0, 1688, 1026]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    282
@@ -4935,7 +4956,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "100"
+    ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "9421"
     Block {
@@ -12703,7 +12724,7 @@ Model {
       System {
 	Name			"Main body"
 	Location		[-8, 0, 1688, 1026]
-	Open			off
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -13164,15 +13185,15 @@ Model {
 	  SourceType		  "Solid"
 	  ClassName		  "Solid"
 	  InertiaType		  "CalculateFromGeometry"
-	  Mass			  "1"
-	  MassUnits		  "kg"
+	  Mass			  "body_mass"
+	  MassUnits		  "g"
 	  CenterOfMass		  "[0 0 0]"
 	  CenterOfMassUnits	  "m"
 	  MomentsOfInertia	  "[1 1 1]"
 	  MomentsOfInertiaUnits	  "kg*m^2"
 	  ProductsOfInertia	  "[0 0 0]"
 	  ProductsOfInertiaUnits  "kg*m^2"
-	  DensityBased		  "on"
+	  DensityBased		  "off"
 	  Density		  "density"
 	  DensityUnits		  "kg/(m^3)"
 	  GraphicType		  "FromGeometry"
@@ -21153,7 +21174,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"controller_leg4"
-	Location		[-28, 108, 1668, 941]
+	Location		[-8, 0, 1688, 1026]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -22820,7 +22841,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"leg_1"
-	Location		[-8, 0, 1608, 876]
+	Location		[-8, 0, 1688, 1026]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -22849,7 +22870,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "leg 1"
-	    Location		    [-8, 0, 1608, 876]
+	    Location		    [-8, 0, 1688, 1026]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -23411,8 +23432,8 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"lg1_link1"
-		Location		[-8, 0, 1608, 876]
-		Open			off
+		Location		[-8, 0, 1688, 1026]
+		Open			on
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
 		ScreenColor		"white"
@@ -23590,15 +23611,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(1, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -23653,15 +23674,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(1, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -23784,7 +23805,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"lg1_link2"
-		Location		[-8, 40, 1608, 916]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -23963,15 +23984,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(1, 2)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -24026,15 +24047,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(1, 2)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -24157,7 +24178,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"lg1_link3"
-		Location		[-8, 40, 1608, 916]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -24336,15 +24357,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(1, 3)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -24399,15 +24420,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(1, 3)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -24964,7 +24985,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"leg_2"
-	Location		[-8, 40, 1608, 916]
+	Location		[-8, 0, 1688, 1026]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -24993,7 +25014,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "leg 2"
-	    Location		    [-8, 40, 1608, 916]
+	    Location		    [-8, 0, 1688, 1026]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -25555,7 +25576,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link1"
-		Location		[-8, 40, 1608, 916]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -25567,7 +25588,7 @@ Model {
 		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 		TiledPageScale		1
 		ShowPageBoundaries	off
-		ZoomFactor		"250"
+		ZoomFactor		"175"
 		Block {
 		  BlockType		  Reference
 		  Name			  "Rigid \nTransform"
@@ -25734,15 +25755,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(2, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -25797,15 +25818,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(2, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -25928,7 +25949,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link2"
-		Location		[-8, 40, 1608, 916]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -26107,15 +26128,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(2, 2)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -26170,15 +26191,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(2, 2)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -26301,7 +26322,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link3"
-		Location		[-8, 40, 1608, 916]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -26480,15 +26501,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(2, 3)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -26543,15 +26564,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(2, 3)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -27108,7 +27129,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"leg_3"
-	Location		[-8, 32, 1608, 908]
+	Location		[-8, 0, 1688, 1026]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -27137,7 +27158,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "leg 3"
-	    Location		    [-8, 32, 1608, 908]
+	    Location		    [-8, 0, 1688, 1026]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -27699,7 +27720,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link1"
-		Location		[-8, 32, 1608, 908]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -27878,15 +27899,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(3, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -27941,15 +27962,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(3, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -28072,7 +28093,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link2"
-		Location		[-8, 32, 1608, 908]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -28251,15 +28272,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(3, 2)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -28314,15 +28335,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(3, 2)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -28445,7 +28466,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link3"
-		Location		[-8, 32, 1608, 908]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -28624,15 +28645,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(3, 3)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -28687,15 +28708,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(3, 3)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -30021,15 +30042,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(4, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -30084,15 +30105,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(4, 1)/2"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -30215,7 +30236,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link2"
-		Location		[-8, 32, 1608, 908]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -30394,15 +30415,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(4, 2)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -30457,15 +30478,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(4, 2)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
@@ -30588,7 +30609,7 @@ Model {
 	      MaskHideContents	      off
 	      System {
 		Name			"link3"
-		Location		[-8, 32, 1608, 908]
+		Location		[-8, 0, 1688, 1026]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -30767,16 +30788,16 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(4, 3)*3/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
-		  Density		  "density"
+		  DensityBased		  "off"
+		  Density		  "leg_masses(4, 1)/2"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"
 		  MarkerShape		  "Sphere"
@@ -30830,15 +30851,15 @@ Model {
 		  SourceType		  "Solid"
 		  ClassName		  "Solid"
 		  InertiaType		  "CalculateFromGeometry"
-		  Mass			  "1"
-		  MassUnits		  "kg"
+		  Mass			  "leg_masses(4, 3)/4"
+		  MassUnits		  "g"
 		  CenterOfMass		  "[0 0 0]"
 		  CenterOfMassUnits	  "m"
 		  MomentsOfInertia	  "[1 1 1]"
 		  MomentsOfInertiaUnits	  "kg*m^2"
 		  ProductsOfInertia	  "[0 0 0]"
 		  ProductsOfInertiaUnits  "kg*m^2"
-		  DensityBased		  "on"
+		  DensityBased		  "off"
 		  Density		  "density"
 		  DensityUnits		  "kg/(m^3)"
 		  GraphicType		  "FromGeometry"

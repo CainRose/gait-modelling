@@ -1,5 +1,6 @@
 tic;
-clc
+clc;
+warning('off','all');
 % keyboard();
 
 body_pitch_max = pi/8;
@@ -280,7 +281,7 @@ options.lb = design_var_lower';                   % lower bound of x
 options.ub = design_var_upper';                   % upper bound of x
 options.objfun = @objective_function_main;     % objective function handle
 options.plotInterval = 1;               % interval between two calls of "plotnsga". 
-options.useParallel = 'yes';
+options.useParallel = 'no';
 options.poolsize = 8;
 options.crossoverFraction = 0.3;
 options.mutationFraction = 0.1;

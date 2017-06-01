@@ -133,10 +133,14 @@ tic;
 % Section 1: DEFINING POSES IN TERMS OF INPUT VECTOR COMPONENTS
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
+global KPFLsw1 KPFLsw2 KPFLsw3 KPFLst1 KPFLst2 KPFLst3 KDFLsw1 KDFLsw2 KDFLsw3 KDFLst1 KDFLst2 KDFLst3
+global KPFRsw1 KPFRsw2 KPFRsw3 KPFRst1 KPFRst2 KPFRst3 KDFRsw1 KDFRsw2 KDFRsw3 KDFRst1 KDFRst2 KDFRst3
+global KPHLsw1 KPHLsw2 KPHLsw3 KPHLst1 KPHLst2 KPHLst3 KDHLsw1 KDHLsw2 KDHLsw3 KDHLst1 KDHLst2 KDHLst3
+global KPHRsw1 KPHRsw2 KPHRsw3 KPHRst1 KPHRst2 KPHRst3 KDHRsw1 KDHRsw2 KDHRsw3 KDHRst1 KDHRst2 KDHRst3
+% global body_height pitch_initial velocity_initial
+
 scale = 1;
-HLL = scale*0.33;
-FLL = scale*0.33;
-IGD = scale*0.33;
+IGD = scale*0.311;
 body_pitch_max = pi/8;
 body_roll_max = pi/6; 
 body_yaw_max = pi/6;
@@ -153,18 +157,24 @@ density = 1408;
 gravity = -9.81;
 k_g_v = 7.21e7; n = 2.31;   b_g_v = 3.8e4;  p = 1.1;    q = 1;  S_p = 0.001;    fk = 0.6;
 
-lg1ps = [FLL*0.43, 0, 0, 0; ...
-         FLL*0.40, 0, 0, 0;...
-         FLL*0.17, 0, 0, 0];
-lg2ps = [FLL*0.43, 0, 0, 0; ...
-         FLL*0.40, 0, 0, 0;...
-         FLL*0.17, 0, 0, 0];
-lg3ps = [FLL*0.39, 0, 0, 0; ...
-         FLL*0.36, 0, 0, 0;...
-         FLL*0.25, 0, 0, 0];
-lg4ps = [FLL*0.39, 0, 0, 0; ...
-         FLL*0.36, 0, 0, 0;...
-         FLL*0.25, 0, 0, 0];     
+lg1ps = [scale*0.146, 0, 0, 0; ...
+         scale*0.135, 0, 0, 0;...
+         scale*0.059, 0, 0, 0];
+lg2ps = [scale*0.146, 0, 0, 0; ...
+         scale*0.135, 0, 0, 0;...
+         scale*0.059, 0, 0, 0];
+lg3ps = [scale*0.132, 0, 0, 0; ...
+         scale*0.121, 0, 0, 0;...
+         scale*0.080, 0, 0, 0];
+lg4ps = [scale*0.132, 0, 0, 0; ...
+         scale*0.121, 0, 0, 0;...
+         scale*0.080, 0, 0, 0];   
+     
+leg_masses = [  89, 113, 83;
+                89, 113, 83;
+                83, 107, 85;
+                83, 107, 85];
+body_mass = 1486;
 
 for i = 1:3
 	t_mat_lg1(:,:,i) = transformation_mat(lg1ps(i,:));     
@@ -173,20 +183,23 @@ for i = 1:3
     t_mat_lg4(:,:,i) = transformation_mat(lg4ps(i,:));              
 end
 
-leg_length = lg1ps(1,1)+lg1ps(2,1)+lg1ps(3,1);
+leg_length1 = lg1ps(1,1)+lg1ps(2,1)+lg1ps(3,1);
+leg_length2 = lg2ps(1,1)+lg2ps(2,1)+lg2ps(3,1);
+leg_length3 = lg3ps(1,1)+lg3ps(2,1)+lg3ps(3,1);
+leg_length4 = lg4ps(1,1)+lg4ps(2,1)+lg4ps(3,1);
 
-M1 = [(0.15*lg1ps(1,1))/leg_length;...
-      (0.15*lg1ps(2,1))/leg_length;...
-      (0.15*lg1ps(3,1))/leg_length];
-M2 = [(0.15*lg2ps(1,1))/leg_length;...
-      (0.15*lg2ps(2,1))/leg_length;...
-      (0.15*lg2ps(3,1))/leg_length];
-M3 = [(0.15*lg3ps(1,1))/leg_length;...
-      (0.15*lg3ps(2,1))/leg_length;...
-      (0.15*lg3ps(3,1))/leg_length];
-M4 = [(0.15*lg4ps(1,1))/leg_length;...
-      (0.15*lg4ps(2,1))/leg_length;...
-      (0.15*lg4ps(3,1))/leg_length];
+M1 = [(0.15*lg1ps(1,1))/leg_length1;...
+      (0.15*lg1ps(2,1))/leg_length1;...
+      (0.15*lg1ps(3,1))/leg_length1];
+M2 = [(0.15*lg2ps(1,1))/leg_length2;...
+      (0.15*lg2ps(2,1))/leg_length2;...
+      (0.15*lg2ps(3,1))/leg_length2];
+M3 = [(0.15*lg3ps(1,1))/leg_length3;...
+      (0.15*lg3ps(2,1))/leg_length3;...
+      (0.15*lg3ps(3,1))/leg_length3];
+M4 = [(0.15*lg4ps(1,1))/leg_length4;...
+      (0.15*lg4ps(2,1))/leg_length4;...
+      (0.15*lg4ps(3,1))/leg_length4];
 
 %-------------------------------------------------------------------------%
 L1 = [0.5*sqrt((lg1ps(1,1)^2)+(lg1ps(1,3)^2));...     % Location of centre of mass in front leg 1
@@ -515,30 +528,31 @@ end
             mws.assignin('TRJ_LG4_J1', TRJ_LG4_J1); mws.assignin('TRJ_LG4_J2', TRJ_LG4_J2); mws.assignin('TRJ_LG4_J3', TRJ_LG4_J3);
             
             % Gains
-            mws.assignin('KPFLsw1', KPFLsw1); mws.assignin('KPFLsw2', KPFLsw2); mws.assignin('KPFLsw3', KPFLsw3);
-            mws.assignin('KPFLst1', KPFLst1); mws.assignin('KPFLst2', KPFLst2); mws.assignin('KPFLst3', KPFLst3);
-            mws.assignin('KDFLsw1', KDFLsw1); mws.assignin('KDFLsw2', KDFLsw2); mws.assignin('KDFLsw3', KDFLsw3);
-            mws.assignin('KDFLst1', KDFLst1); mws.assignin('KDFLst2', KDFLst2); mws.assignin('KDFLst3', KDFLst3);
-            
-            mws.assignin('KPFRsw1', KPFRsw1); mws.assignin('KPFRsw2', KPFRsw2); mws.assignin('KPFRsw3', KPFRsw3);
-            mws.assignin('KPFRst1', KPFRst1); mws.assignin('KPFRst2', KPFRst2); mws.assignin('KPFRst3', KPFRst3);
-            mws.assignin('KDFRsw1', KDFRsw1); mws.assignin('KDFRsw2', KDFRsw2); mws.assignin('KDFRsw3', KDFRsw3);
-            mws.assignin('KDFRst1', KDFRst1); mws.assignin('KDFRst2', KDFRst2); mws.assignin('KDFRst3', KDFRst3);
-            
-            mws.assignin('KPHLsw1', KPHLsw1); mws.assignin('KPHLsw2', KPHLsw2); mws.assignin('KPHLsw3', KPHLsw3);
-            mws.assignin('KPHLst1', KPHLst1); mws.assignin('KPHLst2', KPHLst2); mws.assignin('KPHLst3', KPHLst3);
-            mws.assignin('KDHLsw1', KDHLsw1); mws.assignin('KDHLsw2', KDHLsw2); mws.assignin('KDHLsw3', KDHLsw3);
-            mws.assignin('KDHLst1', KDHLst1); mws.assignin('KDHLst2', KDHLst2); mws.assignin('KDHLst3', KDHLst3);
-            
-            mws.assignin('KPHRsw1', KPHRsw1); mws.assignin('KPHRsw2', KPHRsw2); mws.assignin('KPHRsw3', KPHRsw3);
-            mws.assignin('KPHRst1', KPHRst1); mws.assignin('KPHRst2', KPHRst2); mws.assignin('KPHRst3', KPHRst3);
-            mws.assignin('KDHRsw1', KDHRsw1); mws.assignin('KDHRsw2', KDHRsw2); mws.assignin('KDHRsw3', KDHRsw3);
-            mws.assignin('KDHRst1', KDHRst1); mws.assignin('KDHRst2', KDHRst2); mws.assignin('KDHRst3', KDHRst3);
+%             mws.assignin('KPFLsw1', KPFLsw1); mws.assignin('KPFLsw2', KPFLsw2); mws.assignin('KPFLsw3', KPFLsw3);
+%             mws.assignin('KPFLst1', KPFLst1); mws.assignin('KPFLst2', KPFLst2); mws.assignin('KPFLst3', KPFLst3);
+%             mws.assignin('KDFLsw1', KDFLsw1); mws.assignin('KDFLsw2', KDFLsw2); mws.assignin('KDFLsw3', KDFLsw3);
+%             mws.assignin('KDFLst1', KDFLst1); mws.assignin('KDFLst2', KDFLst2); mws.assignin('KDFLst3', KDFLst3);
+%             
+%             mws.assignin('KPFRsw1', KPFRsw1); mws.assignin('KPFRsw2', KPFRsw2); mws.assignin('KPFRsw3', KPFRsw3);
+%             mws.assignin('KPFRst1', KPFRst1); mws.assignin('KPFRst2', KPFRst2); mws.assignin('KPFRst3', KPFRst3);
+%             mws.assignin('KDFRsw1', KDFRsw1); mws.assignin('KDFRsw2', KDFRsw2); mws.assignin('KDFRsw3', KDFRsw3);
+%             mws.assignin('KDFRst1', KDFRst1); mws.assignin('KDFRst2', KDFRst2); mws.assignin('KDFRst3', KDFRst3);
+%             
+%             mws.assignin('KPHLsw1', KPHLsw1); mws.assignin('KPHLsw2', KPHLsw2); mws.assignin('KPHLsw3', KPHLsw3);
+%             mws.assignin('KPHLst1', KPHLst1); mws.assignin('KPHLst2', KPHLst2); mws.assignin('KPHLst3', KPHLst3);
+%             mws.assignin('KDHLsw1', KDHLsw1); mws.assignin('KDHLsw2', KDHLsw2); mws.assignin('KDHLsw3', KDHLsw3);
+%             mws.assignin('KDHLst1', KDHLst1); mws.assignin('KDHLst2', KDHLst2); mws.assignin('KDHLst3', KDHLst3);
+%             
+%             mws.assignin('KPHRsw1', KPHRsw1); mws.assignin('KPHRsw2', KPHRsw2); mws.assignin('KPHRsw3', KPHRsw3);
+%             mws.assignin('KPHRst1', KPHRst1); mws.assignin('KPHRst2', KPHRst2); mws.assignin('KPHRst3', KPHRst3);
+%             mws.assignin('KDHRsw1', KDHRsw1); mws.assignin('KDHRsw2', KDHRsw2); mws.assignin('KDHRsw3', KDHRsw3);
+%             mws.assignin('KDHRst1', KDHRst1); mws.assignin('KDHRst2', KDHRst2); mws.assignin('KDHRst3', KDHRst3);
             
             % Body Variables
             mws.assignin('body_height', body_height); mws.assignin('pitch_initial', pitch_initial); mws.assignin('velocity_initial', velocity_initial);
             mws.assignin('t_mat_lg1', t_mat_lg1); mws.assignin('t_mat_lg2', t_mat_lg2); mws.assignin('t_mat_lg3', t_mat_lg3); mws.assignin('t_mat_lg4', t_mat_lg4);
             mws.assignin('body_pitch_max', body_pitch_max); mws.assignin('body_roll_max', body_roll_max); mws.assignin('body_yaw_max', body_yaw_max); 
+            mws.assignin('body_mass', body_mass); mws.assignin('leg_masses', leg_masses);
             
             mws.assignin('l1', l1); mws.assignin('l2', l2); mws.assignin('l3', l3); mws.assignin('l4', l4); 
             mws.assignin('r1', r1); mws.assignin('r2', r2); mws.assignin('r3', r3); mws.assignin('r4', r4); 
@@ -549,7 +563,6 @@ end
             mws.assignin('lg1ps', lg1ps); mws.assignin('lg2ps', lg2ps); mws.assignin('lg3ps', lg3ps); mws.assignin('lg4ps', lg4ps); 
             mws.assignin('gravity', gravity); mws.assignin('ground_x', ground_x); mws.assignin('ground_y', ground_y); mws.assignin('ground_z', ground_z);
             mws.assignin('back_x', back_x); mws.assignin('front_x', front_x); mws.assignin('density', density);
-            mws.assignin('HLL', HLL); mws.assignin('FLL', FLL); mws.assignin('IGD', IGD); 
             mws.assignin('bx', bx); mws.assignin('by', by); mws.assignin('bz', bz);
             mws.assignin('k_g_v', k_g_v); mws.assignin('n', n); mws.assignin('b_g_v', b_g_v); mws.assignin('p', p); mws.assignin('q', q);
             mws.assignin('S_p', S_p); mws.assignin('fk', fk);

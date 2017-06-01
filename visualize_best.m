@@ -188,6 +188,8 @@ else
     saveas(l2, ['Trajectory of Front Right Leg at ' num2str(velocity) '.png']);
     saveas(l3, ['Trajectory of Hind Left Leg at ' num2str(velocity) '.png']);
     saveas(l4, ['Trajectory of Hind Right Leg at ' num2str(velocity) '.png']);
+    
+    objective_function_velocity(design_var);
 end
 end
 

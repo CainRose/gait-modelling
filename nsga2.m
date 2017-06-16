@@ -154,11 +154,11 @@ while( ngen < opt.maxGen && STOP_NSGA==0)
     end
     
     % 7. Check Convergence
-    convergence_flag = 0; % 0 => Did not converge, 1 => Converged
-    convergence_flag = check_convergence(pop);
-    if convergence_flag
-        STOP_NSGA = 1;
-    end
+%     convergence_flag = 0; % 0 => Did not converge, 1 => Converged
+%     convergence_flag = check_convergence(pop);
+%     if convergence_flag
+%         STOP_NSGA = 1;
+%     end
 end
 
 % call output function for closing file

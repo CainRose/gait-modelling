@@ -34,6 +34,7 @@ if( strcmpi(opt.useParallel, 'yes') == 1 )
         end
     end
     spmd
+        warning('off','all');
         % Setup tempdir and cd into it
         currDir = pwd;
         addpath(currDir);
@@ -82,7 +83,7 @@ function [indi, evalTime] = evalIndividual(indi, objfun, varargin)
 %*************************************************************************
 
 tStart = tic;
-[y, cons] = objfun( indi.var, varargin{:} );
+evalc('[y, cons] = objfun( indi.var, varargin{:} )');
 evalTime = toc(tStart);
 % keyboard();
 % Save the objective values and constraint violations

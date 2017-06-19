@@ -79,6 +79,7 @@ STOP_NSGA = 0;
 ngen = 1;
 pop = opt.initfun{1}(opt, pop, opt.initfun{2:end});
 [pop, state] = evaluate(opt, pop, state, varargin{:});
+pop = randomize_pop(opt, pop);
 [opt, pop] = ndsort(opt, pop);
 
 % state
@@ -92,7 +93,6 @@ result.states(1)  = state;
 % output
 % plotnsga(result, ngen);
 opt = callOutputfuns(opt, state, pop);
-
 
 %*************************************************************************
 % NSGA2 iteration
@@ -154,11 +154,11 @@ while( ngen < opt.maxGen && STOP_NSGA==0)
     end
     
     % 7. Check Convergence
-%     convergence_flag = 0; % 0 => Did not converge, 1 => Converged
-%     convergence_flag = check_convergence(pop);
-%     if convergence_flag
-%         STOP_NSGA = 1;
-%     end
+    convergence_flag = 0; % 0 => Did not converge, 1 => Converged
+    convergence_flag = check_convergence(pop);
+    if convergence_flag
+        STOP_NSGA = 1;
+    end
 end
 
 % call output function for closing file

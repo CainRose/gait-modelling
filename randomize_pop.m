@@ -18,26 +18,24 @@ for i = 1:popsize
     idx = idx + 1;
 end
 
-% Replace members from idx to end
-for i = idx:popsize
-    var(1:nVar) = lb(1:nVar) + rand(1, nVar) .* (ub(1:nVar)-lb(1:nVar));
-%     var(1) = normrnd(-1.7501,0.07);
-%     var(2) = normrnd(0.8817,0.06);
-%     var(3) = normrnd(0.5618,0.1);
-%     var(4) = normrnd(-0.7901,0.01);
-%     var(5) = normrnd(-1.2286,0.05);
-%     var(6) = normrnd(1.2069,0.1);
-    % if desing variable is integer, round to the nearest integer
-    for v = 1:nVar
-        if( type(v) == 2)
-            var(v) = round(var(v));
-        end
-    end
-    
-    % limit in the lower and upper bound
-    var = varlimit(var, lb, ub);
+if popsize-idx+1 > 0
+    fprintf('Randomizing %d Members\n', popsize-idx+1);
+    % Generate Latin Hypercube Sample of design space
+    newVars = lhsdesign(popsize-idx+1, nVar);
+    newVars = newVars .* repmat(ub - lb, [popsize-idx+1,1]);
+    newVars = newVars + repmat(lb, [popsize-idx+1,1]);
 
-    pop(i).var = var;
+    % Replace members from idx to end
+    for i = idx:popsize
+        var(1:nVar) = newVars(i,:);
+        % if desing variable is integer, round to the nearest integer
+        for v = 1:nVar
+            if( type(v) == 2)
+                var(v) = round(var(v));
+            end
+        end
+        pop(i).var = var;
+    end
 end
 
 end

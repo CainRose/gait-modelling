@@ -1,4 +1,4 @@
-function [leg, hip, knee, ankle, toe] = plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, AEP, divisions)
+function [leg, joints] = plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, AEP, divisions)
 % Function: trajectory_visualization(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, divisions)
 % Description: show the trajectory of the given leg
 
@@ -43,24 +43,15 @@ function [leg, hip, knee, ankle, toe] = plot_trajectory(DH_MAT, J1_traj, J2_traj
     xlabel('X');
     ylabel('Z');
     
-    hip = figure;
-    plot(T, Z(1,:),'color','k');
+    hold on
+    joints = figure;
+    plot(T, Z(1,:), '-k.');
+    plot(T, Z(2,:), '--k.');
+    plot(T, Z(3,:), '-ks');
+    plot(T, Z(4,:), '--ks');
+    hold off
+    
     xlabel('T');
     ylabel('Z');
-    
-    knee = figure;
-    plot(T, Z(2,:),'color','k');
-    xlabel('T');
-    ylabel('Z');
-    
-    ankle = figure;
-    plot(T, Z(3,:),'color','k');
-    xlabel('T');
-    ylabel('Z');
-    
-    toe = figure;
-    plot(T, Z(4,:),'color','k');
-    xlabel('T');
-    ylabel('Z');
-    
+    legend('Front Left', 'Front Right', 'Hind Left', 'Hind Right');
 end

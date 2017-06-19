@@ -35,23 +35,22 @@ function [leg, joints] = plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velo
     
     % display and save trajectories
     leg = figure;
-    plot3(X(:,sample_indices), Y(:,sample_indices), Z(:,sample_indices),...
+    plot3(X(:,sample_indices), Z(:,sample_indices), Y(:,sample_indices),...
         'color', 'k');
     daspect([1, 1, 1]);
-    ylim([0, 0.26]);
     view(2);
-    xlabel('X');
-    ylabel('Z');
+    xlabel('x (m)');
+    ylabel('z (m)');
     
-    hold on
     joints = figure;
-    plot(T, Z(1,:), '-k.');
-    plot(T, Z(2,:), '--k.');
-    plot(T, Z(3,:), '-ks');
-    plot(T, Z(4,:), '--ks');
+    hold on
+    plot(T, Z(1,:), 'b');
+    plot(T, Z(2,:), 'r');
+    plot(T, Z(3,:), 'g');
+    plot(T, Z(4,:), 'k');
     hold off
     
-    xlabel('T');
-    ylabel('Z');
-    legend('Front Left', 'Front Right', 'Hind Left', 'Hind Right');
+    xlabel('t (s)');
+    ylabel('z (m)');
+    legend('Hip', 'Knee', 'Ankle', 'Toe', 'Location', 'Best');
 end

@@ -1,7 +1,13 @@
-function visualize_best( file, component )
+function visualize_best( file, component)
 %VISUALIZE_BEST visualize_best( file )
 %   gives a graphical representation of the movement of the best member of
 %   the given population file
+
+if strcmp(component, 'trajectory') || strcmp(component, 'details')
+    cycles = 2;
+else
+    cycles = 11;
+end
 
 data = loadpopfile(file);
 [~, index] = min([data.pops.obj]);
@@ -31,10 +37,15 @@ end
 
 % generate transformation matrices
 if optFun == 1
-    [OF, cons, d] = objective_function_main(design_var);
+    [OF, cons, d] = objective_function_main(best.var, velocity, cycles);
 elseif optFun == 2
-    [OF, cons, d] = objective_function_velocity(design_var);
+    [OF, cons, d] = objective_function_velocity(best.var, velocity, cycles);
 end
+
+t_cycle = floor(1000*d.temporary_time(end)/cycles)/1000;
+t_FL_PEP = best.var(5)*t_cycle;     t_FR_PEP = best.var(28)*t_cycle;
+t_HL_PEP = best.var(51)*t_cycle;    t_HR_PEP = best.var(74)*t_cycle;
+t_cycle = t_cycle - 0.001;
 
 if strcmp(component, 'trajectory')
     [leg1, joint1] = ...
@@ -103,12 +114,148 @@ if strcmp(component, 'trajectory')
     %     saveas(knee4,   ['Vertical Position of Hind Right Knee at '  num2str(velocity) '.png']);
     %     saveas(ankle4,  ['Vertical Position of Hind Right Ankle at '  num2str(velocity) '.png']);
     %     saveas(toe4,    ['Vertical Position of Hind Right Toe at '  num2str(velocity) '.png']);
-elseif strcmp(component, 'of')
-    OF
-elseif strcmp(component, 'torque')
+
+
+
+elseif strcmp(component, 'details')
+    fprintf('Objective Function: %f\n', OF);
+    best.var'
+    
+    
+    
+elseif strcmp(component, 'torque')    
+    torq_lg1_j1 = averageVar(d.t_sen_lg1_j1, d.FL_AEP, cycles);
+    torq_lg1_j2 = averageVar(d.t_sen_lg1_j2, d.FL_AEP, cycles);
+    torq_lg1_j3 = averageVar(d.t_sen_lg1_j3, d.FL_AEP, cycles);
+    torq_lg2_j1 = averageVar(d.t_sen_lg2_j1, d.FR_AEP, cycles);
+    torq_lg2_j2 = averageVar(d.t_sen_lg2_j2, d.FR_AEP, cycles);
+    torq_lg2_j3 = averageVar(d.t_sen_lg2_j3, d.FR_AEP, cycles);
+    torq_lg3_j1 = averageVar(d.t_sen_lg3_j1, d.HL_AEP, cycles);
+    torq_lg3_j2 = averageVar(d.t_sen_lg3_j2, d.HL_AEP, cycles);
+    torq_lg3_j3 = averageVar(d.t_sen_lg3_j3, d.HL_AEP, cycles);
+    torq_lg4_j1 = averageVar(d.t_sen_lg4_j1, d.HR_AEP, cycles);
+    torq_lg4_j2 = averageVar(d.t_sen_lg4_j2, d.HR_AEP, cycles);
+    torq_lg4_j3 = averageVar(d.t_sen_lg4_j3, d.HR_AEP, cycles);
+    
+    torque1 = figure;
+    hold on
+    plot(0:0.001:t_cycle, torq_lg1_j1, 'b');
+    plot(0:0.001:t_cycle, torq_lg1_j2, 'r');
+    plot(0:0.001:t_cycle, torq_lg1_j3, 'g');
+    plot([t_FL_PEP t_FL_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Torque (N?m)');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Torque of Front Left Joints at '  num2str(velocity) ' m/s']);
+    saveas(torque1, ['Torque of Front Left Joints at '  num2str(velocity) '.png'])
+    
+    torque2 = figure;
+    hold on
+    plot(0:0.001:t_cycle, torq_lg2_j1, 'b');
+    plot(0:0.001:t_cycle, torq_lg2_j2, 'r');
+    plot(0:0.001:t_cycle, torq_lg2_j3, 'g');
+    plot([t_FR_PEP t_FR_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Torque (N?m)');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Torque of Front Right Joints at '  num2str(velocity) ' m/s']);
+    saveas(torque2, ['Torque of Front Right Joints at '  num2str(velocity) '.png'])
+    
+    torque3 = figure;
+    hold on
+    plot(0:0.001:t_cycle, torq_lg3_j1, 'b');
+    plot(0:0.001:t_cycle, torq_lg3_j2, 'r');
+    plot(0:0.001:t_cycle, torq_lg3_j3, 'g');
+    plot([t_HL_PEP t_HL_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Torque (N?m)');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Torque of Hind Left Joints at '  num2str(velocity) ' m/s']);
+    saveas(torque3, ['Torque of Hind Left Joints at '  num2str(velocity) '.png'])
+    
+    torque4 = figure;
+    hold on
+    plot(0:0.001:t_cycle, torq_lg4_j1, 'b');
+    plot(0:0.001:t_cycle, torq_lg4_j2, 'r');
+    plot(0:0.001:t_cycle, torq_lg4_j3, 'g');
+    plot([t_HR_PEP t_HR_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Torque (N?m)');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Torque of Hind Right Joints at '  num2str(velocity) ' m/s']);
+    saveas(torque4, ['Torque of Hind Right Joints at '  num2str(velocity) '.png'])
+    
+    
     
 elseif strcmp(component, 'jointangle')
+    theta_lg1_j1 = averageVar(d.theta_sen_lg1_j1, d.FL_AEP, cycles);
+    theta_lg1_j2 = averageVar(d.theta_sen_lg1_j2, d.FL_AEP, cycles);
+    theta_lg1_j3 = averageVar(d.theta_sen_lg1_j3, d.FL_AEP, cycles);
+    theta_lg2_j1 = averageVar(d.theta_sen_lg2_j1, d.FR_AEP, cycles);
+    theta_lg2_j2 = averageVar(d.theta_sen_lg2_j2, d.FR_AEP, cycles);
+    theta_lg2_j3 = averageVar(d.theta_sen_lg2_j3, d.FR_AEP, cycles);
+    theta_lg3_j1 = averageVar(d.theta_sen_lg3_j1, d.HL_AEP, cycles);
+    theta_lg3_j2 = averageVar(d.theta_sen_lg3_j2, d.HL_AEP, cycles);
+    theta_lg3_j3 = averageVar(d.theta_sen_lg3_j3, d.HL_AEP, cycles);
+    theta_lg4_j1 = averageVar(d.theta_sen_lg4_j1, d.HR_AEP, cycles);
+    theta_lg4_j2 = averageVar(d.theta_sen_lg4_j2, d.HR_AEP, cycles);
+    theta_lg4_j3 = averageVar(d.theta_sen_lg4_j3, d.HR_AEP, cycles);
     
+    theta1 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_lg1_j1, 'b');
+    plot(0:0.001:t_cycle, theta_lg1_j2, 'r');
+    plot(0:0.001:t_cycle, theta_lg1_j3, 'g');
+    plot([t_FL_PEP t_FL_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angle');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angle of Front Left Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta1, ['Angle of Front Left Joints at '  num2str(velocity) '.png'])
+    
+    theta2 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_lg2_j1, 'b');
+    plot(0:0.001:t_cycle, theta_lg2_j2, 'r');
+    plot(0:0.001:t_cycle, theta_lg2_j3, 'g');
+    plot([t_FR_PEP t_FR_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angle');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angle of Front Right Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta2, ['Angle of Front Right Joints at '  num2str(velocity) '.png'])
+    
+    theta3 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_lg3_j1, 'b');
+    plot(0:0.001:t_cycle, theta_lg3_j2, 'r');
+    plot(0:0.001:t_cycle, theta_lg3_j3, 'g');
+    plot([t_HL_PEP t_HL_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angle');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angle of Hind Left Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta3, ['Angle of Hind Left Joints at '  num2str(velocity) '.png'])
+    
+    theta4 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_lg4_j1, 'b');
+    plot(0:0.001:t_cycle, theta_lg4_j2, 'r');
+    plot(0:0.001:t_cycle, theta_lg4_j3, 'g');
+    plot([t_HR_PEP t_HR_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angle');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angle of Hind Right Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta4, ['Angle of Hind Right Joints at '  num2str(velocity) '.png'])
 end
 end
 
+function avgVar = averageVar(rawVar, AEP, cycles)
+    dur_one = floor(length(rawVar)/cycles);
+    avgVar = zeros(dur_one, 1);
+    for i = 1:cycles-1
+        avgVar = avgVar + rawVar(AEP+dur_one*(i-1):AEP+dur_one*i-1);
+    end
+    avgVar = avgVar / 10;
+end

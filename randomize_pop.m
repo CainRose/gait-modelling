@@ -27,7 +27,7 @@ if popsize-idx+1 > 0
 
     % Replace members from idx to end
     for i = idx:popsize
-        var(1:nVar) = newVars(i,:);
+        var(1:nVar) = newVars(i-idx+1,:);
         % if desing variable is integer, round to the nearest integer
         for v = 1:nVar
             if( type(v) == 2)

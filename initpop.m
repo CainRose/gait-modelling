@@ -77,7 +77,7 @@ fileName = varargin{1};
 data_robot = importdata(fileName);
 
 nObj = 1;
-popsize = 100;
+popsize = opt.popsize;
 nVar = 96;
 nCons = 9;
 %keyboard();
@@ -186,26 +186,22 @@ lb = opt.lb;
 ub = opt.ub;
 
 popsize = length(pop);
+
+% Generate Latin Hypercube Sample of design space
+newVars = lhsdesign(popsize, nVar);
+newVars = newVars .* repmat(ub - lb, [popsize,1]);
+newVars = newVars + repmat(lb, [popsize,1]);
+
+% Replace members
 for i = 1:popsize
-    var(1:nVar) = lb(1:nVar) +  rand(1, nVar) .* (ub(1:nVar)-lb(1:nVar));
-%     var(1) = normrnd(-1.7501,0.07);
-%     var(2) = normrnd(0.8817,0.06);
-%     var(3) = normrnd(0.5618,0.1);
-%     var(4) = normrnd(-0.7901,0.01);
-%     var(5) = normrnd(-1.2286,0.05);
-%     var(6) = normrnd(1.2069,0.1);
-%     % if design variable is integer, round to the nearest integer
+    var(1:nVar) = newVars(i,:);
+    % if desing variable is integer, round to the nearest integer
     for v = 1:nVar
         if( type(v) == 2)
             var(v) = round(var(v));
         end
     end
-    
-    % limit in the lower and upper bound
-    var = varlimit(var, lb, ub);
-
     pop(i).var = var;
-    
 end
 
 

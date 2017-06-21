@@ -5,9 +5,9 @@ t2x = xHR;
 t2z = zHR;
 
 delta_x = IGD + t1x - t2x;
-delta_z = t1z - t2z;
+delta_z = +t1z - t2z;
 
-temp_pitch = asin(delta_z/delta_x); %(global pitch value)
+temp_pitch = delta_z/delta_x; %(global pitch value)
 % keyboard();
 check_z1 = t1z + temp_pitch*(xFL - t1x);
 if abs(zFL) >= abs(check_z1)

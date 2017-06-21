@@ -271,7 +271,7 @@ design_var_lower = [0.1;...
 % % Running the optimization
 % % 
 options = nsgaopt();                    % create default options structure
-options.popsize = 50000;                    % populaion size
+options.popsize = 100;                    % populaion size
 options.maxGen  = 1000;                    % max generation
 
 options.numObj = 1;                     % number of objectives
@@ -285,7 +285,7 @@ options.useParallel = 'yes';
 options.poolsize = 8;
 options.crossoverFraction = 0.3;
 options.mutationFraction = 0.1;
-options.initfun = {@initpop, 'initbigcat.txt'};
+options.initfun = {@initpop, 'initial_population1.txt'};
 result = nsga2(options, 0.5, 2);                % begin the optimization!
 % % % % 
 % % % % % % copyfile('populations.txt', '20140422MO_ro_pop.txt');

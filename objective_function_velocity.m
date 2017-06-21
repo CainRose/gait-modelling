@@ -477,16 +477,16 @@ else
     
     DH_temp = lg1ps;
     DH_temp(1:3,4) = [TRJ_LG1_J1(2,1);TRJ_LG1_J2(2,1);TRJ_LG1_J3(2,1)]; % leg 1 is a PEP
-    [xFR,zFR,~,~] = forward_kin(DH_temp);
+    [xFL,zFL,~,~] = forward_kin(DH_temp);
     DH_temp = lg2ps;
     DH_temp(1:3,4) = [TRJ_LG2_J1(2,1);TRJ_LG2_J2(2,1);TRJ_LG2_J3(2,1)]; % leg 1 is a PEP
-    [xFL,zFL,~,~] = forward_kin(DH_temp);
+    [xFR,zFR,~,~] = forward_kin(DH_temp);
     DH_temp = lg3ps;
     DH_temp(1:3,4) = [TRJ_LG3_J1(2,1);TRJ_LG3_J2(2,1);TRJ_LG3_J3(2,1)]; % leg 1 is a PEP
-    [xHR,zHR,~,~] = forward_kin(DH_temp);
+    [xHL,zHL,~,~] = forward_kin(DH_temp);
     DH_temp = lg4ps;
     DH_temp(1:3,4) = [TRJ_LG4_J1(2,1);TRJ_LG4_J2(2,1);TRJ_LG4_J3(2,1)]; % leg 4
-    [xHL,zHL,~,~] = forward_kin(DH_temp);
+    [xHR,zHR,~,~] = forward_kin(DH_temp);
     
     [body_height, pitch_initial] = select_toes(xFR, zFR, xFL, zFL, xHR, zHR, xHL, zHL, IGD);
     

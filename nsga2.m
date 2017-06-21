@@ -79,7 +79,6 @@ STOP_NSGA = 0;
 ngen = 1;
 pop = opt.initfun{1}(opt, pop, opt.initfun{2:end});
 [pop, state] = evaluate(opt, pop, state, varargin{:});
-pop = randomize_pop(opt, pop);
 [opt, pop] = ndsort(opt, pop);
 
 % state

@@ -83,7 +83,8 @@ function [indi, evalTime] = evalIndividual(indi, objfun, varargin)
 %*************************************************************************
 
 tStart = tic;
-evalc('[y, cons] = objfun( indi.var, varargin{:} )');
+%evalc('[y, cons] = objfun( indi.var, varargin{:} )');
+[y, cons] = objfun( indi.var, varargin{:} )
 evalTime = toc(tStart);
 % keyboard();
 % Save the objective values and constraint violations

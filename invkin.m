@@ -20,7 +20,7 @@
 %	August 23, 2003
 %
 % See Also: 
-%	IKINE, JACOBN, JACOB0.
+%	ikine_old, JACOBN, JACOB0.
 %
 
 function [q, matrices] = invkin (dh, handx, handro, handra, q0)
@@ -72,7 +72,7 @@ function [q, matrices] = invkin (dh, handx, handro, handra, q0)
 		hhpt=oa2tr(handro(1,:),handra(1,:))+[zeros(4,3) [handx(1,:)';0]];
 		
 		% Calculate the inverse kinematics
-		qrow=ikine(dh,hhpt,q0);
+		qrow=ikine_old(dh,hhpt,q0);
         if isempty(qrow)
             q = [];
             
@@ -123,7 +123,7 @@ function [q, matrices] = invkin (dh, handx, handro, handra, q0)
 		end
 	
 		% Calculate the inverse kinematics
-		q=ikine(dh,comhhpt,q0);
+		q=ikine_old(dh,comhhpt,q0);
         if isempty(q)
             q = [];
             

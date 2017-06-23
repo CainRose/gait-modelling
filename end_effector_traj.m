@@ -1,4 +1,4 @@
-function [ net_time, net_x, net_z, net_psi ] = end_effector_traj(speed, x_ini, z_ini, z_fin, z_dot_ini, z_dot_fin, psi_dot_ini, psi_dot_fin, psi_ini, psi_change, Fc, T_swing, T_stance, kappa)
+function [ net_time, net_x, net_z, net_psi, len ] = end_effector_traj(speed, x_ini, z_ini, z_fin, z_dot_ini, z_dot_fin, psi_dot_ini, psi_dot_fin, psi_ini, psi_change, Fc, T_swing, T_stance, kappa)
 % Constructs the entire end-effector-trajectory, based on design variables
 % speed = x_dot
 % x_ini = x_aep
@@ -37,6 +37,7 @@ psi_traj_stance = new_bezier_order3(psi_ini, psi_ini-psi_change, psi_dot_ini, ps
 net_psi = [psi_traj_swing, psi_traj_stance(2:end)];
 net_z = [z_traj_swing, z_traj_stance(2:end)] + z_ini;
 net_x = [x_traj_swing, x_traj_stance(2:end)];
+len = length(x_traj_swing);
 % figure; plot(net_time, net_x);
 % figure; plot(net_time, net_z);
 % figure; plot(net_time, net_psi);

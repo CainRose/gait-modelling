@@ -381,13 +381,13 @@ ansp_ans_HR = [];
 % Create joint trajectories for one cycle
 if ~extra_flag
     DH_mat = lg1ps;
-    [ansp_ans_FL, time_traj] = invkin_traj_gen_modfl(DH_mat, obj_ite_stride_time, design_var(5:15), obj_ite_stride_length);
+    [ansp_ans_FL, time_traj] = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(5:15), obj_ite_stride_length);
     DH_mat = lg2ps;
-    ansp_ans_FR = invkin_traj_gen_modfr(DH_mat, obj_ite_stride_time, design_var(28:38), obj_ite_stride_length);
+    ansp_ans_FR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(28:38), obj_ite_stride_length);
     DH_mat = lg3ps;
-    ansp_ans_HL = invkin_traj_gen_modhl(DH_mat, obj_ite_stride_time, design_var(51:61), obj_ite_stride_length);
+    ansp_ans_HL = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(51:61), obj_ite_stride_length);
     DH_mat = lg4ps;
-    ansp_ans_HR = invkin_traj_gen_modhr(DH_mat, obj_ite_stride_time, design_var(74:84), obj_ite_stride_length);
+    ansp_ans_HR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(74:84), obj_ite_stride_length);
 end
 index_ini = 0;
 %         design_var(1)
@@ -741,31 +741,31 @@ else
         % during stance is 0 or not
         ccc_1 = 0; ccc_2 = 0; ccc_3 = 0; ccc_4 = 0;
         if (length(leg1_ee_position) == length(leg2_ee_position))&&(length(leg1_ee_position) == length(leg3_ee_position))&&(length(leg1_ee_position) == length(leg4_ee_position)) &&(length(leg_marker_FL) >= length(leg1_ee_position))
-            for kk = 1:length(leg1_ee_position)
-                % Break if z position during stance isn't 0, or x velocity isn't 0, leg
-                % marker would have value of 0 or -1
-                if((leg_marker_FL(kk)==0)||(leg_marker_FL(kk)==-1))&&(((leg1_ee_position(kk))>0.01))%||(abs(leg1_ee_velocity(kk))>0.1))%||((leg_markers(2,kk)==1))&&((abs(leg1_ee_position(kk))<0.0025))
-                    ccc_1 = 1;
-                    display('stance problem leg 1')
-                    break
-                end
-                if((leg_marker_FR(kk)==0)||(leg_marker_FR(kk)==-1))&&(((leg2_ee_position(kk))>0.01))%||(abs(leg2_ee_velocity(kk))>0.1))%||((leg_markers(3,kk)==1))&&((abs(leg2_ee_position(kk))<0.0025))
-                    ccc_2 = 1;
-                    display('stance problem leg 2')
-                    break
-                end
-                if((leg_marker_HL(kk)==0)||(leg_marker_HL(kk)==-1))&&(((leg3_ee_position(kk))>0.01))%||(abs(leg3_ee_velocity(kk))>0.1))%||((leg_markers(4,kk)==1))&&((abs(leg3_ee_position(kk))<0.0025))
-                    ccc_3 = 1;
-                    display('stance problem leg 3')
-                    break
-                end
-                if((leg_marker_HR(kk)==0)||(leg_marker_HR(kk)==-1))&&(((leg4_ee_position(kk))>0.01))%||(abs(leg4_ee_velocity(kk))>0.1))%||((leg_markers(5,kk)==1))&&((abs(leg4_ee_position(kk))<0.0025))
-                    ccc_4 = 1;
-                    %                                 %%%%%%%%%%keyboard();
-                    display('stance problem leg 4')
-                    break
-                end
-            end
+%             for kk = 1:length(leg1_ee_position)
+%                 % Break if z position during stance isn't 0, or x velocity isn't 0, leg
+%                 % marker would have value of 0 or -1
+%                 if((leg_marker_FL(kk)==0)||(leg_marker_FL(kk)==-1))&&(((leg1_ee_position(kk))>0.01))%||(abs(leg1_ee_velocity(kk))>0.1))%||((leg_markers(2,kk)==1))&&((abs(leg1_ee_position(kk))<0.0025))
+%                     ccc_1 = 1;
+%                     display('stance problem leg 1')
+%                     break
+%                 end
+%                 if((leg_marker_FR(kk)==0)||(leg_marker_FR(kk)==-1))&&(((leg2_ee_position(kk))>0.01))%||(abs(leg2_ee_velocity(kk))>0.1))%||((leg_markers(3,kk)==1))&&((abs(leg2_ee_position(kk))<0.0025))
+%                     ccc_2 = 1;
+%                     display('stance problem leg 2')
+%                     break
+%                 end
+%                 if((leg_marker_HL(kk)==0)||(leg_marker_HL(kk)==-1))&&(((leg3_ee_position(kk))>0.01))%||(abs(leg3_ee_velocity(kk))>0.1))%||((leg_markers(4,kk)==1))&&((abs(leg3_ee_position(kk))<0.0025))
+%                     ccc_3 = 1;
+%                     display('stance problem leg 3')
+%                     break
+%                 end
+%                 if((leg_marker_HR(kk)==0)||(leg_marker_HR(kk)==-1))&&(((leg4_ee_position(kk))>0.01))%||(abs(leg4_ee_velocity(kk))>0.1))%||((leg_markers(5,kk)==1))&&((abs(leg4_ee_position(kk))<0.0025))
+%                     ccc_4 = 1;
+%                     %                                 %%%%%%%%%%keyboard();
+%                     display('stance problem leg 4')
+%                     break
+%                 end
+%             end
         else
             display('leg markers and position don`t match in length')
             cons(7) = 1;

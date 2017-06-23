@@ -1,6 +1,6 @@
 tic;
 clc;
-warning('off','all');
+% warning('off','all');
 % keyboard();
 
 body_pitch_max = pi/8;

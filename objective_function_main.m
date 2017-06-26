@@ -146,6 +146,7 @@ FLL = scale*0.24;
 HLL = scale*0.33;
 % IGD = scale*0.33;
 % FLL = scale*0.33;
+back_hip_height = 0;
 body_pitch_max = pi/8;
 body_roll_max = pi/6;
 body_yaw_max = pi/6;
@@ -336,10 +337,10 @@ obj_ite_stride_time = floor(100*obj_ite_stride_length/obj_ite_velocity)/100;
 obj_ite_simulation_time = floor(100*num_strides*obj_ite_stride_time)/100;
 % obj_ite_velocity = floor(100*obj_ite_stride_length/obj_ite_stride_time)/100;
 velocity_initial = obj_ite_velocity;
-obj_ite_step_length_FL = obj_ite_duty_factor_FL*obj_ite_stride_length;
-obj_ite_step_length_FR = obj_ite_duty_factor_FR*obj_ite_stride_length;
-obj_ite_step_length_HL = obj_ite_duty_factor_HL*obj_ite_stride_length;
-obj_ite_step_length_HR = obj_ite_duty_factor_HR*obj_ite_stride_length;
+% obj_ite_step_length_FL = obj_ite_duty_factor_FL*obj_ite_stride_length;
+% obj_ite_step_length_FR = obj_ite_duty_factor_FR*obj_ite_stride_length;
+% obj_ite_step_length_HL = obj_ite_duty_factor_HL*obj_ite_stride_length;
+% obj_ite_step_length_HR = obj_ite_duty_factor_HR*obj_ite_stride_length;
 KPFLsw1 = design_var(16); KPFLsw2 = design_var(18); KPFLsw3 = design_var(20);
 KPFLst1 = design_var(22); KPFLst2 = design_var(24); KPFLst3 = design_var(26);
 KDFLsw1 = design_var(17); KDFLsw2 = design_var(19); KDFLsw3 = design_var(21);
@@ -490,21 +491,21 @@ else
     TRJ_LG4_J3  = [time_traj; ansp_HR(3,:)];
     
     
-    TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG1_J1(2,:).', (TRJ_LG1_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG1_J2(2,:).', (TRJ_LG1_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG1_J3(2,:).', (TRJ_LG1_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG1_J1(2,:).', (TRJ_LG1_J1(1,:)));
+    TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG1_J2(2,:).', (TRJ_LG1_J2(1,:)));
+    TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG1_J3(2,:).', (TRJ_LG1_J3(1,:)));
     
-    TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG2_J1(2,:).', (TRJ_LG2_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG2_J2(2,:).', (TRJ_LG2_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG2_J3(2,:).', (TRJ_LG2_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG2_J1(2,:).', (TRJ_LG2_J1(1,:)));
+    TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG2_J2(2,:).', (TRJ_LG2_J2(1,:)));
+    TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG2_J3(2,:).', (TRJ_LG2_J3(1,:)));
     
-    TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG3_J1(2,:).', (TRJ_LG3_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG3_J2(2,:).', (TRJ_LG3_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG3_J3(2,:).', (TRJ_LG3_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG3_J1(2,:).', (TRJ_LG3_J1(1,:)));
+    TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG3_J2(2,:).', (TRJ_LG3_J2(1,:)));
+    TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG3_J3(2,:).', (TRJ_LG3_J3(1,:)));
     
-    TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)));
+    TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)));
+    TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)));
     
     %%%%%%%%%%%keyboard();
     
@@ -596,7 +597,7 @@ else
     mws.assignin('back_x', back_x); mws.assignin('front_x', front_x); mws.assignin('density', density);
     mws.assignin('bx', bx); mws.assignin('by', by); mws.assignin('bz', bz);
     mws.assignin('k_g_v', k_g_v); mws.assignin('n', n); mws.assignin('b_g_v', b_g_v); mws.assignin('p', p); mws.assignin('q', q);
-    mws.assignin('S_p', S_p); mws.assignin('fk', fk);
+    mws.assignin('S_p', S_p); mws.assignin('fk', fk); mws.assignin('back_hip_height', back_hip_height);
     
     % Try catch system to create exception for when model fails to
     % compile... treat is as a constraint violation...

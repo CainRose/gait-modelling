@@ -119,7 +119,7 @@ if strcmp(component, 'trajectory')
 
 elseif strcmp(component, 'details')
     fprintf('Objective Function: %f\n', OF);
-    best.var'
+%     best.var'
     
     
     

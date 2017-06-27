@@ -31,6 +31,11 @@ end
 bpitch = -leg_pitch;    % To counteract the rotation of the leg
 
 rotation_mat = [cos(-bpitch) sin(-bpitch);-sin(-bpitch) cos(-bpitch)];
+% rotation_mat = [-sin(-bpitch) cos(-bpitch)];
+% 
+% body_heights = [    rotation_mat*[xFL;zFL],     rotation_mat*[xFR;zFR], ...
+%                     rotation_mat*[xHL;zHL],     rotation_mat*[xHR;zHR]  ];
+% bz = -min(body_heights);
 
 world_frame_hind_coordinates = rotation_mat*[t2x;t2z];
 world_frame_front_coordinates = rotation_mat*[t1x;t1z];

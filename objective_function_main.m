@@ -315,7 +315,7 @@ r4 = [R4(1) R4(1)*(((l4(1,1))/(l4(1,2)))^1.5);...
     ];
 
 
-OF = 100000; % Represents a generic value that the members have... multiplied by 10 to represent the worst member
+OF = 999999; % Represents a generic value that the members have... multiplied by 10 to represent the worst member
 cons = [0 0 0 0 0 0 0 0 0]; % The 8 constraint values. Look at description above
 
 
@@ -774,12 +774,17 @@ else
             cons(7) = 1;
         end
         
-        if (abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL) > 0.1)||(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR) > 0.1)||(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL) > 0.1)||(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR) > 0.1)
-            
-            display('duty factor mismatch')
-            %                         keyboard();
+        duty_mismatch = abs(abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL)) + abs(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR)) + abs(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL)) + abs(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR));
+        duty_mismatch = duty_mismatch - 4*0.1;
+        if duty_mismatch > 0
             cons(7) = 1;
         end
+%         if (abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL) > 0.1)||(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR) > 0.1)||(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL) > 0.1)||(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR) > 0.1)
+%             
+%             display('duty factor mismatch')
+%             %                         keyboard();
+%             cons(7) = 1;
+%         end
         if (ccc_1)||(ccc_2)||(ccc_3)||(ccc_4)
             cons(7) = 1;
         end
@@ -787,9 +792,18 @@ else
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         % Cons 8: Checks for joint angles mismatch at every AEP instance of each leg is the same...
         
-        if ((theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) >= 0.035)||((theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) >= 0.035)||((theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) >= 0.035)||((theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) >= 0.035)||((theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) >= 0.035)||((theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) >= 0.035)||((theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) >= 0.035)||((theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) >= 0.035)||((theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) >= 0.035)||((theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) >= 0.035)||((theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) >= 0.035)||((theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end)) >= 0.035)
+        joint_angle_mismatch = abs(theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) + abs(theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) + abs(theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) ...
+            + abs(theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) + abs(theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) + abs(theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) ...
+            + abs(theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) + abs(theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) + abs(theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) ...
+            + abs(theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) + abs(theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) + abs(theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end));
+        % Error Tolerance
+        joint_angle_mismatch = joint_angle_mismatch - 12 * 0.035;
+        if joint_angle_mismatch > 0
             cons(8) = 1;
         end
+%         if ((theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) >= 0.035)||((theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) >= 0.035)||((theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) >= 0.035)||((theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) >= 0.035)||((theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) >= 0.035)||((theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) >= 0.035)||((theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) >= 0.035)||((theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) >= 0.035)||((theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) >= 0.035)||((theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) >= 0.035)||((theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) >= 0.035)||((theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end)) >= 0.035)
+%             cons(8) = 1;
+%         end
         FL_AEP = find(leg_marker_FL == -1, 1);
         FR_AEP = find(leg_marker_FR == -1, 1);
         HL_AEP = find(leg_marker_HL == -1, 1);
@@ -847,10 +861,12 @@ else
     else
         display('Constraint violation')
         cons
+        OF = (joint_angle_mismatch + duty_mismatch) * 10000;
         if ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
-            OF = 1000;
+            OF = OF + 1000;
+            cons = zeros(1, 9);
         elseif ((~cons(1))&&(~cons(2)))
-            OF = 4000/temporary_time(end);
+            OF = OF + 40000/(1 + temporary_time(end));
         else
             OF = 100000;
         end

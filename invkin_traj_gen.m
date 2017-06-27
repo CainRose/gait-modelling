@@ -1,4 +1,4 @@
-function [ansp, time_traj] = invkin_traj_gen(DH_mat, stride_time, design_var, stride_length)
+function [ansp, time_traj] = invkin_traj_gen(DH_mat, stride_time, design_var, stride_length, pitch)
 % Function: [ansp, time_traj] = trajectory_generator(leg_number, DH_matrix, design_var, stride_time)
 % 
 % Description: Generates the joint trajectory for the selected leg based on
@@ -24,8 +24,6 @@ step_length = beta*stride_length;
 delta_y = step_length*design_var(5);
 delta_psi = design_var(6);
 step_clearance = design_var(7);
-y_dot_AEP = design_var(8);
-y_dot_PEP = design_var(9);
 psi_dot_AEP = design_var(10);
 psi_dot_PEP = design_var(11);
 
@@ -42,7 +40,7 @@ htm = leg.fkine(q0);
 % Extract relavent information from homogeneous transform matrix
 x_aep = htm(1, 4); y_aep = htm(2, 4); z_aep = htm(3, 4);
 rot_mat_aep = htm(1:3, 1:3);
-y_pep = y_aep - delta_y;
+y_pep = y_aep - step_length*sin(pitch);
 psi_aep = mod(atan2(rot_mat_aep(2,1),rot_mat_aep(1,1))+pi, 2*pi)-pi;
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -50,7 +48,9 @@ psi_aep = mod(atan2(rot_mat_aep(2,1),rot_mat_aep(1,1))+pi, 2*pi)-pi;
 T_swing = stride_time*(1 - beta); 
 T_stance = stride_time*beta;
 speed = design_var(7)/stride_time;
-[time_traj, x_traj, y_traj, psi_traj, len] = end_effector_traj(speed, x_aep, y_aep, y_pep, y_dot_PEP, y_dot_AEP, psi_dot_PEP, psi_dot_AEP, psi_aep, delta_psi, step_clearance, T_swing, T_stance, step_length);
+st_x_dot = speed * cos(pitch);
+st_y_dot = speed * sin(pitch);
+[time_traj, x_traj, y_traj, psi_traj, len] = end_effector_traj(st_x_dot, x_aep, y_aep, y_pep, st_y_dot, st_y_dot, psi_dot_PEP, psi_dot_AEP, psi_aep, delta_psi, step_clearance, T_swing, T_stance, step_length);
 
 % keyboard();
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %

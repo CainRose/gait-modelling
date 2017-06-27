@@ -1,4 +1,4 @@
-function [bz, bpitch] = select_toes(xFR, zFR, xFL, zFL, xHR, zHR, xHL, zHL, IGD)
+function [bz, bpitch] = select_toes(leg_pitch, xFR, zFR, xFL, zFL, xHR, zHR, xHL, zHL, IGD)
 
 % Arbitrarily select left most toe as back ground contact and calculate angles to other toes
 if (xHL < xHR); t2x = xHL;  t2z = zHL;
@@ -11,7 +11,7 @@ angles = [  atan((zFL - t2z)/(xFL + IGD - t2x)), ...
             atan((zHR - t2z)/(xHR - t2x))       ];
 
 % find leg with smallest angle (most negative)
-[leg_pitch, i] = min(angles);
+[~, i] = min(angles);
 
 % If this is a hind leg, recalculate angles and change back leg
 if (i > 2)
@@ -20,7 +20,7 @@ if (i > 2)
     end
     angles = [  atan((zFL - t2z)/(xFL + IGD - t2x)), ...
                 atan((zFR - t2z)/(xFR + IGD - t2x)) ];
-    [leg_pitch, i] = min(angles);
+    [~, i] = min(angles);
 end
 if (i == 1) % Front Left
     t1x = xFL;  t1z = zFL;

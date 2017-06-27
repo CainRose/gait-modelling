@@ -331,6 +331,8 @@ obj_ite_phi_rel_FR = design_var(2);
 obj_ite_phi_rel_HL = design_var(3);
 obj_ite_phi_rel_HR = design_var(4);
 
+leg_pitch = design_var(9);
+
 
 % %%%%%%%%%%%keyboard();
 obj_ite_stride_time = floor(100*obj_ite_stride_length/obj_ite_velocity)/100;
@@ -382,13 +384,13 @@ ansp_ans_HR = [];
 % Create joint trajectories for one cycle
 if ~extra_flag
     DH_mat = lg1ps;
-    [ansp_ans_FL, time_traj] = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(5:15), obj_ite_stride_length);
+    [ansp_ans_FL, time_traj] = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(5:15), obj_ite_stride_length, leg_pitch);
     DH_mat = lg2ps;
-    ansp_ans_FR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(28:38), obj_ite_stride_length);
+    ansp_ans_FR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(28:38), obj_ite_stride_length, leg_pitch);
     DH_mat = lg3ps;
-    ansp_ans_HL = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(51:61), obj_ite_stride_length);
+    ansp_ans_HL = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(51:61), obj_ite_stride_length, leg_pitch);
     DH_mat = lg4ps;
-    ansp_ans_HR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(74:84), obj_ite_stride_length);
+    ansp_ans_HR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(74:84), obj_ite_stride_length, leg_pitch);
 end
 index_ini = 0;
 %         design_var(1)
@@ -526,7 +528,7 @@ else
     DH_temp(1:3,4) = [TRJ_LG4_J1(2,1);TRJ_LG4_J2(2,1);TRJ_LG4_J3(2,1)]; % leg 4
     [xHR,zHR,~,~] = forward_kin(DH_temp);
     
-    [body_height, pitch_initial] = select_toes(xFR, zFR, xFL, zFL, xHR, zHR, xHL, zHL, IGD);
+    [body_height, pitch_initial] = select_toes(leg_pitch, xFR, zFR, xFL, zFL, xHR, zHR, xHL, zHL, IGD);
     
     %             body_height = body_height + 0.5; % this is to be used to
     %             % suspend the rover above ground... change planar joint in
@@ -879,6 +881,8 @@ if nargout == 3
         theta_sen_lg2_j1, theta_sen_lg2_j2, theta_sen_lg2_j3, ...
         theta_sen_lg3_j1, theta_sen_lg3_j2, theta_sen_lg3_j3, ...
         theta_sen_lg4_j1, theta_sen_lg4_j2, theta_sen_lg4_j3, ...
+        leg1_ee_position, leg2_ee_position, ...
+        leg3_ee_position, leg4_ee_position, ...
         body_pitch, body_height_calc, body_velocity, ...
         FL_AEP, FR_AEP, HL_AEP, HR_AEP, temporary_time);
 end

@@ -70,12 +70,12 @@ design_var_lower = [0.1;...
                     0;...  
                     0;...
                     0.1;...  LEG FL beta
-                    -2.1;... AEP FL J1 
-                    0.5;...  AEP FL J2
-                    0.2;... AEP FL J3
-                    -0.2;...      delta Z = -10% of step length
-                    -pi/2;...   delta psi 
-                    0.1;...     Fc = 10% of step length 
+                    -pi;... AEP FL J1 
+                    -pi;...  AEP FL J2
+                    -pi;... AEP FL J3
+                    -0.5;...      delta Z = -10% of step length
+                    -pi;...   delta psi 
+                    0.01;...     Fc = 10% of step length 
                     0;...    z_dot_AEP
                     -0.1*IGD;...    z_dot_PEP
                     -pi/2;...   psi_dot_AEP
@@ -93,12 +93,12 @@ design_var_lower = [0.1;...
                     100;...
                     1;...
                     0.1;...  LEG FR beta
-                    -2.1;... AEP FR J1 
-                    0.5;...  AEP FR J2
-                    0.2;... AEP FR J3
-                    -0.2;...      delta Z = -100% of step length
-                    -pi/2;...   delta psi 
-                    0.1;...     Fc = 10% of step length 
+                    -pi;... AEP FR J1 
+                    -pi;...  AEP FR J2
+                    -pi;... AEP FR J3
+                    -0.5;...      delta Z = -100% of step length
+                    -pi;...   delta psi 
+                    0.01;...     Fc = 10% of step length 
                     0;...    z_dot_AEP
                     -0.1*IGD;...    z_dot_PEP
                     -pi/2;...   psi_dot_AEP
@@ -116,12 +116,12 @@ design_var_lower = [0.1;...
                     100;...
                     1;...
                     0.1;...  LEG HL beta
-                    -1.2;...    AEP HL J1
-                    -1.6;...    AEP HL J2
-                     0.8;...      AEP HL J3
-                    -0.1;...      delta Z = -100% of step length
-                    -pi/2;...   delta psi 
-                    0.1;...     Fc = 10% of step length 
+                    -pi;...    AEP HL J1
+                    -pi;...    AEP HL J2
+                    -pi;...      AEP HL J3
+                    -0.5;...      delta Z = -100% of step length
+                    -pi;...   delta psi 
+                    0.01;...     Fc = 10% of step length 
                     0;...    z_dot_AEP
                     -0.1*IGD;...    z_dot_PEP
                     -pi/2;...   psi_dot_AEP
@@ -139,12 +139,12 @@ design_var_lower = [0.1;...
                     100;...
                     1;...
                     0.1;...  LEG HR beta
-                    -1.2;...    AEP HR J1
-                    -1.6;...    AEP HR J2
-                     0.8;...      AEP HR J3
-                    -0.1;...      delta Z = -100% of step length
-                    -pi/2;...   delta psi 
-                    0.1;...     Fc = 10% of step length 
+                    -pi;...    AEP HR J1
+                    -pi;...    AEP HR J2
+                    -pi;...      AEP HR J3
+                    -0.5;...      delta Z = -100% of step length
+                    -pi;...   delta psi 
+                    0.01;...     Fc = 10% of step length 
                     0;...    z_dot_AEP
                     -0.1*IGD;...    z_dot_PEP
                     -pi/2;...   psi_dot_AEP
@@ -167,12 +167,12 @@ design_var_lower = [0.1;...
                     1;...  
                     1;...
                     0.8;...  LEG FL beta
-                    -1.4;... 
-                    1.3;...
-                    0.9;...
-                    0.2;...      delta Z = -100% of step length
-                    pi/2;...   delta psi 
-                    0.5;...     Fc = 10% of step length 
+                    pi;... 
+                    pi;...
+                    pi;...
+                    0.5;...      delta Z = -100% of step length
+                    pi;...   delta psi 
+                    1;...     Fc = 10% of step length 
                     0.1*IGD;...    z_dot_AEP
                     0;...    z_dot_PEP
                     pi/2;...   psi_dot_AEP
@@ -190,12 +190,12 @@ design_var_lower = [0.1;...
                     1000;...
                     10;...
                     0.8;...  LEG FR beta
-                    -1.4;... 
-                    1.3;...
-                    0.9;...
-                    0.2;...      delta Z = -100% of step length
-                    pi/2;...   delta psi 
-                    0.5;...     Fc = 10% of step length 
+                    pi;... 
+                    pi;...
+                    pi;...
+                    0.5;...      delta Z = -100% of step length
+                    pi;...   delta psi 
+                    1;...     Fc = 10% of step length 
                     0.1*IGD;...    z_dot_AEP
                     0;...    z_dot_PEP
                     pi/2;...   psi_dot_AEP
@@ -213,12 +213,12 @@ design_var_lower = [0.1;...
                     1000;...
                     10;...
                     0.8;...  LEG HL beta
-                    -0.4;...
-                    -0.6;...
-                    1.6;...
-                    0.2;...      delta Z = -100% of step length
-                    pi/2;...   delta psi 
-                    0.5;...     Fc = 10% of step length 
+                    pi;...
+                    pi;...
+                    pi;...
+                    0.5;...      delta Z = -100% of step length
+                    pi;...   delta psi 
+                    1;...     Fc = 10% of step length 
                     0.1*IGD;...    z_dot_AEP
                     0;...    z_dot_PEP
                     pi/2;...   psi_dot_AEP
@@ -236,12 +236,12 @@ design_var_lower = [0.1;...
                     1000;...
                     10;...
                     0.8;...  LEG HR beta
-                    -0.4;...
-                    -0.6;...
-                    1.6;...
-                    0.2;...      delta Z = -100% of step length
-                    pi/2;...   delta psi 
-                    0.5;...     Fc = 10% of step length 
+                    pi;...
+                    pi;...
+                    pi;...
+                    0.5;...      delta Z = -100% of step length
+                    pi;...   delta psi 
+                    1;...     Fc = 10% of step length 
                     0.1*IGD;...    z_dot_AEP
                     0;...    z_dot_PEP
                     pi/2;...   psi_dot_AEP
@@ -286,6 +286,6 @@ options.poolsize = 8;
 options.crossoverFraction = 0.3;
 options.mutationFraction = 0.1;
 options.initfun = {@initpop, 'initial_population1.txt'};
-result = nsga2(options, 1.0, 3);                % begin the optimization!
+result = nsga2(options, 1.5, 4);                % begin the optimization!
 % % % % 
 % % % % % % copyfile('populations.txt', '20140422MO_ro_pop.txt');

@@ -6,7 +6,7 @@ function visualize_best( file, component)
 if strcmp(component, 'trajectory') || strcmp(component, 'details')
     cycles = 2;
 else
-    cycles = 11;
+    cycles = 6;
 end
 
 data = loadpopfile(file);
@@ -49,7 +49,7 @@ t_cycle = t_cycle - 0.001;
 
 if strcmp(component, 'trajectory')
     [leg1, joint1] = ...
-        plot_trajectory(d.lg1ps, d.TRJ_LG1_J1, d.TRJ_LG1_J2, d.TRJ_LG1_J3, velocity, d.FL_AEP, 30);
+        plot_trajectory(d.lg1ps, d.TRJ_LG1_J1, d.TRJ_LG1_J2, d.TRJ_LG1_J3, velocity, d.FL_AEP, 30, best.var(9));
     figure(leg1);   title(['Trajectory of Front Left Leg at '            num2str(velocity) ' m/s']);
     figure(joint1); title(['Vertical Position of Front Left Joints at '  num2str(velocity) ' m/s']);
     %     figure(hip1);   title(['Vertical Position of Front Left Hip at '    num2str(velocity) ' m/s']);
@@ -58,7 +58,7 @@ if strcmp(component, 'trajectory')
     %     figure(toe1);   title(['Vertical Position of Front Left Toe at '    num2str(velocity) ' m/s']);
 
     [leg2, joint2] = ...
-        plot_trajectory(d.lg2ps, d.TRJ_LG2_J1, d.TRJ_LG2_J2, d.TRJ_LG2_J3, velocity, d.FR_AEP, 30);
+        plot_trajectory(d.lg2ps, d.TRJ_LG2_J1, d.TRJ_LG2_J2, d.TRJ_LG2_J3, velocity, d.FR_AEP, 30, best.var(9));
     figure(leg2);   title(['Trajectory of Front Right Leg at '           num2str(velocity) ' m/s']);
     figure(joint2); title(['Vertical Position of Front Right Joints at ' num2str(velocity) ' m/s']);
     %     figure(hip2);   title(['Vertical Position of Front Right Hip at '   num2str(velocity) ' m/s']);
@@ -67,7 +67,7 @@ if strcmp(component, 'trajectory')
     %     figure(toe2);   title(['Vertical Position of Front Right Toe at '   num2str(velocity) ' m/s']);
 
     [leg3, joint3] = ...
-        plot_trajectory(d.lg3ps, d.TRJ_LG3_J1, d.TRJ_LG3_J2, d.TRJ_LG3_J3, velocity, d.HL_AEP, 30);
+        plot_trajectory(d.lg3ps, d.TRJ_LG3_J1, d.TRJ_LG3_J2, d.TRJ_LG3_J3, velocity, d.HL_AEP, 30, best.var(9));
     title(['Trajectory of Hind Left Leg at ' num2str(velocity) ' m/s']);
     figure(leg3);   title(['Trajectory of Hind Left Leg at '             num2str(velocity) ' m/s']);
     figure(joint3); title(['Vertical Position of Hind Left Joints at '   num2str(velocity) ' m/s']);
@@ -77,7 +77,7 @@ if strcmp(component, 'trajectory')
     %     figure(toe3);   title(['Vertical Position of Hind Left Toe at '     num2str(velocity) ' m/s']);
 
     [leg4, joint4] = ...
-        plot_trajectory(d.lg4ps, d.TRJ_LG4_J1, d.TRJ_LG4_J2, d.TRJ_LG4_J3, velocity, d.HR_AEP, 30);
+        plot_trajectory(d.lg4ps, d.TRJ_LG4_J1, d.TRJ_LG4_J2, d.TRJ_LG4_J3, velocity, d.HR_AEP, 30, best.var(9));
     title(['Trajectory of Hind Right Leg at ' num2str(velocity) ' m/s']);
     figure(leg4);   title(['Trajectory of Hind Right Leg at '            num2str(velocity) ' m/s']);
     figure(joint4); title(['Vertical Position of Hind Right Joints at '  num2str(velocity) ' m/s']);
@@ -119,7 +119,7 @@ if strcmp(component, 'trajectory')
 
 elseif strcmp(component, 'details')
     fprintf('Objective Function: %f\n', OF);
-%     best.var'
+    best.var'
     
     
     

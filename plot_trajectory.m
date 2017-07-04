@@ -1,4 +1,4 @@
-function [leg, joints] = plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, AEP, divisions)
+function [leg, joints] = plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, AEP, divisions, angle)
 % Function: trajectory_visualization(DH_MAT, J1_traj, J2_traj, J3_traj, velocity, divisions)
 % Description: show the trajectory of the given leg
 
@@ -21,16 +21,21 @@ function [leg, joints] = plot_trajectory(DH_MAT, J1_traj, J2_traj, J3_traj, velo
     Y = zeros(4, lentraj);
     Z = zeros(4, lentraj);
     
+    % rotation matrix to world frame
+    rot = [cos(angle), sin(angle); -sin(angle), cos(angle)];
+    
     % populate the position matrix at each position and apply offset
     for i = 1:lentraj
-        [X(:, i), Z(:, i), Y(:, i)] = leg_stance_plotter(DH_MAT, q(:, i));
+         [x, y, z] = leg_stance_plotter(DH_MAT, q(:, i));
+         tmp = rot*[x;y];
+         X(:, i) = tmp(1, :); Z(:, i) = tmp(2, :); Y(:, i) = z;
     end
     
     X = X + repmat(hip_offset(1,:), [4,1]);
     X = X - min(X(4,:));
-    Y = Y + repmat(hip_offset(2,:), [4,1]);
+    Y = Y + repmat(hip_offset(3,:), [4,1]);
     Y = Y - min(Y(4,:));
-    Z = Z + repmat(hip_offset(3,:), [4,1]);
+    Z = Z + repmat(hip_offset(2,:), [4,1]);
     Z = Z - min(Z(4,:));
     
     % display and save trajectories

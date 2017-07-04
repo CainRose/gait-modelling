@@ -363,6 +363,10 @@ KPHRst1 = design_var(91); KPHRst2 = design_var(93); KPHRst3 = design_var(95);
 KDHRsw1 = design_var(86); KDHRsw2 = design_var(88); KDHRsw3 = design_var(90);
 KDHRst1 = design_var(92); KDHRst2 = design_var(94); KDHRst3 = design_var(96);
 
+joint_angle_mismatch = 0;
+duty_mismatch = 0;
+torque_overflow = 0;
+
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -737,6 +741,7 @@ else
         idx24 = find(abs(diff(t_sen_lg4_j3)) >= obj_ite_max_torque_change, 1);
         if (~isempty(idx1))||(~isempty(idx2))||(~isempty(idx3))||(~isempty(idx4))||(~isempty(idx5))||(~isempty(idx6)||~isempty(idx7))||(~isempty(idx8))||(~isempty(idx9))||(~isempty(idx10))||(~isempty(idx11))||(~isempty(idx12))||(~isempty(idx13))||(~isempty(idx14))||(~isempty(idx15))||(~isempty(idx16))||(~isempty(idx17))||(~isempty(idx18)||~isempty(idx19))||(~isempty(idx20))||(~isempty(idx21))||(~isempty(idx22))||(~isempty(idx23))||(~isempty(idx24)) % Max torque was exceeded
             cons(6) = 1;
+            torque_overflow = sum([idx1, idx2, idx3, idx4, idx5, idx6, idx7, idx8, idx9, idx10, idx11, idx12, idx13, idx14, idx15, idx16, idx17, idx18, idx19, idx20, idx21, idx22, idx23, idx24]);
         end
         
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -778,6 +783,8 @@ else
         duty_mismatch = duty_mismatch - 4*0.1;
         if duty_mismatch > 0
             cons(7) = 1;
+        else
+            duty_mismatch = 0;
         end
 %         if (abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL) > 0.1)||(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR) > 0.1)||(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL) > 0.1)||(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR) > 0.1)
 %             
@@ -800,6 +807,8 @@ else
         joint_angle_mismatch = joint_angle_mismatch - 12 * 0.035;
         if joint_angle_mismatch > 0
             cons(8) = 1;
+        else
+            joint_angle_mismatch = 0;
         end
 %         if ((theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) >= 0.035)||((theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) >= 0.035)||((theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) >= 0.035)||((theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) >= 0.035)||((theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) >= 0.035)||((theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) >= 0.035)||((theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) >= 0.035)||((theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) >= 0.035)||((theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) >= 0.035)||((theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) >= 0.035)||((theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) >= 0.035)||((theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end)) >= 0.035)
 %             cons(8) = 1;
@@ -861,7 +870,7 @@ else
     else
         display('Constraint violation')
         cons
-        OF = (joint_angle_mismatch + duty_mismatch) * 10000;
+        OF = (joint_angle_mismatch + duty_mismatch) * 10000 + torque_overflow;
         if ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
             OF = OF + 1000;
             cons = zeros(1, 9);

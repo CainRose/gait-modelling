@@ -21,7 +21,6 @@ function [ansp, time_traj] = invkin_traj_gen(DH_mat, stride_time, design_var, st
 beta = design_var(1);
 AEP_L1_J1 = design_var(2);  AEP_L1_J2 = design_var(3);  AEP_L1_J3 = design_var(4);
 step_length = beta*stride_length;
-delta_y = step_length*design_var(5);
 delta_psi = design_var(6);
 step_clearance = design_var(7);
 psi_dot_AEP = design_var(10);

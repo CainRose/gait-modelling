@@ -76,10 +76,10 @@ fileName = varargin{1};
 
 data_robot = importdata(fileName);
 
-nObj = 1;
+nObj = opt.numObj;
 popsize = opt.popsize;
-nVar = 96;
-nCons = 9;
+nVar = opt.numVar;
+nCons = opt.numCons;
 %keyboard();
 last_gen_data = data_robot((end+1-popsize):end, :); % extract data of last generation
 

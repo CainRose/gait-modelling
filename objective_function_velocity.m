@@ -1,4 +1,5 @@
-function [OF, cons] = objective_function_main(design_var)
+function [varargout] = objective_function_velocity(design_var, num_strides)
+
 tic;
 %% OBJECTIVE_FUNCTION_MAIN
 % Provides the attribute values (OF) evaluated for the 28 design variables (design_var)
@@ -103,7 +104,6 @@ tic;
 %                 Kd_2_st_HR        #94
 %                 Kp_3_st_HR        #95
 %                 Kd_3_st_HR        #96
-%                 stride_time       #97
 
 % OF(1) = energy_density;
 % cons = [c1 c2 c3 c4 c5 c6 c7]
@@ -134,10 +134,19 @@ tic;
 % Section 1: DEFINING POSES IN TERMS OF INPUT VECTOR COMPONENTS
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
+global KPFLsw1 KPFLsw2 KPFLsw3 KPFLst1 KPFLst2 KPFLst3 KDFLsw1 KDFLsw2 KDFLsw3 KDFLst1 KDFLst2 KDFLst3
+global KPFRsw1 KPFRsw2 KPFRsw3 KPFRst1 KPFRst2 KPFRst3 KDFRsw1 KDFRsw2 KDFRsw3 KDFRst1 KDFRst2 KDFRst3
+global KPHLsw1 KPHLsw2 KPHLsw3 KPHLst1 KPHLst2 KPHLst3 KDHLsw1 KDHLsw2 KDHLsw3 KDHLst1 KDHLst2 KDHLst3
+global KPHRsw1 KPHRsw2 KPHRsw3 KPHRst1 KPHRst2 KPHRst3 KDHRsw1 KDHRsw2 KDHRsw3 KDHRst1 KDHRst2 KDHRst3
+% global body_height pitch_initial velocity_initial
+
 scale = 1;
+IGD = scale*0.32;
+FLL = scale*0.24;
 HLL = scale*0.33;
-FLL = scale*0.33;
-IGD = scale*0.33;
+% IGD = scale*0.33;
+% FLL = scale*0.33;
+back_hip_height = 0;
 body_pitch_max = pi/8;
 body_roll_max = pi/6;
 body_yaw_max = pi/6;
@@ -154,18 +163,50 @@ density = 1408;
 gravity = -9.81;
 k_g_v = 7.21e7; n = 2.31;   b_g_v = 3.8e4;  p = 1.1;    q = 1;  S_p = 0.001;    fk = 0.6;
 
-lg1ps = [FLL*0.43, 0, 0, 0; ...
-    FLL*0.40, 0, 0, 0;...
-    FLL*0.17, 0, 0, 0];
-lg2ps = [FLL*0.43, 0, 0, 0; ...
-    FLL*0.40, 0, 0, 0;...
-    FLL*0.17, 0, 0, 0];
-lg3ps = [FLL*0.39, 0, 0, 0; ...
-    FLL*0.36, 0, 0, 0;...
-    FLL*0.25, 0, 0, 0];
-lg4ps = [FLL*0.39, 0, 0, 0; ...
-    FLL*0.36, 0, 0, 0;...
-    FLL*0.25, 0, 0, 0];
+lg1ps = [FLL*0.368, 0, 0, 0; ...
+    FLL*0.342, 0, 0, 0;...
+    FLL*0.146, 0, 0, 0];
+lg2ps = [FLL*0.368, 0, 0, 0; ...
+    FLL*0.342, 0, 0, 0;...
+    FLL*0.146, 0, 0, 0];
+lg3ps = [HLL*0.347, 0, 0, 0; ...
+    HLL*0.324, 0, 0, 0;...
+    HLL*0.221, 0, 0, 0];
+lg4ps = [HLL*0.347, 0, 0, 0; ...
+    HLL*0.324, 0, 0, 0;...
+    HLL*0.221, 0, 0, 0];
+% 
+% lg1ps = [scale*0.146, 0, 0, 0; ...
+%          scale*0.135, 0, 0, 0;...
+%          scale*0.059, 0, 0, 0];
+% lg2ps = [scale*0.146, 0, 0, 0; ...
+%          scale*0.135, 0, 0, 0;...
+%          scale*0.059, 0, 0, 0];
+% lg3ps = [scale*0.132, 0, 0, 0; ...
+%          scale*0.121, 0, 0, 0;...
+%          scale*0.080, 0, 0, 0];
+% lg4ps = [scale*0.132, 0, 0, 0; ...
+%          scale*0.121, 0, 0, 0;...
+%          scale*0.080, 0, 0, 0];
+
+% lg1ps = [FLL*0.43, 0, 0, 0; ...
+%     FLL*0.40, 0, 0, 0;...
+%     FLL*0.17, 0, 0, 0];
+% lg2ps = [FLL*0.43, 0, 0, 0; ...
+%     FLL*0.40, 0, 0, 0;...
+%     FLL*0.17, 0, 0, 0];
+% lg3ps = [FLL*0.39, 0, 0, 0; ...
+%     FLL*0.36, 0, 0, 0;...
+%     FLL*0.25, 0, 0, 0];
+% lg4ps = [FLL*0.39, 0, 0, 0; ...
+%     FLL*0.36, 0, 0, 0;...
+%     FLL*0.25, 0, 0, 0];
+     
+leg_masses = [  89, 113, 83;
+    89, 113, 83;
+    83, 107, 85;
+    83, 107, 85];
+body_mass = 1486;
 
 for i = 1:3
     t_mat_lg1(:,:,i) = transformation_mat(lg1ps(i,:));
@@ -174,20 +215,23 @@ for i = 1:3
     t_mat_lg4(:,:,i) = transformation_mat(lg4ps(i,:));
 end
 
-leg_length = lg1ps(1,1)+lg1ps(2,1)+lg1ps(3,1);
+leg_length1 = lg1ps(1,1)+lg1ps(2,1)+lg1ps(3,1);
+leg_length2 = lg2ps(1,1)+lg2ps(2,1)+lg2ps(3,1);
+leg_length3 = lg3ps(1,1)+lg3ps(2,1)+lg3ps(3,1);
+leg_length4 = lg4ps(1,1)+lg4ps(2,1)+lg4ps(3,1);
 
-M1 = [(0.15*lg1ps(1,1))/leg_length;...
-    (0.15*lg1ps(2,1))/leg_length;...
-    (0.15*lg1ps(3,1))/leg_length];
-M2 = [(0.15*lg2ps(1,1))/leg_length;...
-    (0.15*lg2ps(2,1))/leg_length;...
-    (0.15*lg2ps(3,1))/leg_length];
-M3 = [(0.15*lg3ps(1,1))/leg_length;...
-    (0.15*lg3ps(2,1))/leg_length;...
-    (0.15*lg3ps(3,1))/leg_length];
-M4 = [(0.15*lg4ps(1,1))/leg_length;...
-    (0.15*lg4ps(2,1))/leg_length;...
-    (0.15*lg4ps(3,1))/leg_length];
+M1 = [(0.15*lg1ps(1,1))/leg_length1;...
+    (0.15*lg1ps(2,1))/leg_length1;...
+    (0.15*lg1ps(3,1))/leg_length1];
+M2 = [(0.15*lg2ps(1,1))/leg_length2;...
+    (0.15*lg2ps(2,1))/leg_length2;...
+    (0.15*lg2ps(3,1))/leg_length2];
+M3 = [(0.15*lg3ps(1,1))/leg_length3;...
+    (0.15*lg3ps(2,1))/leg_length3;...
+    (0.15*lg3ps(3,1))/leg_length3];
+M4 = [(0.15*lg4ps(1,1))/leg_length4;...
+    (0.15*lg4ps(2,1))/leg_length4;...
+    (0.15*lg4ps(3,1))/leg_length4];
 
 %-------------------------------------------------------------------------%
 L1 = [0.5*sqrt((lg1ps(1,1)^2)+(lg1ps(1,3)^2));...     % Location of centre of mass in front leg 1
@@ -271,12 +315,13 @@ r4 = [R4(1) R4(1)*(((l4(1,1))/(l4(1,2)))^1.5);...
     ];
 
 
-OF = 100000; % Represents a generic value that the members have... multiplied by 10 to represent the worst member
+OF = 999999; % Represents a generic value that the members have... multiplied by 10 to represent the worst member
 cons = [0 0 0 0 0 0 0 0 0]; % The 8 constraint values. Look at description above
 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % Design Variable initialization to global variables
+obj_ite_velocity = design_var(97);
 obj_ite_stride_length = design_var(1); % Stride length
 obj_ite_duty_factor_FL = design_var(5);
 obj_ite_duty_factor_FR = design_var(28);
@@ -287,17 +332,18 @@ obj_ite_phi_rel_FR = design_var(2);
 obj_ite_phi_rel_HL = design_var(3);
 obj_ite_phi_rel_HR = design_var(4);
 
-num_strides = 3;
+leg_pitch = design_var(9);
+
+
 % %%%%%%%%%%%keyboard();
-obj_ite_stride_time = floor(100*design_var(97))/100;
-obj_ite_velocity = obj_ite_stride_length/obj_ite_stride_time;
+obj_ite_stride_time = floor(100*obj_ite_stride_length/obj_ite_velocity)/100;
 obj_ite_simulation_time = floor(100*num_strides*obj_ite_stride_time)/100;
 % obj_ite_velocity = floor(100*obj_ite_stride_length/obj_ite_stride_time)/100;
 velocity_initial = obj_ite_velocity;
-obj_ite_step_length_FL = obj_ite_duty_factor_FL*obj_ite_stride_length;
-obj_ite_step_length_FR = obj_ite_duty_factor_FR*obj_ite_stride_length;
-obj_ite_step_length_HL = obj_ite_duty_factor_HL*obj_ite_stride_length;
-obj_ite_step_length_HR = obj_ite_duty_factor_HR*obj_ite_stride_length;
+% obj_ite_step_length_FL = obj_ite_duty_factor_FL*obj_ite_stride_length;
+% obj_ite_step_length_FR = obj_ite_duty_factor_FR*obj_ite_stride_length;
+% obj_ite_step_length_HL = obj_ite_duty_factor_HL*obj_ite_stride_length;
+% obj_ite_step_length_HR = obj_ite_duty_factor_HR*obj_ite_stride_length;
 KPFLsw1 = design_var(16); KPFLsw2 = design_var(18); KPFLsw3 = design_var(20);
 KPFLst1 = design_var(22); KPFLst2 = design_var(24); KPFLst3 = design_var(26);
 KDFLsw1 = design_var(17); KDFLsw2 = design_var(19); KDFLsw3 = design_var(21);
@@ -318,6 +364,10 @@ KPHRst1 = design_var(91); KPHRst2 = design_var(93); KPHRst3 = design_var(95);
 KDHRsw1 = design_var(86); KDHRsw2 = design_var(88); KDHRsw3 = design_var(90);
 KDHRst1 = design_var(92); KDHRst2 = design_var(94); KDHRst3 = design_var(96);
 
+joint_angle_mismatch = 0;
+duty_mismatch = 0;
+torque_overflow = 0;
+
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -337,20 +387,15 @@ ansp_ans_HL = [];
 ansp_ans_HR = [];
 
 % Create joint trajectories for one cycle
-try
-    if ~extra_flag
-        DH_mat = lg1ps;
-        [ansp_ans_FL, time_traj] = invkin_traj_gen_modfl(DH_mat, obj_ite_stride_time, design_var(5:15), obj_ite_stride_length);
-        DH_mat = lg2ps;
-        ansp_ans_FR = invkin_traj_gen_modfr(DH_mat, obj_ite_stride_time, design_var(28:38), obj_ite_stride_length);
-        DH_mat = lg3ps;
-        ansp_ans_HL = invkin_traj_gen_modhl(DH_mat, obj_ite_stride_time, design_var(51:61), obj_ite_stride_length);
-        DH_mat = lg4ps;
-        ansp_ans_HR = invkin_traj_gen_modhr(DH_mat, obj_ite_stride_time, design_var(74:84), obj_ite_stride_length);
-    end
-catch
-    display('Constraint violation - Excessive stride time')
-    cons(1) = 1;
+if ~extra_flag
+    DH_mat = lg1ps;
+    [ansp_ans_FL, time_traj] = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(5:15), obj_ite_stride_length, leg_pitch);
+    DH_mat = lg2ps;
+    ansp_ans_FR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(28:38), obj_ite_stride_length, leg_pitch);
+    DH_mat = lg3ps;
+    ansp_ans_HL = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(51:61), obj_ite_stride_length, leg_pitch);
+    DH_mat = lg4ps;
+    ansp_ans_HR = invkin_traj_gen(DH_mat, obj_ite_stride_time, design_var(74:84), obj_ite_stride_length, leg_pitch);
 end
 index_ini = 0;
 %         design_var(1)
@@ -453,21 +498,21 @@ else
     TRJ_LG4_J3  = [time_traj; ansp_HR(3,:)];
     
     
-    TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG1_J1(2,:).', (TRJ_LG1_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG1_J2(2,:).', (TRJ_LG1_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG1_J3(2,:).', (TRJ_LG1_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG1_J1(2,:).', (TRJ_LG1_J1(1,:)));
+    TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG1_J2(2,:).', (TRJ_LG1_J2(1,:)));
+    TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG1_J3(2,:).', (TRJ_LG1_J3(1,:)));
     
-    TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG2_J1(2,:).', (TRJ_LG2_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG2_J2(2,:).', (TRJ_LG2_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG2_J3(2,:).', (TRJ_LG2_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG2_J1(2,:).', (TRJ_LG2_J1(1,:)));
+    TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG2_J2(2,:).', (TRJ_LG2_J2(1,:)));
+    TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG2_J3(2,:).', (TRJ_LG2_J3(1,:)));
     
-    TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG3_J1(2,:).', (TRJ_LG3_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG3_J2(2,:).', (TRJ_LG3_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG3_J3(2,:).', (TRJ_LG3_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG3_J1(2,:).', (TRJ_LG3_J1(1,:)));
+    TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG3_J2(2,:).', (TRJ_LG3_J2(1,:)));
+    TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG3_J3(2,:).', (TRJ_LG3_J3(1,:)));
     
-    TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)), 'name', 'TRJ_LG4_J1');
-    TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)), 'name', 'TRJ_LG4_J1');
+    TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)));
+    TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)));
+    TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)));
     
     %%%%%%%%%%%keyboard();
     
@@ -488,7 +533,7 @@ else
     DH_temp(1:3,4) = [TRJ_LG4_J1(2,1);TRJ_LG4_J2(2,1);TRJ_LG4_J3(2,1)]; % leg 4
     [xHR,zHR,~,~] = forward_kin(DH_temp);
     
-    [body_height, pitch_initial] = select_toes(xFR, zFR, xFL, zFL, xHR, zHR, xHL, zHL, IGD);
+    [body_height, pitch_initial] = select_toes(leg_pitch, xFR, zFR, xFL, zFL, xHR, zHR, xHL, zHL, IGD);
     
     %             body_height = body_height + 0.5; % this is to be used to
     %             % suspend the rover above ground... change planar joint in
@@ -522,30 +567,31 @@ else
     mws.assignin('TRJ_LG4_J1', TRJ_LG4_J1); mws.assignin('TRJ_LG4_J2', TRJ_LG4_J2); mws.assignin('TRJ_LG4_J3', TRJ_LG4_J3);
     
     % Gains
-    mws.assignin('KPFLsw1', KPFLsw1); mws.assignin('KPFLsw2', KPFLsw2); mws.assignin('KPFLsw3', KPFLsw3);
-    mws.assignin('KPFLst1', KPFLst1); mws.assignin('KPFLst2', KPFLst2); mws.assignin('KPFLst3', KPFLst3);
-    mws.assignin('KDFLsw1', KDFLsw1); mws.assignin('KDFLsw2', KDFLsw2); mws.assignin('KDFLsw3', KDFLsw3);
-    mws.assignin('KDFLst1', KDFLst1); mws.assignin('KDFLst2', KDFLst2); mws.assignin('KDFLst3', KDFLst3);
-    
-    mws.assignin('KPFRsw1', KPFRsw1); mws.assignin('KPFRsw2', KPFRsw2); mws.assignin('KPFRsw3', KPFRsw3);
-    mws.assignin('KPFRst1', KPFRst1); mws.assignin('KPFRst2', KPFRst2); mws.assignin('KPFRst3', KPFRst3);
-    mws.assignin('KDFRsw1', KDFRsw1); mws.assignin('KDFRsw2', KDFRsw2); mws.assignin('KDFRsw3', KDFRsw3);
-    mws.assignin('KDFRst1', KDFRst1); mws.assignin('KDFRst2', KDFRst2); mws.assignin('KDFRst3', KDFRst3);
-    
-    mws.assignin('KPHLsw1', KPHLsw1); mws.assignin('KPHLsw2', KPHLsw2); mws.assignin('KPHLsw3', KPHLsw3);
-    mws.assignin('KPHLst1', KPHLst1); mws.assignin('KPHLst2', KPHLst2); mws.assignin('KPHLst3', KPHLst3);
-    mws.assignin('KDHLsw1', KDHLsw1); mws.assignin('KDHLsw2', KDHLsw2); mws.assignin('KDHLsw3', KDHLsw3);
-    mws.assignin('KDHLst1', KDHLst1); mws.assignin('KDHLst2', KDHLst2); mws.assignin('KDHLst3', KDHLst3);
-    
-    mws.assignin('KPHRsw1', KPHRsw1); mws.assignin('KPHRsw2', KPHRsw2); mws.assignin('KPHRsw3', KPHRsw3);
-    mws.assignin('KPHRst1', KPHRst1); mws.assignin('KPHRst2', KPHRst2); mws.assignin('KPHRst3', KPHRst3);
-    mws.assignin('KDHRsw1', KDHRsw1); mws.assignin('KDHRsw2', KDHRsw2); mws.assignin('KDHRsw3', KDHRsw3);
-    mws.assignin('KDHRst1', KDHRst1); mws.assignin('KDHRst2', KDHRst2); mws.assignin('KDHRst3', KDHRst3);
+    %             mws.assignin('KPFLsw1', KPFLsw1); mws.assignin('KPFLsw2', KPFLsw2); mws.assignin('KPFLsw3', KPFLsw3);
+    %             mws.assignin('KPFLst1', KPFLst1); mws.assignin('KPFLst2', KPFLst2); mws.assignin('KPFLst3', KPFLst3);
+    %             mws.assignin('KDFLsw1', KDFLsw1); mws.assignin('KDFLsw2', KDFLsw2); mws.assignin('KDFLsw3', KDFLsw3);
+    %             mws.assignin('KDFLst1', KDFLst1); mws.assignin('KDFLst2', KDFLst2); mws.assignin('KDFLst3', KDFLst3);
+    %
+    %             mws.assignin('KPFRsw1', KPFRsw1); mws.assignin('KPFRsw2', KPFRsw2); mws.assignin('KPFRsw3', KPFRsw3);
+    %             mws.assignin('KPFRst1', KPFRst1); mws.assignin('KPFRst2', KPFRst2); mws.assignin('KPFRst3', KPFRst3);
+    %             mws.assignin('KDFRsw1', KDFRsw1); mws.assignin('KDFRsw2', KDFRsw2); mws.assignin('KDFRsw3', KDFRsw3);
+    %             mws.assignin('KDFRst1', KDFRst1); mws.assignin('KDFRst2', KDFRst2); mws.assignin('KDFRst3', KDFRst3);
+    %
+    %             mws.assignin('KPHLsw1', KPHLsw1); mws.assignin('KPHLsw2', KPHLsw2); mws.assignin('KPHLsw3', KPHLsw3);
+    %             mws.assignin('KPHLst1', KPHLst1); mws.assignin('KPHLst2', KPHLst2); mws.assignin('KPHLst3', KPHLst3);
+    %             mws.assignin('KDHLsw1', KDHLsw1); mws.assignin('KDHLsw2', KDHLsw2); mws.assignin('KDHLsw3', KDHLsw3);
+    %             mws.assignin('KDHLst1', KDHLst1); mws.assignin('KDHLst2', KDHLst2); mws.assignin('KDHLst3', KDHLst3);
+    %
+    %             mws.assignin('KPHRsw1', KPHRsw1); mws.assignin('KPHRsw2', KPHRsw2); mws.assignin('KPHRsw3', KPHRsw3);
+    %             mws.assignin('KPHRst1', KPHRst1); mws.assignin('KPHRst2', KPHRst2); mws.assignin('KPHRst3', KPHRst3);
+    %             mws.assignin('KDHRsw1', KDHRsw1); mws.assignin('KDHRsw2', KDHRsw2); mws.assignin('KDHRsw3', KDHRsw3);
+    %             mws.assignin('KDHRst1', KDHRst1); mws.assignin('KDHRst2', KDHRst2); mws.assignin('KDHRst3', KDHRst3);
     
     % Body Variables
     mws.assignin('body_height', body_height); mws.assignin('pitch_initial', pitch_initial); mws.assignin('velocity_initial', velocity_initial);
     mws.assignin('t_mat_lg1', t_mat_lg1); mws.assignin('t_mat_lg2', t_mat_lg2); mws.assignin('t_mat_lg3', t_mat_lg3); mws.assignin('t_mat_lg4', t_mat_lg4);
     mws.assignin('body_pitch_max', body_pitch_max); mws.assignin('body_roll_max', body_roll_max); mws.assignin('body_yaw_max', body_yaw_max);
+    mws.assignin('body_mass', body_mass); mws.assignin('leg_masses', leg_masses);
     
     mws.assignin('l1', l1); mws.assignin('l2', l2); mws.assignin('l3', l3); mws.assignin('l4', l4);
     mws.assignin('r1', r1); mws.assignin('r2', r2); mws.assignin('r3', r3); mws.assignin('r4', r4);
@@ -556,72 +602,68 @@ else
     mws.assignin('lg1ps', lg1ps); mws.assignin('lg2ps', lg2ps); mws.assignin('lg3ps', lg3ps); mws.assignin('lg4ps', lg4ps);
     mws.assignin('gravity', gravity); mws.assignin('ground_x', ground_x); mws.assignin('ground_y', ground_y); mws.assignin('ground_z', ground_z);
     mws.assignin('back_x', back_x); mws.assignin('front_x', front_x); mws.assignin('density', density);
-    mws.assignin('HLL', HLL); mws.assignin('FLL', FLL); mws.assignin('IGD', IGD);
     mws.assignin('bx', bx); mws.assignin('by', by); mws.assignin('bz', bz);
     mws.assignin('k_g_v', k_g_v); mws.assignin('n', n); mws.assignin('b_g_v', b_g_v); mws.assignin('p', p); mws.assignin('q', q);
-    mws.assignin('S_p', S_p); mws.assignin('fk', fk);
+    mws.assignin('S_p', S_p); mws.assignin('fk', fk); mws.assignin('back_hip_height', back_hip_height);
     
     % Try catch system to create exception for when model fails to
     % compile... treat is as a constraint violation...
     %%%%%%%%%%%keyboard();
     %%%keyboard();
-    temporary_time = [];
-    try
-        modelsim = sim('final_model_trial2.mdl', 'SimulationMode', 'normal', 'StartTime', '0', 'StopTime', num2str(obj_ite_simulation_time));
-        
-        %%%%%%%%%%keyboard();
-        
-        
-        
-        results_file_loader  % Reads data from files created by the executable above and stores them in function workspace
-        
-        temporary_time = modelsim.get('t_sen_lg1').time;
-        
-        t_sen_lg1_j1 = modelsim.get('t_sen_lg1').data(:,1);
-        t_sen_lg1_j2 = modelsim.get('t_sen_lg1').data(:,2);
-        t_sen_lg1_j3 = modelsim.get('t_sen_lg1').data(:,3);
-        
-        t_sen_lg2_j1 = modelsim.get('t_sen_lg2').data(:,1);
-        t_sen_lg2_j2 = modelsim.get('t_sen_lg2').data(:,2);
-        t_sen_lg2_j3 = modelsim.get('t_sen_lg2').data(:,3);
-        
-        t_sen_lg3_j1 = modelsim.get('t_sen_lg3').data(:,1);
-        t_sen_lg3_j2 = modelsim.get('t_sen_lg3').data(:,2);
-        t_sen_lg3_j3 = modelsim.get('t_sen_lg3').data(:,3);
-        
-        t_sen_lg4_j1 = modelsim.get('t_sen_lg4').data(:,1);
-        t_sen_lg4_j2 = modelsim.get('t_sen_lg4').data(:,2);
-        t_sen_lg4_j3 = modelsim.get('t_sen_lg4').data(:,3);
-        
-        theta_sen_lg1_j1 = modelsim.get('theta_sen_lg1').data(:,1);
-        theta_sen_lg1_j2 = modelsim.get('theta_sen_lg1').data(:,2);
-        theta_sen_lg1_j3 = modelsim.get('theta_sen_lg1').data(:,3);
-        
-        theta_sen_lg2_j1 = modelsim.get('theta_sen_lg2').data(:,1);
-        theta_sen_lg2_j2 = modelsim.get('theta_sen_lg2').data(:,2);
-        theta_sen_lg2_j3 = modelsim.get('theta_sen_lg2').data(:,3);
-        
-        theta_sen_lg3_j1 = modelsim.get('theta_sen_lg3').data(:,1);
-        theta_sen_lg3_j2 = modelsim.get('theta_sen_lg3').data(:,2);
-        theta_sen_lg3_j3 = modelsim.get('theta_sen_lg3').data(:,3);
-        
-        theta_sen_lg4_j1 = modelsim.get('theta_sen_lg4').data(:,1);
-        theta_sen_lg4_j2 = modelsim.get('theta_sen_lg4').data(:,2);
-        theta_sen_lg4_j3 = modelsim.get('theta_sen_lg4').data(:,3);
-        
-        body_pitch = modelsim.get('body_movement').data(:,1);
-        body_height_calc = modelsim.get('body_movement').data(:,2);
-        body_velocity = modelsim.get('body_velocity').data(:,1);
-        
-        leg1_ee_position = modelsim.get('leg1_ee').data(:,2);
-        leg2_ee_position = modelsim.get('leg2_ee').data(:,2);
-        leg3_ee_position = modelsim.get('leg3_ee').data(:,2);
-        leg4_ee_position = modelsim.get('leg4_ee').data(:,2);
-        
-    catch
-        OF = 100000;
-        cons(2) = 1;
-    end
+    %              try
+    modelsim = sim('final_model_trial2.mdl', 'SimulationMode', 'normal', 'StartTime', '0', 'StopTime', num2str(obj_ite_simulation_time));
+    %              catch
+    %                  OF = 100000;
+    %                  cons(2) = 1;
+    %              end
+    %%%%%%%%%%keyboard();
+    
+    
+    
+    results_file_loader  % Reads data from files created by the executable above and stores them in function workspace
+    
+    temporary_time = modelsim.get('t_sen_lg1').time;
+    
+    t_sen_lg1_j1 = modelsim.get('t_sen_lg1').data(:,1);
+    t_sen_lg1_j2 = modelsim.get('t_sen_lg1').data(:,2);
+    t_sen_lg1_j3 = modelsim.get('t_sen_lg1').data(:,3);
+    
+    t_sen_lg2_j1 = modelsim.get('t_sen_lg2').data(:,1);
+    t_sen_lg2_j2 = modelsim.get('t_sen_lg2').data(:,2);
+    t_sen_lg2_j3 = modelsim.get('t_sen_lg2').data(:,3);
+    
+    t_sen_lg3_j1 = modelsim.get('t_sen_lg3').data(:,1);
+    t_sen_lg3_j2 = modelsim.get('t_sen_lg3').data(:,2);
+    t_sen_lg3_j3 = modelsim.get('t_sen_lg3').data(:,3);
+    
+    t_sen_lg4_j1 = modelsim.get('t_sen_lg4').data(:,1);
+    t_sen_lg4_j2 = modelsim.get('t_sen_lg4').data(:,2);
+    t_sen_lg4_j3 = modelsim.get('t_sen_lg4').data(:,3);
+    
+    theta_sen_lg1_j1 = modelsim.get('theta_sen_lg1').data(:,1);
+    theta_sen_lg1_j2 = modelsim.get('theta_sen_lg1').data(:,2);
+    theta_sen_lg1_j3 = modelsim.get('theta_sen_lg1').data(:,3);
+    
+    theta_sen_lg2_j1 = modelsim.get('theta_sen_lg2').data(:,1);
+    theta_sen_lg2_j2 = modelsim.get('theta_sen_lg2').data(:,2);
+    theta_sen_lg2_j3 = modelsim.get('theta_sen_lg2').data(:,3);
+    
+    theta_sen_lg3_j1 = modelsim.get('theta_sen_lg3').data(:,1);
+    theta_sen_lg3_j2 = modelsim.get('theta_sen_lg3').data(:,2);
+    theta_sen_lg3_j3 = modelsim.get('theta_sen_lg3').data(:,3);
+    
+    theta_sen_lg4_j1 = modelsim.get('theta_sen_lg4').data(:,1);
+    theta_sen_lg4_j2 = modelsim.get('theta_sen_lg4').data(:,2);
+    theta_sen_lg4_j3 = modelsim.get('theta_sen_lg4').data(:,3);
+    
+    body_pitch = modelsim.get('body_movement').data(:,1);
+    body_height_calc = modelsim.get('body_movement').data(:,2);
+    body_velocity = modelsim.get('body_velocity').data(:,1);
+    
+    leg1_ee_position = modelsim.get('leg1_ee').data(:,2);
+    leg2_ee_position = modelsim.get('leg2_ee').data(:,2);
+    leg3_ee_position = modelsim.get('leg3_ee').data(:,2);
+    leg4_ee_position = modelsim.get('leg4_ee').data(:,2);
     
     % cons = [c1 c2 c3 c4 c5 c6 c7 c8]
     % Default value is 0, constraint violation value is 1
@@ -700,6 +742,7 @@ else
         idx24 = find(abs(diff(t_sen_lg4_j3)) >= obj_ite_max_torque_change, 1);
         if (~isempty(idx1))||(~isempty(idx2))||(~isempty(idx3))||(~isempty(idx4))||(~isempty(idx5))||(~isempty(idx6)||~isempty(idx7))||(~isempty(idx8))||(~isempty(idx9))||(~isempty(idx10))||(~isempty(idx11))||(~isempty(idx12))||(~isempty(idx13))||(~isempty(idx14))||(~isempty(idx15))||(~isempty(idx16))||(~isempty(idx17))||(~isempty(idx18)||~isempty(idx19))||(~isempty(idx20))||(~isempty(idx21))||(~isempty(idx22))||(~isempty(idx23))||(~isempty(idx24)) % Max torque was exceeded
             cons(6) = 1;
+            torque_overflow = sum([idx1, idx2, idx3, idx4, idx5, idx6, idx7, idx8, idx9, idx10, idx11, idx12, idx13, idx14, idx15, idx16, idx17, idx18, idx19, idx20, idx21, idx22, idx23, idx24]);
         end
         
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -707,42 +750,49 @@ else
         % during stance is 0 or not
         ccc_1 = 0; ccc_2 = 0; ccc_3 = 0; ccc_4 = 0;
         if (length(leg1_ee_position) == length(leg2_ee_position))&&(length(leg1_ee_position) == length(leg3_ee_position))&&(length(leg1_ee_position) == length(leg4_ee_position)) &&(length(leg_marker_FL) >= length(leg1_ee_position))
-            for kk = 1:length(leg1_ee_position)
-                % Break if z position during stance isn't 0, or x velocity isn't 0, leg
-                % marker would have value of 0 or -1
-                if((leg_marker_FL(kk)==0)||(leg_marker_FL(kk)==-1))&&(((leg1_ee_position(kk))>0.01))%||(abs(leg1_ee_velocity(kk))>0.1))%||((leg_markers(2,kk)==1))&&((abs(leg1_ee_position(kk))<0.0025))
-                    ccc_1 = 1;
-                    display('stance problem leg 1')
-                    break
-                end
-                if((leg_marker_FR(kk)==0)||(leg_marker_FR(kk)==-1))&&(((leg2_ee_position(kk))>0.01))%||(abs(leg2_ee_velocity(kk))>0.1))%||((leg_markers(3,kk)==1))&&((abs(leg2_ee_position(kk))<0.0025))
-                    ccc_2 = 1;
-                    display('stance problem leg 2')
-                    break
-                end
-                if((leg_marker_HL(kk)==0)||(leg_marker_HL(kk)==-1))&&(((leg3_ee_position(kk))>0.01))%||(abs(leg3_ee_velocity(kk))>0.1))%||((leg_markers(4,kk)==1))&&((abs(leg3_ee_position(kk))<0.0025))
-                    ccc_3 = 1;
-                    display('stance problem leg 3')
-                    break
-                end
-                if((leg_marker_HR(kk)==0)||(leg_marker_HR(kk)==-1))&&(((leg4_ee_position(kk))>0.01))%||(abs(leg4_ee_velocity(kk))>0.1))%||((leg_markers(5,kk)==1))&&((abs(leg4_ee_position(kk))<0.0025))
-                    ccc_4 = 1;
-                    %                                 %%%%%%%%%%keyboard();
-                    display('stance problem leg 4')
-                    break
-                end
-            end
+%             for kk = 1:length(leg1_ee_position)
+%                 % Break if z position during stance isn't 0, or x velocity isn't 0, leg
+%                 % marker would have value of 0 or -1
+%                 if((leg_marker_FL(kk)==0)||(leg_marker_FL(kk)==-1))&&(((leg1_ee_position(kk))>0.01))%||(abs(leg1_ee_velocity(kk))>0.1))%||((leg_markers(2,kk)==1))&&((abs(leg1_ee_position(kk))<0.0025))
+%                     ccc_1 = 1;
+%                     display('stance problem leg 1')
+%                     break
+%                 end
+%                 if((leg_marker_FR(kk)==0)||(leg_marker_FR(kk)==-1))&&(((leg2_ee_position(kk))>0.01))%||(abs(leg2_ee_velocity(kk))>0.1))%||((leg_markers(3,kk)==1))&&((abs(leg2_ee_position(kk))<0.0025))
+%                     ccc_2 = 1;
+%                     display('stance problem leg 2')
+%                     break
+%                 end
+%                 if((leg_marker_HL(kk)==0)||(leg_marker_HL(kk)==-1))&&(((leg3_ee_position(kk))>0.01))%||(abs(leg3_ee_velocity(kk))>0.1))%||((leg_markers(4,kk)==1))&&((abs(leg3_ee_position(kk))<0.0025))
+%                     ccc_3 = 1;
+%                     display('stance problem leg 3')
+%                     break
+%                 end
+%                 if((leg_marker_HR(kk)==0)||(leg_marker_HR(kk)==-1))&&(((leg4_ee_position(kk))>0.01))%||(abs(leg4_ee_velocity(kk))>0.1))%||((leg_markers(5,kk)==1))&&((abs(leg4_ee_position(kk))<0.0025))
+%                     ccc_4 = 1;
+%                     %                                 %%%%%%%%%%keyboard();
+%                     display('stance problem leg 4')
+%                     break
+%                 end
+%             end
         else
             display('leg markers and position don`t match in length')
             cons(7) = 1;
         end
         
-        if (abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL) > 0.1)||(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR) > 0.1)||(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL) > 0.1)||(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR) > 0.1)
-            
-            display('duty factor mismatch')
-            %                         keyboard();
+        duty_mismatch = abs(abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL)) + abs(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR)) + abs(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL)) + abs(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR));
+        duty_mismatch = duty_mismatch - 4*0.1;
+        if duty_mismatch > 0
             cons(7) = 1;
+        else
+            duty_mismatch = 0;
         end
+%         if (abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL) > 0.1)||(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR) > 0.1)||(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL) > 0.1)||(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR) > 0.1)
+%             
+%             display('duty factor mismatch')
+%             %                         keyboard();
+%             cons(7) = 1;
+%         end
         if (ccc_1)||(ccc_2)||(ccc_3)||(ccc_4)
             cons(7) = 1;
         end
@@ -750,13 +800,24 @@ else
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         % Cons 8: Checks for joint angles mismatch at every AEP instance of each leg is the same...
         
-        if ((theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) >= 0.035)||((theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) >= 0.035)||((theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) >= 0.035)||((theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) >= 0.035)||((theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) >= 0.035)||((theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) >= 0.035)||((theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) >= 0.035)||((theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) >= 0.035)||((theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) >= 0.035)||((theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) >= 0.035)||((theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) >= 0.035)||((theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end)) >= 0.035)
+        joint_angle_mismatch = abs(theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) + abs(theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) + abs(theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) ...
+            + abs(theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) + abs(theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) + abs(theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) ...
+            + abs(theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) + abs(theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) + abs(theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) ...
+            + abs(theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) + abs(theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) + abs(theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end));
+        % Error Tolerance
+        joint_angle_mismatch = joint_angle_mismatch - 12 * 0.035;
+        if joint_angle_mismatch > 0
             cons(8) = 1;
+        else
+            joint_angle_mismatch = 0;
         end
-        %                     idx_FR_AEP = find(leg_markers(2,:) == -1); % leg 1 AEPs
-        %                     idx_FL_AEP = find(leg_markers(3,:) == -1); % leg 2 AEPs
-        %                     idx_HR_AEP = find(leg_markers(4,:) == -1); % leg 3 AEPs
-        %                     idx_HL_AEP = find(leg_markers(5,:) == -1); % leg 4 AEPs
+%         if ((theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) >= 0.035)||((theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) >= 0.035)||((theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) >= 0.035)||((theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) >= 0.035)||((theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) >= 0.035)||((theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) >= 0.035)||((theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) >= 0.035)||((theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) >= 0.035)||((theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) >= 0.035)||((theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) >= 0.035)||((theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) >= 0.035)||((theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end)) >= 0.035)
+%             cons(8) = 1;
+%         end
+        FL_AEP = find(leg_marker_FL == -1, 1);
+        FR_AEP = find(leg_marker_FR == -1, 1);
+        HL_AEP = find(leg_marker_HL == -1, 1);
+        HR_AEP = find(leg_marker_HR == -1, 1);
         %                     temp_len = length(leg_markers(2,:));
         %                     cc_1 = 0; cc_2 = 0; cc_3 = 0; cc_4 = 0;
         %                     for kk = 1:length(idx_FR_AEP)
@@ -803,16 +864,18 @@ else
     %%%%%%%%%%keyboard();
     
     if (~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5))&&(~cons(6))&&(~cons(7))&&(~cons(8))&&(~cons(9))
-        OF = -mean(body_velocity);
+        OF = -1 * mean(body_velocity);
         
         display('Successful run')
     else
         display('Constraint violation')
         cons
+        OF = (joint_angle_mismatch + duty_mismatch) * 10000 + torque_overflow;
         if ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
-            OF = 1000 * sum(cons);
+            OF = OF + 1000;
+            cons = zeros(1, 9);
         elseif ((~cons(1))&&(~cons(2)))
-            OF = 4000 * sum(cons);
+            OF = OF + 40000/(1 + temporary_time(end));
         else
             OF = 100000;
         end
@@ -821,6 +884,35 @@ else
 end
 
 time_taken_for_one_iteration = toc
+
+if nargout >= 1
+    varargout{1} = OF;
+end
+if nargout >= 2
+    varargout{2} = cons;
+end
+if nargout == 3
+    varargout{3} = v2struct( ...
+        lg1ps, lg2ps, lg3ps, lg4ps, ...
+        TRJ_LG1_J1, TRJ_LG1_J2, TRJ_LG1_J3, ...
+        TRJ_LG2_J1, TRJ_LG2_J2, TRJ_LG2_J3, ...
+        TRJ_LG3_J1, TRJ_LG3_J2, TRJ_LG3_J3, ...
+        TRJ_LG4_J1, TRJ_LG4_J2, TRJ_LG4_J3, ...
+        t_sen_lg1_j1, t_sen_lg1_j2, t_sen_lg1_j3, ...
+        t_sen_lg2_j1, t_sen_lg2_j2, t_sen_lg2_j3, ...
+        t_sen_lg3_j1, t_sen_lg3_j2, t_sen_lg3_j3, ...
+        t_sen_lg4_j1, t_sen_lg4_j2, t_sen_lg4_j3, ...
+        theta_sen_lg1_j1, theta_sen_lg1_j2, theta_sen_lg1_j3, ...
+        theta_sen_lg2_j1, theta_sen_lg2_j2, theta_sen_lg2_j3, ...
+        theta_sen_lg3_j1, theta_sen_lg3_j2, theta_sen_lg3_j3, ...
+        theta_sen_lg4_j1, theta_sen_lg4_j2, theta_sen_lg4_j3, ...
+        leg1_ee_position, leg2_ee_position, ...
+        leg3_ee_position, leg4_ee_position, ...
+        body_pitch, body_height_calc, body_velocity, ...
+        FL_AEP, FR_AEP, HL_AEP, HR_AEP, temporary_time);
+end
+
+
 
 end
 

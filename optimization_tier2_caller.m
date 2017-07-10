@@ -281,11 +281,11 @@ options.lb = design_var_lower';                   % lower bound of x
 options.ub = design_var_upper';                   % upper bound of x
 options.objfun = @objective_function_main;     % objective function handle
 options.plotInterval = 1;               % interval between two calls of "plotnsga". 
-options.useParallel = 'yes';
+options.useParallel = 'no';
 options.poolsize = 8;
 options.crossoverFraction = 0.3;
 options.mutationFraction = 0.1;
 options.initfun = {@initpop, 'initial_population1.txt'};
-result = nsga2(options, 1.5, 4);                % begin the optimization!
+result = nsga2(options, 0.1, 10);                % begin the optimization!
 % % % % 
 % % % % % % copyfile('populations.txt', '20140422MO_ro_pop.txt');

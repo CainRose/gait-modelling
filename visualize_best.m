@@ -39,7 +39,7 @@ end
 if optFun == 1
     [OF, cons, d] = objective_function_main(best.var, velocity, cycles);
 elseif optFun == 2
-    [OF, cons, d] = objective_function_velocity(best.var, velocity, cycles);
+    [OF, cons, d] = objective_function_velocity(best.var, cycles);
 end
 
 t_cycle = floor(1000*d.temporary_time(end)/cycles)/1000;
@@ -248,6 +248,68 @@ elseif strcmp(component, 'jointangle')
     legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
     title(['Angle of Hind Right Joints at '  num2str(velocity) ' m/s']);
     saveas(theta4, ['Angle of Hind Right Joints at '  num2str(velocity) '.png'])
+
+elseif strcmp(component, 'jointanglevel')
+    theta_dot_lg1_j1 = averageVar(d.theta_dot_sen_lg1_j1, d.FL_AEP, cycles);
+    theta_dot_lg1_j2 = averageVar(d.theta_dot_sen_lg1_j2, d.FL_AEP, cycles);
+    theta_dot_lg1_j3 = averageVar(d.theta_dot_sen_lg1_j3, d.FL_AEP, cycles);
+    theta_dot_lg2_j1 = averageVar(d.theta_dot_sen_lg2_j1, d.FR_AEP, cycles);
+    theta_dot_lg2_j2 = averageVar(d.theta_dot_sen_lg2_j2, d.FR_AEP, cycles);
+    theta_dot_lg2_j3 = averageVar(d.theta_dot_sen_lg2_j3, d.FR_AEP, cycles);
+    theta_dot_lg3_j1 = averageVar(d.theta_dot_sen_lg3_j1, d.HL_AEP, cycles);
+    theta_dot_lg3_j2 = averageVar(d.theta_dot_sen_lg3_j2, d.HL_AEP, cycles);
+    theta_dot_lg3_j3 = averageVar(d.theta_dot_sen_lg3_j3, d.HL_AEP, cycles);
+    theta_dot_lg4_j1 = averageVar(d.theta_dot_sen_lg4_j1, d.HR_AEP, cycles);
+    theta_dot_lg4_j2 = averageVar(d.theta_dot_sen_lg4_j2, d.HR_AEP, cycles);
+    theta_dot_lg4_j3 = averageVar(d.theta_dot_sen_lg4_j3, d.HR_AEP, cycles);
+    
+    theta1 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_dot_lg1_j1, 'b');
+    plot(0:0.001:t_cycle, theta_dot_lg1_j2, 'r');
+    plot(0:0.001:t_cycle, theta_dot_lg1_j3, 'g');
+    plot([t_FL_PEP t_FL_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angular Velocity');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angular Velocity of Front Left Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta1, ['Angular Velocity of Front Left Joints at '  num2str(velocity) '.png'])
+    
+    theta2 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_dot_lg2_j1, 'b');
+    plot(0:0.001:t_cycle, theta_dot_lg2_j2, 'r');
+    plot(0:0.001:t_cycle, theta_dot_lg2_j3, 'g');
+    plot([t_FR_PEP t_FR_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angular Velocity');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angular Velocity of Front Right Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta2, ['Angular Velocity of Front Right Joints at '  num2str(velocity) '.png'])
+    
+    theta3 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_dot_lg3_j1, 'b');
+    plot(0:0.001:t_cycle, theta_dot_lg3_j2, 'r');
+    plot(0:0.001:t_cycle, theta_dot_lg3_j3, 'g');
+    plot([t_HL_PEP t_HL_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angular Velocity');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angular Velocity of Hind Left Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta3, ['Angular Velocity of Hind Left Joints at '  num2str(velocity) '.png'])
+    
+    theta4 = figure;
+    hold on
+    plot(0:0.001:t_cycle, theta_dot_lg4_j1, 'b');
+    plot(0:0.001:t_cycle, theta_dot_lg4_j2, 'r');
+    plot(0:0.001:t_cycle, theta_dot_lg4_j3, 'g');
+    plot([t_HR_PEP t_HR_PEP], get(gca,'ylim'), 'k--');
+    xlabel('t (s)');
+    ylabel('Angular Velocity');
+    legend('Hip', 'Knee', 'Ankle', 'Location', 'Best');
+    title(['Angular Velocity of Hind Right Joints at '  num2str(velocity) ' m/s']);
+    saveas(theta4, ['Angular Velocity of Hind Right Joints at '  num2str(velocity) '.png'])
 end
 end
 

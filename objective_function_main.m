@@ -563,7 +563,7 @@ else
     mws.assignin('TRJ_LG1_J1', TRJ_LG1_J1); mws.assignin('TRJ_LG1_J2', TRJ_LG1_J2); mws.assignin('TRJ_LG1_J3', TRJ_LG1_J3);
     mws.assignin('TRJ_LG2_J1', TRJ_LG2_J1); mws.assignin('TRJ_LG2_J2', TRJ_LG2_J2); mws.assignin('TRJ_LG2_J3', TRJ_LG2_J3);
     mws.assignin('TRJ_LG3_J1', TRJ_LG3_J1); mws.assignin('TRJ_LG3_J2', TRJ_LG3_J2); mws.assignin('TRJ_LG3_J3', TRJ_LG3_J3);
-    mws.assignin('TRJ_LG4_J1', TRJ_LG4_J1); mws.assignin('TRJ_LG4_J2', TRJ_LG4_J2); mws.assignin('TRJ_LG4_J3', TRJ_LG4_J3);
+    mws.assignin('TRJ_LG4_J1', TRJ_LG4_J1); mws.assignin('TRJ_LG4_J2', TRJ_LG4_J2); mws.assignin('TRJ_LG4_J3', TRJ_LG4_J3');
     
     % Gains
     %             mws.assignin('KPFLsw1', KPFLsw1); mws.assignin('KPFLsw2', KPFLsw2); mws.assignin('KPFLsw3', KPFLsw3);
@@ -654,6 +654,22 @@ else
     theta_sen_lg4_j1 = modelsim.get('theta_sen_lg4').data(:,1);
     theta_sen_lg4_j2 = modelsim.get('theta_sen_lg4').data(:,2);
     theta_sen_lg4_j3 = modelsim.get('theta_sen_lg4').data(:,3);
+    
+    theta_dot_sen_lg1_j1 = modelsim.get('theta_dot_sen_lg1').data(:,1);
+    theta_dot_sen_lg1_j2 = modelsim.get('theta_dot_sen_lg1').data(:,2);
+    theta_dot_sen_lg1_j3 = modelsim.get('theta_dot_sen_lg1').data(:,3);
+    
+    theta_dot_sen_lg2_j1 = modelsim.get('theta_dot_sen_lg2').data(:,1);
+    theta_dot_sen_lg2_j2 = modelsim.get('theta_dot_sen_lg2').data(:,2);
+    theta_dot_sen_lg2_j3 = modelsim.get('theta_dot_sen_lg2').data(:,3);
+    
+    theta_dot_sen_lg3_j1 = modelsim.get('theta_dot_sen_lg3').data(:,1);
+    theta_dot_sen_lg3_j2 = modelsim.get('theta_dot_sen_lg3').data(:,2);
+    theta_dot_sen_lg3_j3 = modelsim.get('theta_dot_sen_lg3').data(:,3);
+    
+    theta_dot_sen_lg4_j1 = modelsim.get('theta_dot_sen_lg4').data(:,1);
+    theta_dot_sen_lg4_j2 = modelsim.get('theta_dot_sen_lg4').data(:,2);
+    theta_dot_sen_lg4_j3 = modelsim.get('theta_dot_sen_lg4').data(:,3);
     
     body_pitch = modelsim.get('body_movement').data(:,1);
     body_height_calc = modelsim.get('body_movement').data(:,2);
@@ -906,6 +922,10 @@ if nargout == 3
         theta_sen_lg2_j1, theta_sen_lg2_j2, theta_sen_lg2_j3, ...
         theta_sen_lg3_j1, theta_sen_lg3_j2, theta_sen_lg3_j3, ...
         theta_sen_lg4_j1, theta_sen_lg4_j2, theta_sen_lg4_j3, ...
+        theta_dot_sen_lg1_j1, theta_dot_sen_lg1_j2, theta_dot_sen_lg1_j3, ...
+        theta_dot_sen_lg2_j1, theta_dot_sen_lg2_j2, theta_dot_sen_lg2_j3, ...
+        theta_dot_sen_lg3_j1, theta_dot_sen_lg3_j2, theta_dot_sen_lg3_j3, ...
+        theta_dot_sen_lg4_j1, theta_dot_sen_lg4_j2, theta_dot_sen_lg4_j3, ...
         leg1_ee_position, leg2_ee_position, ...
         leg3_ee_position, leg4_ee_position, ...
         body_pitch, body_height_calc, body_velocity, ...

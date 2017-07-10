@@ -656,6 +656,22 @@ else
     theta_sen_lg4_j2 = modelsim.get('theta_sen_lg4').data(:,2);
     theta_sen_lg4_j3 = modelsim.get('theta_sen_lg4').data(:,3);
     
+    theta_dot_sen_lg1_j1 = modelsim.get('theta_dot_sen_lg1').data(:,1);
+    theta_dot_sen_lg1_j2 = modelsim.get('theta_dot_sen_lg1').data(:,2);
+    theta_dot_sen_lg1_j3 = modelsim.get('theta_dot_sen_lg1').data(:,3);
+    
+    theta_dot_sen_lg2_j1 = modelsim.get('theta_dot_sen_lg2').data(:,1);
+    theta_dot_sen_lg2_j2 = modelsim.get('theta_dot_sen_lg2').data(:,2);
+    theta_dot_sen_lg2_j3 = modelsim.get('theta_dot_sen_lg2').data(:,3);
+    
+    theta_dot_sen_lg3_j1 = modelsim.get('theta_dot_sen_lg3').data(:,1);
+    theta_dot_sen_lg3_j2 = modelsim.get('theta_dot_sen_lg3').data(:,2);
+    theta_dot_sen_lg3_j3 = modelsim.get('theta_dot_sen_lg3').data(:,3);
+    
+    theta_dot_sen_lg4_j1 = modelsim.get('theta_dot_sen_lg4').data(:,1);
+    theta_dot_sen_lg4_j2 = modelsim.get('theta_dot_sen_lg4').data(:,2);
+    theta_dot_sen_lg4_j3 = modelsim.get('theta_dot_sen_lg4').data(:,3);
+    
     body_pitch = modelsim.get('body_movement').data(:,1);
     body_height_calc = modelsim.get('body_movement').data(:,2);
     body_velocity = modelsim.get('body_velocity').data(:,1);
@@ -906,6 +922,10 @@ if nargout == 3
         theta_sen_lg2_j1, theta_sen_lg2_j2, theta_sen_lg2_j3, ...
         theta_sen_lg3_j1, theta_sen_lg3_j2, theta_sen_lg3_j3, ...
         theta_sen_lg4_j1, theta_sen_lg4_j2, theta_sen_lg4_j3, ...
+        theta_dot_sen_lg1_j1, theta_dot_sen_lg1_j2, theta_dot_sen_lg1_j3, ...
+        theta_dot_sen_lg2_j1, theta_dot_sen_lg2_j2, theta_dot_sen_lg2_j3, ...
+        theta_dot_sen_lg3_j1, theta_dot_sen_lg3_j2, theta_dot_sen_lg3_j3, ...
+        theta_dot_sen_lg4_j1, theta_dot_sen_lg4_j2, theta_dot_sen_lg4_j3, ...
         leg1_ee_position, leg2_ee_position, ...
         leg3_ee_position, leg4_ee_position, ...
         body_pitch, body_height_calc, body_velocity, ...

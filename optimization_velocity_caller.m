@@ -288,6 +288,6 @@ options.poolsize = 8;
 options.crossoverFraction = 0.3;
 options.mutationFraction = 0.1;
 options.initfun = {@initpop, 'initial_population2.txt'};
-result = nsga2(options, 6);                % begin the optimization!
+result = nsga2(options, 25);                % begin the optimization!
 % % % % 
 % % % % % % copyfile('populations.txt', '20140422MO_ro_pop.txt');

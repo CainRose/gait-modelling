@@ -23,6 +23,7 @@ AEP_L1_J1 = design_var(2);  AEP_L1_J2 = design_var(3);  AEP_L1_J3 = design_var(4
 step_length = beta*stride_length;
 delta_psi = design_var(6);
 step_clearance = design_var(7);
+z_net = design_var(8);
 psi_dot_AEP = design_var(10);
 psi_dot_PEP = design_var(11);
 
@@ -39,7 +40,8 @@ htm = leg.fkine(q0);
 % Extract relavent information from homogeneous transform matrix
 x_aep = htm(1, 4); y_aep = htm(2, 4); z_aep = htm(3, 4);
 rot_mat_aep = htm(1:3, 1:3);
-y_pep = y_aep - step_length*sin(pitch);
+x_pep = x_aep - step_length*cos(pitch) + z_net*sin(pitch);
+y_pep = y_aep - step_length*sin(pitch) + z_net*cos(pitch);
 psi_aep = mod(atan2(rot_mat_aep(2,1),rot_mat_aep(1,1))+pi, 2*pi)-pi;
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -49,27 +51,13 @@ T_stance = stride_time*beta;
 speed = design_var(7)/stride_time;
 st_x_dot = speed * cos(pitch);
 st_y_dot = speed * sin(pitch);
-[time_traj, x_traj, y_traj, psi_traj, len] = end_effector_traj(st_x_dot, x_aep, y_aep, y_pep, st_y_dot, st_y_dot, psi_dot_PEP, psi_dot_AEP, psi_aep, delta_psi, step_clearance, T_swing, T_stance, step_length);
+modFc = step_clearance * cos(pitch) - sin(pitch)/2;
+[time_traj, x_traj, y_traj, psi_traj, len] = end_effector_traj(st_x_dot, x_aep, x_pep, y_aep, y_pep, st_y_dot, st_y_dot, psi_dot_PEP, psi_dot_AEP, psi_aep, delta_psi, modFc, T_swing, T_stance, step_length);
 
 % keyboard();
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %% Step 3: Use average of first two joint values, plus inverse kinematics 
 
-% Construct homogeneous transform matrices from trajectories
-% htm_traj = repmat(eye(4), [1 1 length(time_traj)]);
-% htm_traj_temp = repmat(eye(4), [1 1 length(time_traj)]);
-% htm_traj_temp(1, 1, :) =  cos(psi_traj);
-% htm_traj_temp(1, 2, :) = -sin(psi_traj);
-% htm_traj_temp(2, 1, :) =  sin(psi_traj);
-% htm_traj_temp(2, 2, :) =  cos(psi_traj);
-% htm_traj_temp(1, 4, :) =  x_traj;
-% htm_traj_temp(2, 4, :) =  y_traj;
-% 
-% htm_traj(:, :, end-len+1:end) = htm_traj_temp(:, :, 1:len);
-% htm_traj(:, :, 1:end-len) = htm_traj_temp(:, :, len+1:end);
-% 
-% q_traj = zeros(3, length(time_traj));
-% q_traj(:, 1) = q0;
 x3_traj = [x_traj(len+1:end) x_traj(1:len)];
 y3_traj = [y_traj(len+1:end) y_traj(1:len)];
 psi3_traj = [psi_traj(len+1:end) psi_traj(1:len)];
@@ -78,10 +66,6 @@ if isempty(q_traj_guess)
     ansp = [];
     return
 end
-% for i = 1:length(time_traj)-1
-%      q_traj(:, i+1) = leg.ikine(htm_traj(:,:,i), q_traj_guess(:,i),[1 1 0 0 0 1], 'alpha', 1);
-% end
-% q_traj = [q_traj(:,len+1:end) q_traj(:,1:len)];
 
  % function to find out additional poses
 total_steps = length(time_traj);

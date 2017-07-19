@@ -1,4 +1,4 @@
-function [ net_time, net_x, net_z, net_psi, len ] = end_effector_traj(speed, x_ini, z_ini, z_fin, z_dot_ini, z_dot_fin, psi_dot_ini, psi_dot_fin, psi_ini, psi_change, Fc, T_swing, T_stance, kappa)
+function [ net_time, net_x, net_z, net_psi, len ] = end_effector_traj(speed, x_ini, x_fin, z_ini, z_fin, z_dot_ini, z_dot_fin, psi_dot_ini, psi_dot_fin, psi_ini, psi_change, Fc, T_swing, T_stance, kappa)
 % Constructs the entire end-effector-trajectory, based on design variables
 % speed = x_dot
 % x_ini = x_aep
@@ -21,7 +21,7 @@ temp_time_swing = time_vec_swing + (T_stance).*ones(1,length(time_vec_swing));
 net_time = [time_vec_stance,temp_time_swing(2:end)];
 % keyboard();
 % X trajectories
-x_traj_stance = x_ini:-kappa/(t_steps_stance-1):(x_ini-kappa);
+x_traj_stance = new_bezier_order3(0, x_fin-x_ini, -speed, -speed, time_vec_stance);
 x_traj_swing = new_bezier_order3(x_ini-kappa, x_ini, -speed, -speed, time_vec_swing);
 
 % Z trajectories

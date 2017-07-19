@@ -366,6 +366,7 @@ KDHRst1 = design_var(92); KDHRst2 = design_var(94); KDHRst3 = design_var(96);
 joint_angle_mismatch = 0;
 duty_mismatch = 0;
 torque_overflow = 0;
+contact_break = 0;
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
@@ -497,21 +498,21 @@ else
     TRJ_LG4_J3  = [time_traj; ansp_HR(3,:)];
     
     
-    TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG1_J1(2,:).', (TRJ_LG1_J1(1,:)));
-    TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG1_J2(2,:).', (TRJ_LG1_J2(1,:)));
-    TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG1_J3(2,:).', (TRJ_LG1_J3(1,:)));
-    
-    TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG2_J1(2,:).', (TRJ_LG2_J1(1,:)));
-    TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG2_J2(2,:).', (TRJ_LG2_J2(1,:)));
-    TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG2_J3(2,:).', (TRJ_LG2_J3(1,:)));
-    
-    TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG3_J1(2,:).', (TRJ_LG3_J1(1,:)));
-    TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG3_J2(2,:).', (TRJ_LG3_J2(1,:)));
-    TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG3_J3(2,:).', (TRJ_LG3_J3(1,:)));
-    
-    TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)));
-    TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)));
-    TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)));
+%     TRJ_LG1_J1_TIMESERIES = timeseries(TRJ_LG1_J1(2,:).', (TRJ_LG1_J1(1,:)));
+%     TRJ_LG1_J2_TIMESERIES = timeseries(TRJ_LG1_J2(2,:).', (TRJ_LG1_J2(1,:)));
+%     TRJ_LG1_J3_TIMESERIES = timeseries(TRJ_LG1_J3(2,:).', (TRJ_LG1_J3(1,:)));
+%     
+%     TRJ_LG2_J1_TIMESERIES = timeseries(TRJ_LG2_J1(2,:).', (TRJ_LG2_J1(1,:)));
+%     TRJ_LG2_J2_TIMESERIES = timeseries(TRJ_LG2_J2(2,:).', (TRJ_LG2_J2(1,:)));
+%     TRJ_LG2_J3_TIMESERIES = timeseries(TRJ_LG2_J3(2,:).', (TRJ_LG2_J3(1,:)));
+%     
+%     TRJ_LG3_J1_TIMESERIES = timeseries(TRJ_LG3_J1(2,:).', (TRJ_LG3_J1(1,:)));
+%     TRJ_LG3_J2_TIMESERIES = timeseries(TRJ_LG3_J2(2,:).', (TRJ_LG3_J2(1,:)));
+%     TRJ_LG3_J3_TIMESERIES = timeseries(TRJ_LG3_J3(2,:).', (TRJ_LG3_J3(1,:)));
+%     
+%     TRJ_LG4_J1_TIMESERIES = timeseries(TRJ_LG4_J1(2,:).', (TRJ_LG4_J1(1,:)));
+%     TRJ_LG4_J2_TIMESERIES = timeseries(TRJ_LG4_J2(2,:).', (TRJ_LG4_J2(1,:)));
+%     TRJ_LG4_J3_TIMESERIES = timeseries(TRJ_LG4_J3(2,:).', (TRJ_LG4_J3(1,:)));
     
     %%%%%%%%%%%keyboard();
     
@@ -554,16 +555,16 @@ else
     mws = get_param('final_model_trial2', 'modelworkspace');
     
     % Timeseries trajectories
-    mws.assignin('TRJ_LG1_J1_TIMESERIES', TRJ_LG1_J1_TIMESERIES); mws.assignin('TRJ_LG1_J2_TIMESERIES', TRJ_LG1_J2_TIMESERIES); mws.assignin('TRJ_LG1_J3_TIMESERIES', TRJ_LG1_J3_TIMESERIES);
-    mws.assignin('TRJ_LG2_J1_TIMESERIES', TRJ_LG2_J1_TIMESERIES); mws.assignin('TRJ_LG2_J2_TIMESERIES', TRJ_LG2_J2_TIMESERIES); mws.assignin('TRJ_LG2_J3_TIMESERIES', TRJ_LG2_J3_TIMESERIES);
-    mws.assignin('TRJ_LG3_J1_TIMESERIES', TRJ_LG3_J1_TIMESERIES); mws.assignin('TRJ_LG3_J2_TIMESERIES', TRJ_LG3_J2_TIMESERIES); mws.assignin('TRJ_LG3_J3_TIMESERIES', TRJ_LG3_J3_TIMESERIES);
-    mws.assignin('TRJ_LG4_J1_TIMESERIES', TRJ_LG4_J1_TIMESERIES); mws.assignin('TRJ_LG4_J2_TIMESERIES', TRJ_LG4_J2_TIMESERIES); mws.assignin('TRJ_LG4_J3_TIMESERIES', TRJ_LG4_J3_TIMESERIES);
+%     mws.assignin('TRJ_LG1_J1_TIMESERIES', TRJ_LG1_J1_TIMESERIES); mws.assignin('TRJ_LG1_J2_TIMESERIES', TRJ_LG1_J2_TIMESERIES); mws.assignin('TRJ_LG1_J3_TIMESERIES', TRJ_LG1_J3_TIMESERIES);
+%     mws.assignin('TRJ_LG2_J1_TIMESERIES', TRJ_LG2_J1_TIMESERIES); mws.assignin('TRJ_LG2_J2_TIMESERIES', TRJ_LG2_J2_TIMESERIES); mws.assignin('TRJ_LG2_J3_TIMESERIES', TRJ_LG2_J3_TIMESERIES);
+%     mws.assignin('TRJ_LG3_J1_TIMESERIES', TRJ_LG3_J1_TIMESERIES); mws.assignin('TRJ_LG3_J2_TIMESERIES', TRJ_LG3_J2_TIMESERIES); mws.assignin('TRJ_LG3_J3_TIMESERIES', TRJ_LG3_J3_TIMESERIES);
+%     mws.assignin('TRJ_LG4_J1_TIMESERIES', TRJ_LG4_J1_TIMESERIES); mws.assignin('TRJ_LG4_J2_TIMESERIES', TRJ_LG4_J2_TIMESERIES); mws.assignin('TRJ_LG4_J3_TIMESERIES', TRJ_LG4_J3_TIMESERIES);
     
     % Trajectories
     mws.assignin('TRJ_LG1_J1', TRJ_LG1_J1); mws.assignin('TRJ_LG1_J2', TRJ_LG1_J2); mws.assignin('TRJ_LG1_J3', TRJ_LG1_J3);
     mws.assignin('TRJ_LG2_J1', TRJ_LG2_J1); mws.assignin('TRJ_LG2_J2', TRJ_LG2_J2); mws.assignin('TRJ_LG2_J3', TRJ_LG2_J3);
     mws.assignin('TRJ_LG3_J1', TRJ_LG3_J1); mws.assignin('TRJ_LG3_J2', TRJ_LG3_J2); mws.assignin('TRJ_LG3_J3', TRJ_LG3_J3);
-    mws.assignin('TRJ_LG4_J1', TRJ_LG4_J1); mws.assignin('TRJ_LG4_J2', TRJ_LG4_J2); mws.assignin('TRJ_LG4_J3', TRJ_LG4_J3');
+    mws.assignin('TRJ_LG4_J1', TRJ_LG4_J1); mws.assignin('TRJ_LG4_J2', TRJ_LG4_J2); mws.assignin('TRJ_LG4_J3', TRJ_LG4_J3);
     
     % Gains
     %             mws.assignin('KPFLsw1', KPFLsw1); mws.assignin('KPFLsw2', KPFLsw2); mws.assignin('KPFLsw3', KPFLsw3);
@@ -623,62 +624,62 @@ else
     
     temporary_time = modelsim.get('t_sen_lg1').time;
     
-    t_sen_lg1_j1 = modelsim.get('t_sen_lg1').data(:,1);
-    t_sen_lg1_j2 = modelsim.get('t_sen_lg1').data(:,2);
-    t_sen_lg1_j3 = modelsim.get('t_sen_lg1').data(:,3);
+    t_sen_lg1_j1 = modelsim.get('t_sen_lg1').signals.values(:,1);
+    t_sen_lg1_j2 = modelsim.get('t_sen_lg1').signals.values(:,2);
+    t_sen_lg1_j3 = modelsim.get('t_sen_lg1').signals.values(:,3);
     
-    t_sen_lg2_j1 = modelsim.get('t_sen_lg2').data(:,1);
-    t_sen_lg2_j2 = modelsim.get('t_sen_lg2').data(:,2);
-    t_sen_lg2_j3 = modelsim.get('t_sen_lg2').data(:,3);
+    t_sen_lg2_j1 = modelsim.get('t_sen_lg2').signals.values(:,1);
+    t_sen_lg2_j2 = modelsim.get('t_sen_lg2').signals.values(:,2);
+    t_sen_lg2_j3 = modelsim.get('t_sen_lg2').signals.values(:,3);
     
-    t_sen_lg3_j1 = modelsim.get('t_sen_lg3').data(:,1);
-    t_sen_lg3_j2 = modelsim.get('t_sen_lg3').data(:,2);
-    t_sen_lg3_j3 = modelsim.get('t_sen_lg3').data(:,3);
+    t_sen_lg3_j1 = modelsim.get('t_sen_lg3').signals.values(:,1);
+    t_sen_lg3_j2 = modelsim.get('t_sen_lg3').signals.values(:,2);
+    t_sen_lg3_j3 = modelsim.get('t_sen_lg3').signals.values(:,3);
     
-    t_sen_lg4_j1 = modelsim.get('t_sen_lg4').data(:,1);
-    t_sen_lg4_j2 = modelsim.get('t_sen_lg4').data(:,2);
-    t_sen_lg4_j3 = modelsim.get('t_sen_lg4').data(:,3);
+    t_sen_lg4_j1 = modelsim.get('t_sen_lg4').signals.values(:,1);
+    t_sen_lg4_j2 = modelsim.get('t_sen_lg4').signals.values(:,2);
+    t_sen_lg4_j3 = modelsim.get('t_sen_lg4').signals.values(:,3);
     
-    theta_sen_lg1_j1 = modelsim.get('theta_sen_lg1').data(:,1);
-    theta_sen_lg1_j2 = modelsim.get('theta_sen_lg1').data(:,2);
-    theta_sen_lg1_j3 = modelsim.get('theta_sen_lg1').data(:,3);
+    theta_sen_lg1_j1 = modelsim.get('theta_sen_lg1').signals.values(:,1);
+    theta_sen_lg1_j2 = modelsim.get('theta_sen_lg1').signals.values(:,2);
+    theta_sen_lg1_j3 = modelsim.get('theta_sen_lg1').signals.values(:,3);
     
-    theta_sen_lg2_j1 = modelsim.get('theta_sen_lg2').data(:,1);
-    theta_sen_lg2_j2 = modelsim.get('theta_sen_lg2').data(:,2);
-    theta_sen_lg2_j3 = modelsim.get('theta_sen_lg2').data(:,3);
+    theta_sen_lg2_j1 = modelsim.get('theta_sen_lg2').signals.values(:,1);
+    theta_sen_lg2_j2 = modelsim.get('theta_sen_lg2').signals.values(:,2);
+    theta_sen_lg2_j3 = modelsim.get('theta_sen_lg2').signals.values(:,3);
     
-    theta_sen_lg3_j1 = modelsim.get('theta_sen_lg3').data(:,1);
-    theta_sen_lg3_j2 = modelsim.get('theta_sen_lg3').data(:,2);
-    theta_sen_lg3_j3 = modelsim.get('theta_sen_lg3').data(:,3);
+    theta_sen_lg3_j1 = modelsim.get('theta_sen_lg3').signals.values(:,1);
+    theta_sen_lg3_j2 = modelsim.get('theta_sen_lg3').signals.values(:,2);
+    theta_sen_lg3_j3 = modelsim.get('theta_sen_lg3').signals.values(:,3);
     
-    theta_sen_lg4_j1 = modelsim.get('theta_sen_lg4').data(:,1);
-    theta_sen_lg4_j2 = modelsim.get('theta_sen_lg4').data(:,2);
-    theta_sen_lg4_j3 = modelsim.get('theta_sen_lg4').data(:,3);
+    theta_sen_lg4_j1 = modelsim.get('theta_sen_lg4').signals.values(:,1);
+    theta_sen_lg4_j2 = modelsim.get('theta_sen_lg4').signals.values(:,2);
+    theta_sen_lg4_j3 = modelsim.get('theta_sen_lg4').signals.values(:,3);
     
-    theta_dot_sen_lg1_j1 = modelsim.get('theta_dot_sen_lg1').data(:,1);
-    theta_dot_sen_lg1_j2 = modelsim.get('theta_dot_sen_lg1').data(:,2);
-    theta_dot_sen_lg1_j3 = modelsim.get('theta_dot_sen_lg1').data(:,3);
+    theta_dot_sen_lg1_j1 = modelsim.get('theta_dot_sen_lg1').signals.values(:,1);
+    theta_dot_sen_lg1_j2 = modelsim.get('theta_dot_sen_lg1').signals.values(:,2);
+    theta_dot_sen_lg1_j3 = modelsim.get('theta_dot_sen_lg1').signals.values(:,3);
     
-    theta_dot_sen_lg2_j1 = modelsim.get('theta_dot_sen_lg2').data(:,1);
-    theta_dot_sen_lg2_j2 = modelsim.get('theta_dot_sen_lg2').data(:,2);
-    theta_dot_sen_lg2_j3 = modelsim.get('theta_dot_sen_lg2').data(:,3);
+    theta_dot_sen_lg2_j1 = modelsim.get('theta_dot_sen_lg2').signals.values(:,1);
+    theta_dot_sen_lg2_j2 = modelsim.get('theta_dot_sen_lg2').signals.values(:,2);
+    theta_dot_sen_lg2_j3 = modelsim.get('theta_dot_sen_lg2').signals.values(:,3);
     
-    theta_dot_sen_lg3_j1 = modelsim.get('theta_dot_sen_lg3').data(:,1);
-    theta_dot_sen_lg3_j2 = modelsim.get('theta_dot_sen_lg3').data(:,2);
-    theta_dot_sen_lg3_j3 = modelsim.get('theta_dot_sen_lg3').data(:,3);
+    theta_dot_sen_lg3_j1 = modelsim.get('theta_dot_sen_lg3').signals.values(:,1);
+    theta_dot_sen_lg3_j2 = modelsim.get('theta_dot_sen_lg3').signals.values(:,2);
+    theta_dot_sen_lg3_j3 = modelsim.get('theta_dot_sen_lg3').signals.values(:,3);
     
-    theta_dot_sen_lg4_j1 = modelsim.get('theta_dot_sen_lg4').data(:,1);
-    theta_dot_sen_lg4_j2 = modelsim.get('theta_dot_sen_lg4').data(:,2);
-    theta_dot_sen_lg4_j3 = modelsim.get('theta_dot_sen_lg4').data(:,3);
+    theta_dot_sen_lg4_j1 = modelsim.get('theta_dot_sen_lg4').signals.values(:,1);
+    theta_dot_sen_lg4_j2 = modelsim.get('theta_dot_sen_lg4').signals.values(:,2);
+    theta_dot_sen_lg4_j3 = modelsim.get('theta_dot_sen_lg4').signals.values(:,3);
     
-    body_pitch = modelsim.get('body_movement').data(:,1);
-    body_height_calc = modelsim.get('body_movement').data(:,2);
-    body_velocity = modelsim.get('body_velocity').data(:,1);
+    body_pitch = modelsim.get('body_movement').signals.values(:,1);
+    body_height_calc = modelsim.get('body_movement').signals.values(:,2);
+    body_velocity = modelsim.get('body_velocity').signals.values(:,1);
     
-    leg1_ee_position = modelsim.get('leg1_ee').data(:,2);
-    leg2_ee_position = modelsim.get('leg2_ee').data(:,2);
-    leg3_ee_position = modelsim.get('leg3_ee').data(:,2);
-    leg4_ee_position = modelsim.get('leg4_ee').data(:,2);
+    leg1_ee_position = modelsim.get('leg1_ee').signals.values(:,2);
+    leg2_ee_position = modelsim.get('leg2_ee').signals.values(:,2);
+    leg3_ee_position = modelsim.get('leg3_ee').signals.values(:,2);
+    leg4_ee_position = modelsim.get('leg4_ee').signals.values(:,2);
     
     % cons = [c1 c2 c3 c4 c5 c6 c7 c8]
     % Default value is 0, constraint violation value is 1
@@ -765,31 +766,22 @@ else
         % during stance is 0 or not
         ccc_1 = 0; ccc_2 = 0; ccc_3 = 0; ccc_4 = 0;
         if (length(leg1_ee_position) == length(leg2_ee_position))&&(length(leg1_ee_position) == length(leg3_ee_position))&&(length(leg1_ee_position) == length(leg4_ee_position)) &&(length(leg_marker_FL) >= length(leg1_ee_position))
-%             for kk = 1:length(leg1_ee_position)
-%                 % Break if z position during stance isn't 0, or x velocity isn't 0, leg
-%                 % marker would have value of 0 or -1
-%                 if((leg_marker_FL(kk)==0)||(leg_marker_FL(kk)==-1))&&(((leg1_ee_position(kk))>0.01))%||(abs(leg1_ee_velocity(kk))>0.1))%||((leg_markers(2,kk)==1))&&((abs(leg1_ee_position(kk))<0.0025))
-%                     ccc_1 = 1;
-%                     display('stance problem leg 1')
-%                     break
-%                 end
-%                 if((leg_marker_FR(kk)==0)||(leg_marker_FR(kk)==-1))&&(((leg2_ee_position(kk))>0.01))%||(abs(leg2_ee_velocity(kk))>0.1))%||((leg_markers(3,kk)==1))&&((abs(leg2_ee_position(kk))<0.0025))
-%                     ccc_2 = 1;
-%                     display('stance problem leg 2')
-%                     break
-%                 end
-%                 if((leg_marker_HL(kk)==0)||(leg_marker_HL(kk)==-1))&&(((leg3_ee_position(kk))>0.01))%||(abs(leg3_ee_velocity(kk))>0.1))%||((leg_markers(4,kk)==1))&&((abs(leg3_ee_position(kk))<0.0025))
-%                     ccc_3 = 1;
-%                     display('stance problem leg 3')
-%                     break
-%                 end
-%                 if((leg_marker_HR(kk)==0)||(leg_marker_HR(kk)==-1))&&(((leg4_ee_position(kk))>0.01))%||(abs(leg4_ee_velocity(kk))>0.1))%||((leg_markers(5,kk)==1))&&((abs(leg4_ee_position(kk))<0.0025))
-%                     ccc_4 = 1;
-%                     %                                 %%%%%%%%%%keyboard();
-%                     display('stance problem leg 4')
-%                     break
-%                 end
-%             end
+            for kk = 1:length(leg1_ee_position)
+                % Break if z position during stance isn't 0, or x velocity isn't 0, leg
+                % marker would have value of 0 or -1
+                if((leg_marker_FL(kk)==0)||(leg_marker_FL(kk)==-1))&&(((leg1_ee_position(kk))>0.01))%||(abs(leg1_ee_velocity(kk))>0.1))%||((leg_markers(2,kk)==1))&&((abs(leg1_ee_position(kk))<0.0025))
+                    ccc_1 = ccc_1 + 1;
+                end
+                if((leg_marker_FR(kk)==0)||(leg_marker_FR(kk)==-1))&&(((leg2_ee_position(kk))>0.01))%||(abs(leg2_ee_velocity(kk))>0.1))%||((leg_markers(3,kk)==1))&&((abs(leg2_ee_position(kk))<0.0025))
+                    ccc_2 = ccc_2 + 1;
+                end
+                if((leg_marker_HL(kk)==0)||(leg_marker_HL(kk)==-1))&&(((leg3_ee_position(kk))>0.01))%||(abs(leg3_ee_velocity(kk))>0.1))%||((leg_markers(4,kk)==1))&&((abs(leg3_ee_position(kk))<0.0025))
+                    ccc_3 = ccc_3 + 1;
+                end
+                if((leg_marker_HR(kk)==0)||(leg_marker_HR(kk)==-1))&&(((leg4_ee_position(kk))>0.01))%||(abs(leg4_ee_velocity(kk))>0.1))%||((leg_markers(5,kk)==1))&&((abs(leg4_ee_position(kk))<0.0025))
+                    ccc_4 = ccc_4 + 1;
+                end
+            end
         else
             display('leg markers and position don`t match in length')
             cons(7) = 1;
@@ -809,6 +801,7 @@ else
 %             cons(7) = 1;
 %         end
         if (ccc_1)||(ccc_2)||(ccc_3)||(ccc_4)
+            contact_break = ccc_1 + ccc_2 + ccc_3 + ccc_4;
             cons(7) = 1;
         end
         %%%keyboard();
@@ -886,12 +879,15 @@ else
     else
         display('Constraint violation')
         cons
-        OF = (joint_angle_mismatch + duty_mismatch) * 10000 + torque_overflow;
-        if ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
+        OF = (joint_angle_mismatch + duty_mismatch) * 10000 + contact_break * 10 + torque_overflow;
+        if temporary_time(end) ~= obj_ite_simulation_time
+            OF = 100000;
+        elseif ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
             OF = OF + 1000;
             cons = zeros(1, 9);
         elseif ((~cons(1))&&(~cons(2)))
             OF = OF + 40000/(1 + temporary_time(end));
+            cons = zeros(1, 9);
         else
             OF = 100000;
         end

@@ -846,16 +846,14 @@ else
         display('Constraint violation')
         cons
         OF = (touchdown_impact + contact_break + torque_overflow)/num_strides;
-        if temporary_time(end) ~= obj_ite_simulation_time
-            OF = 100000;
-        elseif ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
+        if ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
             OF = OF + 100;
             cons = zeros(1, 9);
         elseif ((~cons(1))&&(~cons(2)))
             OF = OF + 40000/(temporary_time(end)/num_strides);
             cons = zeros(1, 9);
         else
-            OF = 100000;
+            OF = 999998;
         end
     end
     

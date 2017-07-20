@@ -48,10 +48,10 @@ psi_aep = mod(atan2(rot_mat_aep(2,1),rot_mat_aep(1,1))+pi, 2*pi)-pi;
 %% Step 2: Construct all trajectories
 T_swing = stride_time*(1 - beta); 
 T_stance = stride_time*beta;
-speed = design_var(7)/stride_time;
+speed = stride_length/stride_time;
 st_x_dot = speed * cos(pitch);
 st_y_dot = speed * sin(pitch);
-modFc = step_clearance * cos(pitch) - sin(pitch)/2;
+modFc = step_clearance;
 [time_traj, x_traj, y_traj, psi_traj, len] = end_effector_traj(st_x_dot, x_aep, x_pep, y_aep, y_pep, st_y_dot, st_y_dot, psi_dot_PEP, psi_dot_AEP, psi_aep, delta_psi, modFc, T_swing, T_stance, step_length);
 
 % keyboard();

@@ -21,8 +21,8 @@ temp_time_swing = time_vec_swing + (T_stance).*ones(1,length(time_vec_swing));
 net_time = [time_vec_stance,temp_time_swing(2:end)];
 % keyboard();
 % X trajectories
-x_traj_stance = new_bezier_order3(0, x_fin-x_ini, -speed, -speed, time_vec_stance);
-x_traj_swing = new_bezier_order3(x_ini-kappa, x_ini, -speed, -speed, time_vec_swing);
+x_traj_stance = new_bezier_order3(x_ini, x_fin, -speed, -speed, time_vec_stance);
+x_traj_swing = new_bezier_order3(x_fin, x_ini, -speed, -speed, time_vec_swing);
 
 % Z trajectories
 z_traj_swing = new_bezier_order4(z_fin-z_ini, 0, -z_dot_fin, -z_dot_ini, Fc*kappa, time_vec_swing);

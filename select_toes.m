@@ -11,7 +11,7 @@ angles = [  atan((zFL - t2z)/(xFL + IGD - t2x)), ...
             atan((zHR - t2z)/(xHR - t2x))       ];
 
 % find leg with smallest angle (most negative)
-[~, i] = min(angles);
+[angle, i] = min(angles);
 
 % If this is a hind leg, recalculate angles and change back leg
 if (i > 2)
@@ -20,7 +20,7 @@ if (i > 2)
     end
     angles = [  atan((zFL - t2z)/(xFL + IGD - t2x)), ...
                 atan((zFR - t2z)/(xFR + IGD - t2x)) ];
-    [~, i] = min(angles);
+    [angle, i] = min(angles);
 end
 if (i == 1) % Front Left
     t1x = xFL;  t1z = zFL;
@@ -28,7 +28,7 @@ else        % Front Right
     t1x = xFR;  t1z = zFR;
 end
 
-bpitch = -leg_pitch;    % To counteract the rotation of the leg
+bpitch = -angle;    % To counteract the rotation of the leg
 
 rotation_mat = [cos(-bpitch) sin(-bpitch);-sin(-bpitch) cos(-bpitch)];
 % rotation_mat = [-sin(-bpitch) cos(-bpitch)];

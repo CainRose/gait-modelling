@@ -363,8 +363,7 @@ KPHRst1 = design_var(91); KPHRst2 = design_var(93); KPHRst3 = design_var(95);
 KDHRsw1 = design_var(86); KDHRsw2 = design_var(88); KDHRsw3 = design_var(90);
 KDHRst1 = design_var(92); KDHRst2 = design_var(94); KDHRst3 = design_var(96);
 
-joint_angle_mismatch = 0;
-duty_mismatch = 0;
+touchdown_impact = 0;
 torque_overflow = 0;
 contact_break = 0;
 
@@ -681,6 +680,16 @@ else
     leg3_ee_position = modelsim.get('leg3_ee').signals.values(:,2);
     leg4_ee_position = modelsim.get('leg4_ee').signals.values(:,2);
     
+    leg1_ee_velocity = modelsim.get('leg1_ee').signals.values(:,3);
+    leg2_ee_velocity = modelsim.get('leg2_ee').signals.values(:,3);
+    leg3_ee_velocity = modelsim.get('leg3_ee').signals.values(:,3);
+    leg4_ee_velocity = modelsim.get('leg4_ee').signals.values(:,3);
+    
+    leg1_ee_z_vel = modelsim.get('leg1_ee').signals.values(:,4);
+    leg2_ee_z_vel = modelsim.get('leg2_ee').signals.values(:,4);
+    leg3_ee_z_vel = modelsim.get('leg3_ee').signals.values(:,4);
+    leg4_ee_z_vel = modelsim.get('leg4_ee').signals.values(:,4);
+    
     % cons = [c1 c2 c3 c4 c5 c6 c7 c8]
     % Default value is 0, constraint violation value is 1
     %
@@ -731,55 +740,54 @@ else
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         % Cons 6: Find positions where max torque and torque change was exceeded
         
-        idx1 = find(abs(t_sen_lg1_j1) >= obj_ite_max_torque, 1);
-        idx2 = find(abs(t_sen_lg1_j2) >= obj_ite_max_torque, 1);
-        idx3 = find(abs(t_sen_lg1_j3) >= obj_ite_max_torque, 1);
-        idx4 = find(abs(t_sen_lg2_j1) >= obj_ite_max_torque, 1);
-        idx5 = find(abs(t_sen_lg2_j2) >= obj_ite_max_torque, 1);
-        idx6 = find(abs(t_sen_lg2_j3) >= obj_ite_max_torque, 1);
-        idx7 = find(abs(t_sen_lg3_j1) >= obj_ite_max_torque, 1);
-        idx8 = find(abs(t_sen_lg3_j2) >= obj_ite_max_torque, 1);
-        idx9 = find(abs(t_sen_lg3_j3) >= obj_ite_max_torque, 1);
-        idx10 = find(abs(t_sen_lg4_j1) >= obj_ite_max_torque, 1);
-        idx11 = find(abs(t_sen_lg4_j2) >= obj_ite_max_torque, 1);
-        idx12 = find(abs(t_sen_lg4_j3) >= obj_ite_max_torque, 1);
-        
-        idx13 = find(abs(diff(t_sen_lg1_j1)) >= obj_ite_max_torque_change, 1);
-        idx14 = find(abs(diff(t_sen_lg1_j2)) >= obj_ite_max_torque_change, 1);
-        idx15 = find(abs(diff(t_sen_lg1_j3)) >= obj_ite_max_torque_change, 1);
-        idx16 = find(abs(diff(t_sen_lg2_j1)) >= obj_ite_max_torque_change, 1);
-        idx17 = find(abs(diff(t_sen_lg2_j2)) >= obj_ite_max_torque_change, 1);
-        idx18 = find(abs(diff(t_sen_lg2_j3)) >= obj_ite_max_torque_change, 1);
-        idx19 = find(abs(diff(t_sen_lg3_j1)) >= obj_ite_max_torque_change, 1);
-        idx20 = find(abs(diff(t_sen_lg3_j2)) >= obj_ite_max_torque_change, 1);
-        idx21 = find(abs(diff(t_sen_lg3_j3)) >= obj_ite_max_torque_change, 1);
-        idx22 = find(abs(diff(t_sen_lg4_j1)) >= obj_ite_max_torque_change, 1);
-        idx23 = find(abs(diff(t_sen_lg4_j2)) >= obj_ite_max_torque_change, 1);
-        idx24 = find(abs(diff(t_sen_lg4_j3)) >= obj_ite_max_torque_change, 1);
-        if (~isempty(idx1))||(~isempty(idx2))||(~isempty(idx3))||(~isempty(idx4))||(~isempty(idx5))||(~isempty(idx6)||~isempty(idx7))||(~isempty(idx8))||(~isempty(idx9))||(~isempty(idx10))||(~isempty(idx11))||(~isempty(idx12))||(~isempty(idx13))||(~isempty(idx14))||(~isempty(idx15))||(~isempty(idx16))||(~isempty(idx17))||(~isempty(idx18)||~isempty(idx19))||(~isempty(idx20))||(~isempty(idx21))||(~isempty(idx22))||(~isempty(idx23))||(~isempty(idx24)) % Max torque was exceeded
+        idx1  = abs(abs(t_sen_lg1_j1(abs(t_sen_lg1_j1) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx2  = abs(abs(t_sen_lg1_j2(abs(t_sen_lg1_j2) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx3  = abs(abs(t_sen_lg1_j3(abs(t_sen_lg1_j3) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx4  = abs(abs(t_sen_lg2_j1(abs(t_sen_lg2_j1) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx5  = abs(abs(t_sen_lg2_j2(abs(t_sen_lg2_j2) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx6  = abs(abs(t_sen_lg2_j3(abs(t_sen_lg2_j3) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx7  = abs(abs(t_sen_lg3_j1(abs(t_sen_lg3_j1) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx8  = abs(abs(t_sen_lg3_j2(abs(t_sen_lg3_j2) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx9  = abs(abs(t_sen_lg3_j3(abs(t_sen_lg3_j3) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx10 = abs(abs(t_sen_lg4_j1(abs(t_sen_lg4_j1) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx11 = abs(abs(t_sen_lg4_j2(abs(t_sen_lg4_j2) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        idx12 = abs(abs(t_sen_lg4_j3(abs(t_sen_lg4_j3) >= obj_ite_max_torque)) - obj_ite_max_torque);
+        if (~isempty(idx1))||(~isempty(idx2))||(~isempty(idx3))||(~isempty(idx4))||(~isempty(idx5))||(~isempty(idx6)||~isempty(idx7))||(~isempty(idx8))||(~isempty(idx9))||(~isempty(idx10))||(~isempty(idx11))||(~isempty(idx12)) % Max torque was exceeded
             cons(6) = 1;
-            torque_overflow = sum([idx1, idx2, idx3, idx4, idx5, idx6, idx7, idx8, idx9, idx10, idx11, idx12, idx13, idx14, idx15, idx16, idx17, idx18, idx19, idx20, idx21, idx22, idx23, idx24]);
+            torque_overflow = sum([idx1, idx2, idx3, idx4, idx5, idx6, idx7, idx8, idx9, idx10, idx11, idx12]) / obj_ite_simulation_time;
         end
         
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         % Cons 7: Checks if vertical position or horizontal velocity of toe
         % during stance is 0 or not
-        ccc_1 = 0; ccc_2 = 0; ccc_3 = 0; ccc_4 = 0;
+        ccc_1 = 0; ccc_2 = 0; ccc_3 = 0; ccc_4 = 0; ccc_5 = 0; ccc_6 = 0; ccc_7 = 0; ccc_8 = 0;
         if (length(leg1_ee_position) == length(leg2_ee_position))&&(length(leg1_ee_position) == length(leg3_ee_position))&&(length(leg1_ee_position) == length(leg4_ee_position)) &&(length(leg_marker_FL) >= length(leg1_ee_position))
             for kk = 1:length(leg1_ee_position)
                 % Break if z position during stance isn't 0, or x velocity isn't 0, leg
                 % marker would have value of 0 or -1
-                if((leg_marker_FL(kk)==0)||(leg_marker_FL(kk)==-1))&&(((leg1_ee_position(kk))>0.01))%||(abs(leg1_ee_velocity(kk))>0.1))%||((leg_markers(2,kk)==1))&&((abs(leg1_ee_position(kk))<0.0025))
-                    ccc_1 = ccc_1 + 1;
+                if(leg_marker_FL(kk) == 0 || leg_marker_FL(kk) == -1) && (leg1_ee_position(kk) > 0.01)
+                    ccc_1 = ccc_1 + max([leg1_ee_position(kk) - 0.01, 0]);
                 end
-                if((leg_marker_FR(kk)==0)||(leg_marker_FR(kk)==-1))&&(((leg2_ee_position(kk))>0.01))%||(abs(leg2_ee_velocity(kk))>0.1))%||((leg_markers(3,kk)==1))&&((abs(leg2_ee_position(kk))<0.0025))
-                    ccc_2 = ccc_2 + 1;
+                if(leg_marker_FR(kk) == 0 || leg_marker_FR(kk) == -1) && (leg2_ee_position(kk) > 0.01)
+                    ccc_2 = ccc_2 + max([leg2_ee_position(kk) - 0.01, 0]);
                 end
-                if((leg_marker_HL(kk)==0)||(leg_marker_HL(kk)==-1))&&(((leg3_ee_position(kk))>0.01))%||(abs(leg3_ee_velocity(kk))>0.1))%||((leg_markers(4,kk)==1))&&((abs(leg3_ee_position(kk))<0.0025))
-                    ccc_3 = ccc_3 + 1;
+                if(leg_marker_HL(kk) == 0 || leg_marker_HL(kk) == -1) && (leg3_ee_position(kk) > 0.01)
+                    ccc_3 = ccc_3 + max([leg3_ee_position(kk) - 0.01, 0]);
                 end
-                if((leg_marker_HR(kk)==0)||(leg_marker_HR(kk)==-1))&&(((leg4_ee_position(kk))>0.01))%||(abs(leg4_ee_velocity(kk))>0.1))%||((leg_markers(5,kk)==1))&&((abs(leg4_ee_position(kk))<0.0025))
-                    ccc_4 = ccc_4 + 1;
+                if(leg_marker_HR(kk) == 0 || leg_marker_HR(kk) == -1) && (leg4_ee_position(kk) > 0.01)
+                    ccc_4 = ccc_4 + max([leg4_ee_position(kk) - 0.01, 0]);
+                end
+                if leg_marker_FL(kk) == 1 && abs(leg1_ee_position(kk)) < 0.0025
+                    ccc_5 = ccc_5 + 0.1;
+                end
+                if leg_marker_FR(kk) == 1 && abs(leg2_ee_position(kk)) < 0.0025
+                    ccc_6 = ccc_6 + 0.1;
+                end
+                if leg_marker_HL(kk) == 1 && abs(leg3_ee_position(kk)) < 0.0025
+                    ccc_7 = ccc_7 + 0.1;
+                end
+                if leg_marker_HR(kk) == 1 && abs(leg4_ee_position(kk)) < 0.0025
+                    ccc_8 = ccc_8 + 0.1;
                 end
             end
         else
@@ -787,75 +795,33 @@ else
             cons(7) = 1;
         end
         
-        duty_mismatch = abs(abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL)) + abs(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR)) + abs(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL)) + abs(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR));
-        duty_mismatch = duty_mismatch - 4*0.1;
-        if duty_mismatch > 0
-            cons(7) = 1;
-        else
-            duty_mismatch = 0;
-        end
-%         if (abs((length(find((leg1_ee_position)<=0.001))/length(leg1_ee_position)) - obj_ite_duty_factor_FL) > 0.1)||(abs((length(find((leg2_ee_position)<=0.001))/length(leg2_ee_position)) - obj_ite_duty_factor_FR) > 0.1)||(abs((length(find((leg3_ee_position)<=0.001))/length(leg3_ee_position)) - obj_ite_duty_factor_HL) > 0.1)||(abs((length(find((leg4_ee_position)<=0.001))/length(leg4_ee_position)) - obj_ite_duty_factor_HR) > 0.1)
-%             
-%             display('duty factor mismatch')
-%             %                         keyboard();
-%             cons(7) = 1;
-%         end
-        if (ccc_1)||(ccc_2)||(ccc_3)||(ccc_4)
-            contact_break = ccc_1 + ccc_2 + ccc_3 + ccc_4;
+        if ccc_1 || ccc_2 || ccc_3 || ccc_4 || ccc_5 || ccc_6 || ccc_7 || ccc_8
+            contact_break = (ccc_1 + ccc_2 + ccc_3 + ccc_4 + ccc_5 + ccc_6 + ccc_7 + ccc_8);
             cons(7) = 1;
         end
         %%%keyboard();
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        % Cons 8: Checks for joint angles mismatch at every AEP instance of each leg is the same...
+        % Cons 8: Checks that impact velocity is equal to 0
         
-        joint_angle_mismatch = abs(theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) + abs(theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) + abs(theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) ...
-            + abs(theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) + abs(theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) + abs(theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) ...
-            + abs(theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) + abs(theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) + abs(theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) ...
-            + abs(theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) + abs(theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) + abs(theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end));
-        % Error Tolerance
-        joint_angle_mismatch = joint_angle_mismatch - 12 * 0.035;
-        if joint_angle_mismatch > 0
-            cons(8) = 1;
-        else
-            joint_angle_mismatch = 0;
-        end
-%         if ((theta_sen_lg1_j1(1)-theta_sen_lg1_j1(end)) >= 0.035)||((theta_sen_lg1_j2(1)-theta_sen_lg1_j2(end)) >= 0.035)||((theta_sen_lg1_j3(1)-theta_sen_lg1_j3(end)) >= 0.035)||((theta_sen_lg2_j1(1)-theta_sen_lg2_j1(end)) >= 0.035)||((theta_sen_lg2_j2(1)-theta_sen_lg2_j2(end)) >= 0.035)||((theta_sen_lg2_j3(1)-theta_sen_lg2_j3(end)) >= 0.035)||((theta_sen_lg3_j1(1)-theta_sen_lg3_j1(end)) >= 0.035)||((theta_sen_lg3_j2(1)-theta_sen_lg3_j2(end)) >= 0.035)||((theta_sen_lg3_j3(1)-theta_sen_lg3_j3(end)) >= 0.035)||((theta_sen_lg4_j1(1)-theta_sen_lg4_j1(end)) >= 0.035)||((theta_sen_lg4_j2(1)-theta_sen_lg4_j2(end)) >= 0.035)||((theta_sen_lg4_j3(1)-theta_sen_lg4_j3(end)) >= 0.035)
-%             cons(8) = 1;
-%         end
-        FL_AEP = find(leg_marker_FL == -1, 1);
-        FR_AEP = find(leg_marker_FR == -1, 1);
-        HL_AEP = find(leg_marker_HL == -1, 1);
-        HR_AEP = find(leg_marker_HR == -1, 1);
-        %                     temp_len = length(leg_markers(2,:));
-        %                     cc_1 = 0; cc_2 = 0; cc_3 = 0; cc_4 = 0;
-        %                     for kk = 1:length(idx_FR_AEP)
-        %                         if (length(theta_sen_lg1_j1)<temp_len)||(length(theta_sen_lg1_j2)<temp_len)||((length(theta_sen_lg1_j3)<temp_len)||((theta_sen_lg1_j1(idx_FR_AEP(kk))- TRJ_LG1_J1(2,idx_FR_AEP(kk)))>= 0.0175)||((theta_sen_lg1_j2(idx_FR_AEP(kk))- TRJ_LG1_J2(2,idx_FR_AEP(kk)))>= 0.0175)||((theta_sen_lg1_j3(idx_FR_AEP(kk))- TRJ_LG1_J3(2,idx_FR_AEP(kk)))>= 0.0175))
-        %                             cc_1 = 1;
-        %                             break
-        %                         end
-        %                     end
-        %                     for kk = 1:length(idx_FL_AEP)
-        %                         if (length(theta_sen_lg2_j1)<temp_len)||(length(theta_sen_lg2_j2)<temp_len)||(length(theta_sen_lg2_j3)<temp_len)||(((theta_sen_lg2_j1(idx_FL_AEP(kk))- TRJ_LG2_J1(2,idx_FL_AEP(kk)))>= 0.0175)||((theta_sen_lg2_j2(idx_FL_AEP(kk))- TRJ_LG2_J2(2,idx_FL_AEP(kk)))>= 0.0175)||((theta_sen_lg2_j3(idx_FL_AEP(kk))- TRJ_LG2_J3(2,idx_FL_AEP(kk)))>= 0.0175))
-        %                             cc_2 = 1;
-        %                             break
-        %                         end
-        %                     end
-        %                     for kk = 1:length(idx_HR_AEP)
-        %                         if (length(theta_sen_lg3_j1)<temp_len)||(length(theta_sen_lg3_j2)<temp_len)||(length(theta_sen_lg3_j3)<temp_len)||(((theta_sen_lg3_j1(idx_HR_AEP(kk))- TRJ_LG3_J1(2,idx_HR_AEP(kk)))>= 0.0175)||((theta_sen_lg3_j2(idx_HR_AEP(kk))- TRJ_LG3_J2(2,idx_HR_AEP(kk)))>= 0.0175)||((theta_sen_lg3_j3(idx_HR_AEP(kk))- TRJ_LG3_J3(2,idx_HR_AEP(kk)))>= 0.0175))
-        %                             cc_3 = 1;
-        %                             break
-        %                         end
-        %                     end
-        %                     for kk = 1:length(idx_HL_AEP)
-        %                         if (length(theta_sen_lg4_j1)<temp_len)||(length(theta_sen_lg4_j2)<temp_len)||(length(theta_sen_lg4_j3)<temp_len)||(((theta_sen_lg4_j1(idx_HL_AEP(kk))- TRJ_LG4_J1(2,idx_HL_AEP(kk)))>= 0.0175)||((theta_sen_lg4_j2(idx_HL_AEP(kk))- TRJ_LG4_J2(2,idx_HL_AEP(kk)))>= 0.0175)||((theta_sen_lg4_j3(idx_HL_AEP(kk))- TRJ_LG4_J3(2,idx_HL_AEP(kk)))>= 0.0175))
-        %                             cc_4 = 1;
-        %                             break
-        %                         end
-        %                     end
-        %                     if (cc_1)||(cc_2)||(cc_3)||(cc_4)
-        %                         cons(8) = 1;
-        %                     end
+        FL_AEPs = find(leg_marker_FL == -1);
+        FR_AEPs = find(leg_marker_FR == -1);
+        HL_AEPs = find(leg_marker_HL == -1);
+        HR_AEPs = find(leg_marker_HR == -1);
+        FL_AEP = FL_AEPs(1);
+        FR_AEP = FR_AEPs(1);
+        HL_AEP = HL_AEPs(1);
+        HR_AEP = HR_AEPs(1);
         
+        impact_speed_max = 0.05;
+        touchdown_impact = abs(abs(leg1_ee_velocity(abs(leg1_ee_velocity(FL_AEPs)) > impact_speed_max)) - impact_speed_max) + ...
+                           abs(abs(leg2_ee_velocity(abs(leg2_ee_velocity(FR_AEPs)) > impact_speed_max)) - impact_speed_max) + ...
+                           abs(abs(leg3_ee_velocity(abs(leg3_ee_velocity(HL_AEPs)) > impact_speed_max)) - impact_speed_max) + ...
+                           abs(abs(leg4_ee_velocity(abs(leg4_ee_velocity(HR_AEPs)) > impact_speed_max)) - impact_speed_max) + ...
+                           abs(abs(leg1_ee_z_vel(abs(leg1_ee_z_vel(FL_AEPs)) > impact_speed_max)) - impact_speed_max) + ...
+                           abs(abs(leg2_ee_z_vel(abs(leg2_ee_z_vel(FR_AEPs)) > impact_speed_max)) - impact_speed_max) + ...
+                           abs(abs(leg3_ee_z_vel(abs(leg3_ee_z_vel(HL_AEPs)) > impact_speed_max)) - impact_speed_max) + ...
+                           abs(abs(leg4_ee_z_vel(abs(leg4_ee_z_vel(HR_AEPs)) > impact_speed_max)) - impact_speed_max);
+         
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         % Cons 9: Checks if velocity of main body is ever negative
         
@@ -879,14 +845,14 @@ else
     else
         display('Constraint violation')
         cons
-        OF = (joint_angle_mismatch + duty_mismatch) * 10000 + contact_break * 10 + torque_overflow;
+        OF = (touchdown_impact + contact_break + torque_overflow)/num_strides;
         if temporary_time(end) ~= obj_ite_simulation_time
             OF = 100000;
         elseif ((~cons(1))&&(~cons(2))&&(~cons(3))&&(~cons(4))&&(~cons(5)))
-            OF = OF + 1000;
+            OF = OF + 100;
             cons = zeros(1, 9);
         elseif ((~cons(1))&&(~cons(2)))
-            OF = OF + 40000/(1 + temporary_time(end));
+            OF = OF + 40000/(temporary_time(end)/num_strides);
             cons = zeros(1, 9);
         else
             OF = 100000;
